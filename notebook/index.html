@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GerakBijak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app">
+
+<!-- ================= TODAY ================= -->
+<main id="tab-today">
+  <div class="top">
+    <div class="brand"><div class="logo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17h4l3-10 3 10h6"/></svg></div>GerakBijak</div>
+    <div class="round" aria-label="Notifications"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17201D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></div>
+  </div>
+  <div><div class="hello">Selamat pagi, Aina</div><div class="day" id="gb-day">Tomorrow</div></div>
+
+  <div class="card" style="gap:10px;">
+    <div class="trip">
+      <label>From<select id="gb-origin"></select></label>
+      <label>To<select id="gb-destination"></select></label>
+      <label class="full">I usually leave at<select id="gb-usual"></select></label>
+    </div>
+  </div>
+
+  <div class="card" id="gb-plan">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <span class="label">Your best time to leave</span><span class="pill teal" id="gb-slot">Slot</span>
+    </div>
+    <div style="display:flex;align-items:baseline;gap:8px;"><span class="big" id="gb-best">--:--</span><span style="font-size:22px;font-weight:700;color:var(--muted);">AM</span></div>
+    <div style="font-size:14px;color:var(--muted);line-height:1.5;" id="gb-route">--</div>
+    <div class="three">
+      <div class="box" style="background:var(--bg);"><b id="gb-best-min">--</b><span style="color:var(--muted);">Predicted trip</span></div>
+      <div class="box" style="background:var(--org-bg);"><b id="gb-usual-min" style="color:var(--org-ink);">--</b><span style="color:#7C2D12;" id="gb-usual-lbl">If you leave --</span></div>
+      <div class="box" style="background:var(--teal-bg);"><b id="gb-saved" style="color:var(--teal-ink);">--</b><span style="color:#0B5A4A;">You save</span></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;font-size:13px;"><span id="gb-dot" style="width:10px;height:10px;border-radius:5px;background:#16A34A;flex-shrink:0;"></span><span id="gb-traffic">--</span></div>
+    <button class="btn" id="gb-leave">I'm leaving now</button>
+    <div class="two"><a class="btn2" id="gb-waze" target="_blank" rel="noopener">Open in Waze</a><a class="btn2" id="gb-gmaps" target="_blank" rel="noopener">Open in Google Maps</a></div>
+  </div>
+
+  <div class="done hide" id="gb-done">
+    <div style="width:44px;height:44px;border-radius:22px;background:#fff;display:flex;align-items:center;justify-content:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B58" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></div>
+    <div style="font-size:22px;font-weight:800;" id="gb-done-title">Left on time</div>
+    <div style="font-size:15px;line-height:1.5;">+10 points added. Have a smooth trip!</div>
+    <button class="btn2" id="gb-undo" style="align-self:flex-start;background:transparent;color:#fff;border-color:#fff;padding:0 18px;">Undo</button>
+  </div>
+
+  <div class="card">
+    <div><div style="font-size:15px;font-weight:700;">How your trip changes this morning</div><div style="font-size:13px;color:var(--muted);">Predicted trip time around your usual time</div></div>
+    <div class="bars" id="gb-bars"></div>
+    <div class="ticks" id="gb-ticks"></div>
+    <div style="display:flex;gap:14px;font-size:12px;color:var(--muted);"><span style="display:flex;align-items:center;gap:6px;"><span style="width:10px;height:10px;border-radius:2px;background:var(--teal);"></span>Suggested</span><span style="display:flex;align-items:center;gap:6px;"><span style="width:10px;height:10px;border-radius:2px;background:#E0703A;"></span>Usual</span></div>
+  </div>
+
+  <div class="card row" data-go="carpool" style="flex-direction:row;padding:16px 18px;">
+    <div class="icon" style="background:var(--teal-bg);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B58" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15 14.5c3 0 6 1.9 6 5.5"/></svg></div>
+    <div style="flex:1;"><div style="font-size:15px;font-weight:700;">2 families can share your school run</div><div style="font-size:13px;color:var(--muted);">SK Denai Alam, 7:20 drop-off</div></div>
+  </div>
+  <div class="card row" data-go="rewards" style="flex-direction:row;padding:16px 18px;">
+    <div class="icon" style="background:var(--org-bg);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9A3412" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13"/><path d="M3 12h18"/></svg></div>
+    <div style="flex:1;"><div style="font-size:15px;font-weight:700;"><span class="gb-points">230</span> points this month</div><div style="font-size:13px;color:var(--muted);">Redeem at Elmina Lakeside Mall partners</div></div>
+  </div>
+  <p id="gb-error" style="color:#B42318;"></p>
+</main>
+
+<!-- ================= CARPOOL ================= -->
+<main id="tab-carpool" class="hide">
+  <div style="font-size:17px;font-weight:800;">School-run match</div>
+  <div class="card">
+    <div><div class="label">Matched by AI</div><div style="font-size:22px;font-weight:800;line-height:1.25;">SK Denai Alam<br>7:20 drop-off</div><div style="font-size:14px;color:var(--muted);">3 households in Elmina West, all within 400 m</div></div>
+    <div class="person"><div class="avatar" style="background:#0D6B58;">A</div><div style="flex:1;"><b>You (Aina)</b><div style="font-size:13px;color:var(--muted);">Elmina West</div></div><span class="pill teal">2 kids</span></div>
+    <div class="person"><div class="avatar" style="background:#9A3412;">N1</div><div style="flex:1;"><b>Neighbour 1</b><div style="font-size:13px;color:var(--muted);">200 m away</div></div><span class="pill teal">1 kid</span></div>
+    <div class="person"><div class="avatar" style="background:#4C5A86;">N2</div><div style="flex:1;"><b>Neighbour 2</b><div style="font-size:13px;color:var(--muted);">350 m away</div></div><span class="pill teal">2 kids</span></div>
+  </div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:700;">Who drives this week</div>
+    <div class="week"><div class="me">Mon<b>You</b></div><div>Tue<b>N1</b></div><div>Wed<b>N2</b></div><div class="me">Thu<b>You</b></div><div>Fri<b>N1</b></div></div>
+    <div style="font-size:13px;color:var(--muted);">You drive Monday and Thursday. Swap a day anytime from the group chat.</div>
+  </div>
+  <div class="two">
+    <div class="box" style="background:var(--teal-bg);padding:14px 16px;"><b style="font-size:24px;color:var(--teal-ink);">2 cars</b><span style="color:#0B5A4A;">off the road each school morning</span></div>
+    <div class="box" style="background:var(--org-bg);padding:14px 16px;"><b style="font-size:24px;color:var(--org-ink);">+20 pts</b><span style="color:#7C2D12;">for every shared run</span></div>
+  </div>
+  <div style="font-size:12px;color:var(--muted);line-height:1.5;">Only distance is shown. House numbers and phone numbers are shared after every family accepts.</div>
+  <button class="btn" id="gb-join">Join this group</button>
+</main>
+
+<!-- ================= REWARDS ================= -->
+<main id="tab-rewards" class="hide">
+  <div style="font-size:17px;font-weight:800;">Rewards</div>
+  <div class="card dark">
+    <div class="label" style="color:#C9D1CD;">Your points</div>
+    <div style="display:flex;align-items:baseline;gap:8px;"><span style="font-size:56px;font-weight:800;letter-spacing:-1.5px;line-height:1;" class="gb-points">230</span><span style="color:#C9D1CD;font-weight:600;">pts</span></div>
+    <div class="two">
+      <div class="box" style="background:#26302C;"><b>42 min</b><span style="color:#C9D1CD;">saved this month</span></div>
+      <div class="box" style="background:#26302C;"><b>6.4 kg CO2</b><span style="color:#C9D1CD;">avoided this month</span></div>
+    </div>
+  </div>
+  <div class="card" style="gap:4px;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:6px;">This week</div>
+    <div class="act"><div><b style="font-size:14px;">Left in your slot</b><div style="font-size:12px;color:var(--muted);">Mon</div></div><b style="color:var(--teal);">+10</b></div>
+    <div class="act"><div><b style="font-size:14px;">Shared school run</b><div style="font-size:12px;color:var(--muted);">Tue</div></div><b style="color:var(--teal);">+20</b></div>
+    <div class="act"><div><b style="font-size:14px;">Left in your slot</b><div style="font-size:12px;color:var(--muted);">Wed</div></div><b style="color:var(--teal);">+10</b></div>
+  </div>
+  <div style="font-size:15px;font-weight:700;">Redeem with township partners</div>
+  <div id="gb-vouchers" style="display:flex;flex-direction:column;gap:10px;"></div>
+  <div style="font-size:12px;color:var(--muted);">Vouchers are funded by township merchants, who gain new customers in return.</div>
+</main>
+
+<nav aria-label="Main">
+  <button data-tab="today" class="on"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Today</button>
+  <button data-tab="carpool"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15 14.5c3 0 6 1.9 6 5.5"/></svg>Carpool</button>
+  <button data-tab="rewards"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg>Rewards</button>
+</nav>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
