@@ -1,0 +1,501 @@
+resident_id,precinct,lat,lon,school_run,school,leave_time,leave_min,destination,shift_willing,carpool,frustration
+R0001,Elmina Green,3.18964,101.48928,Yes,SK Bukit Subang,7:00,420,Petaling Jaya,"Yes, 20 min",Yes,4
+R0002,Elmina West,3.18503,101.47511,No,,7:30,450,Petaling Jaya,"Yes, 10 min",,2
+R0003,Elmina Green,3.19519,101.48866,No,,7:15,435,Petaling Jaya,"Yes, 20 min",,3
+R0004,Elmina West,3.18871,101.47611,Yes,SMK Denai Alam,7:10,430,KL Sentral,Maybe,Maybe,4
+R0005,Elmina East,3.19064,101.50319,Yes,SJK(C) Regent Elmina,7:10,430,KL Sentral,"Yes, 20 min",No,4
+R0006,Elmina West,3.18415,101.47764,No,,7:25,445,KL Sentral,"Yes, 10 min",,5
+R0007,Elmina Green,3.19579,101.4871,Yes,SK Bukit Subang,7:10,430,Petaling Jaya,"Yes, 10 min",Maybe,5
+R0008,Elmina Valley,3.17523,101.48698,No,,7:25,445,Petaling Jaya,Maybe,,4
+R0009,Elmina Green,3.19402,101.48806,Yes,SMK Denai Alam,7:10,430,KL Sentral,"Yes, 20 min",Maybe,4
+R0010,Elmina Green,3.18987,101.49007,Yes,SK Denai Alam,7:10,430,KL Sentral,Maybe,Maybe,3
+R0011,Elmina Valley,3.17229,101.48482,Yes,SK Denai Alam,7:10,430,Shah Alam (Sek 7),No,No,5
+R0012,Elmina Valley,3.17762,101.48595,Yes,SK Bukit Subang,7:10,430,Sungai Buloh,Maybe,Yes,5
+R0013,Elmina West,3.18082,101.47716,Yes,SJK(C) Regent Elmina,7:00,420,Petaling Jaya,"Yes, 10 min",Maybe,4
+R0014,Elmina Valley,3.17648,101.49099,No,,7:20,440,KL Sentral,Maybe,,3
+R0015,Elmina East,3.18814,101.49897,No,,7:10,430,KL Sentral,"Yes, 10 min",,2
+R0016,Elmina Ridge,3.17639,101.48041,Yes,SK Bukit Subang,7:15,435,Petaling Jaya,"Yes, 20 min",Maybe,4
+R0017,Elmina West,3.18635,101.47735,Yes,SJK(C) Regent Elmina,7:05,425,Shah Alam (Sek 7),No,Maybe,3
+R0018,Elmina Valley,3.17629,101.49016,Yes,SJK(C) Regent Elmina,7:15,435,Petaling Jaya,"Yes, 20 min",Yes,2
+R0019,Elmina Valley,3.17805,101.48885,Yes,SK Bukit Subang,7:05,425,Petaling Jaya,"Yes, 10 min",Yes,5
+R0020,Elmina East,3.18938,101.50547,Yes,SMK Denai Alam,7:05,425,Shah Alam (Sek 7),"Yes, 20 min",No,4
+R0021,Elmina West,3.18494,101.48038,No,,7:30,450,Petaling Jaya,Maybe,,5
+R0022,Elmina East,3.19222,101.49956,Yes,SK Denai Alam,7:10,430,KL Sentral,Maybe,No,5
+R0023,Elmina West,3.1842,101.47842,Yes,SMK Denai Alam,7:15,435,KL Sentral,No,Maybe,5
+R0024,Elmina Valley,3.17607,101.48693,Yes,SMK Denai Alam,7:05,425,Petaling Jaya,Maybe,Maybe,5
+R0025,Elmina Ridge,3.17253,101.47439,Yes,SMK Denai Alam,7:10,430,Sungai Buloh,No,Yes,4
+R0026,Elmina Ridge,3.16878,101.4727,No,,7:15,435,Sungai Buloh,No,,3
+R0027,Elmina Green,3.19016,101.48784,No,,7:20,440,KL Sentral,Maybe,,4
+R0028,Elmina Valley,3.17317,101.48559,No,,7:40,460,Shah Alam (Sek 7),"Yes, 20 min",,3
+R0029,Elmina East,3.18683,101.50146,No,,7:35,455,KL Sentral,"Yes, 20 min",,3
+R0030,Elmina West,3.18451,101.47578,Yes,SK Bukit Subang,7:10,430,KL Sentral,"Yes, 10 min",Maybe,4
+R0031,Elmina West,3.1847,101.47679,Yes,SK Denai Alam,7:05,425,Sungai Buloh,Maybe,Maybe,4
+R0032,Elmina East,3.18958,101.50306,Yes,SMK Denai Alam,7:15,435,KL Sentral,No,No,5
+R0033,Elmina Ridge,3.17136,101.47377,No,,7:20,440,Petaling Jaya,"Yes, 10 min",,4
+R0034,Elmina Green,3.19315,101.48818,Yes,SJK(C) Regent Elmina,7:05,425,Shah Alam (Sek 7),"Yes, 10 min",Maybe,3
+R0035,Elmina West,3.18326,101.47986,Yes,SJK(C) Regent Elmina,7:00,420,Shah Alam (Sek 7),"Yes, 20 min",Maybe,4
+R0036,Elmina Valley,3.17535,101.48815,No,,7:25,445,Petaling Jaya,Maybe,,5
+R0037,Elmina East,3.19158,101.50365,No,,7:20,440,Sungai Buloh,"Yes, 10 min",,2
+R0038,Elmina Ridge,3.17532,101.4754,Yes,SK Bukit Subang,7:05,425,Sungai Buloh,"Yes, 20 min",No,3
+R0039,Elmina Valley,3.17734,101.48296,Yes,SJK(C) Regent Elmina,7:10,430,KL Sentral,"Yes, 10 min",No,5
+R0040,Elmina West,3.18052,101.48025,No,,7:25,445,Sungai Buloh,"Yes, 10 min",,4
+R0041,Elmina Green,3.19302,101.48959,No,,7:20,440,Shah Alam (Sek 7),Maybe,,4
+R0042,Elmina East,3.18872,101.50526,Yes,SJK(C) Regent Elmina,7:00,420,Sungai Buloh,"Yes, 10 min",No,5
+R0043,Elmina West,3.18522,101.48212,Yes,SJK(C) Regent Elmina,7:10,430,Petaling Jaya,"Yes, 10 min",Yes,4
+R0044,Elmina Valley,3.17325,101.48448,Yes,SMK Denai Alam,7:00,420,Shah Alam (Sek 7),Maybe,Yes,5
+R0045,Elmina Green,3.19351,101.49054,Yes,SK Bukit Subang,7:10,430,Sungai Buloh,"Yes, 20 min",Maybe,5
+R0046,Elmina East,3.1886,101.50243,No,,7:15,435,KL Sentral,Maybe,,5
+R0047,Elmina Valley,3.17162,101.48515,Yes,SMK Denai Alam,7:15,435,KL Sentral,Maybe,No,2
+R0048,Elmina Green,3.19542,101.48885,No,,7:30,450,Petaling Jaya,No,,4
+R0049,Elmina Green,3.18924,101.48705,No,,7:15,435,Sungai Buloh,Maybe,,5
+R0050,Elmina Ridge,3.17304,101.47371,No,,7:10,430,KL Sentral,"Yes, 10 min",,3
+R0051,Elmina East,3.18858,101.50272,Yes,SK Bukit Subang,7:10,430,Shah Alam (Sek 7),No,No,4
+R0052,Elmina Valley,3.17684,101.48771,No,,7:30,450,Petaling Jaya,Maybe,,4
+R0053,Elmina East,3.18714,101.50273,Yes,SMK Denai Alam,7:15,435,KL Sentral,"Yes, 10 min",Maybe,4
+R0054,Elmina East,3.18835,101.50626,No,,7:15,435,Shah Alam (Sek 7),Maybe,,4
+R0055,Elmina Valley,3.17736,101.48725,No,,7:20,440,Petaling Jaya,"Yes, 10 min",,4
+R0056,Elmina Valley,3.17728,101.48788,Yes,SMK Denai Alam,7:10,430,Petaling Jaya,"Yes, 10 min",No,4
+R0057,Elmina Green,3.19489,101.48981,Yes,SJK(C) Regent Elmina,7:10,430,KL Sentral,Maybe,Yes,3
+R0058,Elmina West,3.18071,101.48,No,,7:00,420,KL Sentral,Maybe,,4
+R0059,Elmina East,3.18777,101.50302,Yes,SJK(C) Regent Elmina,7:05,425,Sungai Buloh,"Yes, 10 min",Maybe,4
+R0060,Elmina East,3.18749,101.50398,Yes,SMK Denai Alam,7:15,435,Shah Alam (Sek 7),"Yes, 20 min",Maybe,5
+R0061,Elmina Ridge,3.17229,101.47457,Yes,SJK(C) Regent Elmina,7:10,430,Shah Alam (Sek 7),Maybe,Yes,3
+R0062,Elmina Ridge,3.17081,101.47653,Yes,SK Bukit Subang,7:15,435,KL Sentral,"Yes, 10 min",Yes,3
+R0063,Elmina Green,3.19215,101.48945,No,,7:20,440,Petaling Jaya,Maybe,,4
+R0064,Elmina West,3.18848,101.47681,No,,7:25,445,Shah Alam (Sek 7),"Yes, 20 min",,4
+R0065,Elmina Green,3.19234,101.48974,Yes,SJK(C) Regent Elmina,7:00,420,Shah Alam (Sek 7),"Yes, 10 min",Yes,4
+R0066,Elmina East,3.18941,101.49881,Yes,SK Bukit Subang,7:15,435,Sungai Buloh,No,Yes,5
+R0067,Elmina Valley,3.17544,101.4888,No,,7:30,450,Petaling Jaya,"Yes, 10 min",,5
+R0068,Elmina Green,3.18991,101.48716,No,,7:40,460,KL Sentral,"Yes, 10 min",,5
+R0069,Elmina Ridge,3.16837,101.47118,Yes,SMK Denai Alam,7:10,430,Petaling Jaya,"Yes, 20 min",Maybe,5
+R0070,Elmina West,3.1868,101.47562,No,,7:15,435,Shah Alam (Sek 7),"Yes, 20 min",,5
+R0071,Elmina Green,3.19022,101.48952,Yes,SJK(C) Regent Elmina,7:10,430,Shah Alam (Sek 7),"Yes, 10 min",No,5
+R0072,Elmina Green,3.19569,101.48803,No,,7:15,435,KL Sentral,No,,4
+R0073,Elmina Valley,3.17371,101.48269,Yes,SMK Denai Alam,7:15,435,Sungai Buloh,Maybe,No,3
+R0074,Elmina Valley,3.17355,101.48928,Yes,SK Bukit Subang,7:10,430,KL Sentral,Maybe,No,5
+R0075,Elmina Ridge,3.16819,101.47436,Yes,SMK Denai Alam,7:15,435,KL Sentral,"Yes, 20 min",Maybe,3
+R0076,Elmina West,3.18209,101.47739,Yes,SK Bukit Subang,7:10,430,KL Sentral,Maybe,Maybe,5
+R0077,Elmina Green,3.18895,101.49006,Yes,SMK Denai Alam,7:00,420,Sungai Buloh,"Yes, 10 min",No,4
+R0078,Elmina Valley,3.17677,101.49324,Yes,SK Bukit Subang,7:15,435,KL Sentral,"Yes, 10 min",No,5
+R0079,Elmina West,3.18295,101.47874,Yes,SMK Denai Alam,7:10,430,Petaling Jaya,No,Maybe,5
+R0080,Elmina West,3.18218,101.47528,Yes,SMK Denai Alam,7:00,420,KL Sentral,Maybe,Yes,4
+R0081,Elmina West,3.18631,101.47485,Yes,SK Denai Alam,7:10,430,KL Sentral,Maybe,Yes,4
+R0082,Elmina West,3.18397,101.47654,Yes,SK Denai Alam,7:05,425,KL Sentral,"Yes, 10 min",Yes,4
+R0083,Elmina Green,3.18748,101.48571,No,,7:30,450,KL Sentral,"Yes, 10 min",,3
+R0084,Elmina West,3.18499,101.47713,No,,7:10,430,KL Sentral,No,,3
+R0085,Elmina Ridge,3.16706,101.4762,Yes,SMK Denai Alam,7:00,420,KL Sentral,"Yes, 10 min",Maybe,5
+R0086,Elmina East,3.18818,101.50004,No,,7:25,445,Petaling Jaya,Maybe,,5
+R0087,Elmina West,3.18197,101.47888,No,,7:30,450,Sungai Buloh,"Yes, 20 min",,4
+R0088,Elmina East,3.18975,101.49808,Yes,SK Denai Alam,7:15,435,Shah Alam (Sek 7),No,Yes,5
+R0089,Elmina Valley,3.17897,101.48803,No,,7:20,440,Shah Alam (Sek 7),No,,5
+R0090,Elmina East,3.19295,101.50397,Yes,SK Denai Alam,7:10,430,KL Sentral,No,No,5
+R0091,Elmina Valley,3.17325,101.48912,No,,7:15,435,KL Sentral,"Yes, 10 min",,5
+R0092,Elmina East,3.18909,101.50014,No,,7:30,450,KL Sentral,"Yes, 10 min",,4
+R0093,Elmina Valley,3.17326,101.4873,No,,7:20,440,Petaling Jaya,"Yes, 10 min",,2
+R0094,Elmina Green,3.19319,101.48812,Yes,SMK Denai Alam,7:05,425,Shah Alam (Sek 7),"Yes, 10 min",Yes,5
+R0095,Elmina East,3.18434,101.4979,Yes,SMK Denai Alam,7:05,425,Sungai Buloh,"Yes, 20 min",Maybe,4
+R0096,Elmina Green,3.19002,101.48816,No,,7:35,455,Petaling Jaya,"Yes, 20 min",,5
+R0097,Elmina East,3.19319,101.50208,Yes,SMK Denai Alam,7:10,430,Petaling Jaya,"Yes, 10 min",No,4
+R0098,Elmina West,3.18613,101.4762,No,,7:15,435,Petaling Jaya,Maybe,,3
+R0099,Elmina West,3.17974,101.47847,Yes,SMK Denai Alam,7:10,430,KL Sentral,Maybe,Yes,5
+R0100,Elmina Ridge,3.1711,101.47271,Yes,SK Denai Alam,7:05,425,KL Sentral,Maybe,Yes,4
+R0101,Elmina Ridge,3.17197,101.47351,No,,7:00,420,Shah Alam (Sek 7),"Yes, 20 min",,5
+R0102,Elmina Ridge,3.16959,101.47464,No,,7:10,430,Sungai Buloh,Maybe,,4
+R0103,Elmina East,3.1881,101.50208,No,,7:15,435,Petaling Jaya,Maybe,,5
+R0104,Elmina Valley,3.17686,101.48823,No,,7:05,425,KL Sentral,"Yes, 20 min",,3
+R0105,Elmina Ridge,3.16963,101.47235,Yes,SK Denai Alam,7:10,430,KL Sentral,Maybe,Maybe,3
+R0106,Elmina Valley,3.17716,101.491,No,,7:10,430,Sungai Buloh,Maybe,,3
+R0107,Elmina Ridge,3.17614,101.47363,No,,7:20,440,Petaling Jaya,"Yes, 10 min",,4
+R0108,Elmina East,3.19262,101.50268,Yes,SMK Denai Alam,7:15,435,Sungai Buloh,"Yes, 10 min",Yes,3
+R0109,Elmina East,3.19164,101.50264,Yes,SK Denai Alam,7:10,430,Shah Alam (Sek 7),"Yes, 10 min",Yes,5
+R0110,Elmina Green,3.19355,101.48644,No,,7:25,445,Shah Alam (Sek 7),No,,4
+R0111,Elmina Green,3.19606,101.48929,No,,7:25,445,Petaling Jaya,Maybe,,4
+R0112,Elmina East,3.19103,101.50208,No,,7:15,435,KL Sentral,Maybe,,4
+R0113,Elmina West,3.18643,101.47609,No,,7:10,430,Shah Alam (Sek 7),"Yes, 10 min",,4
+R0114,Elmina Ridge,3.17282,101.47539,Yes,SMK Denai Alam,7:15,435,KL Sentral,Maybe,No,5
+R0115,Elmina Ridge,3.17595,101.47689,Yes,SMK Denai Alam,7:15,435,Shah Alam (Sek 7),Maybe,Maybe,5
+R0116,Elmina West,3.1824,101.47609,No,,7:20,440,Shah Alam (Sek 7),Maybe,,3
+R0117,Elmina East,3.18983,101.49928,No,,7:25,445,Petaling Jaya,Maybe,,5
+R0118,Elmina Green,3.1919,101.48826,Yes,SJK(C) Regent Elmina,7:05,425,Petaling Jaya,Maybe,Maybe,5
+R0119,Elmina East,3.18908,101.50199,Yes,SJK(C) Regent Elmina,6:55,415,Sungai Buloh,Maybe,No,4
+R0120,Elmina Valley,3.17817,101.48677,Yes,SJK(C) Regent Elmina,7:05,425,Shah Alam (Sek 7),"Yes, 20 min",No,4
+R0121,Elmina Valley,3.17482,101.48919,Yes,SK Bukit Subang,7:05,425,Shah Alam (Sek 7),"Yes, 20 min",No,5
+R0122,Elmina Green,3.19574,101.48933,No,,7:10,430,Shah Alam (Sek 7),Maybe,,3
+R0123,Elmina Valley,3.17849,101.48658,Yes,SJK(C) Regent Elmina,7:05,425,KL Sentral,No,Yes,5
+R0124,Elmina Green,3.189,101.48699,Yes,SJK(C) Regent Elmina,7:05,425,KL Sentral,Maybe,Maybe,4
+R0125,Elmina Ridge,3.17295,101.47414,No,,7:20,440,KL Sentral,"Yes, 20 min",,5
+R0126,Elmina East,3.18769,101.50202,No,,7:20,440,KL Sentral,"Yes, 10 min",,5
+R0127,Elmina Ridge,3.17309,101.47614,No,,7:35,455,Shah Alam (Sek 7),Maybe,,4
+R0128,Elmina West,3.18554,101.47402,Yes,SMK Denai Alam,7:05,425,Petaling Jaya,"Yes, 20 min",Maybe,4
+R0129,Elmina Green,3.19272,101.48917,No,,7:20,440,Shah Alam (Sek 7),No,,3
+R0130,Elmina Valley,3.17548,101.48759,Yes,SJK(C) Regent Elmina,7:00,420,KL Sentral,"Yes, 10 min",No,3
+R0131,Elmina East,3.18749,101.50504,No,,7:20,440,Petaling Jaya,Maybe,,5
+R0132,Elmina East,3.19278,101.4969,No,,7:20,440,Shah Alam (Sek 7),Maybe,,3
+R0133,Elmina Green,3.19474,101.49127,Yes,SK Denai Alam,7:10,430,KL Sentral,Maybe,No,3
+R0134,Elmina Valley,3.17061,101.48488,Yes,SMK Denai Alam,7:15,435,Sungai Buloh,Maybe,Maybe,3
+R0135,Elmina Green,3.19646,101.48809,No,,7:40,460,Petaling Jaya,No,,4
+R0136,Elmina West,3.18048,101.47532,Yes,SK Bukit Subang,7:10,430,Shah Alam (Sek 7),Maybe,Yes,4
+R0137,Elmina West,3.18398,101.47397,No,,7:25,445,Petaling Jaya,"Yes, 20 min",,4
+R0138,Elmina East,3.18844,101.50365,No,,7:30,450,Shah Alam (Sek 7),Maybe,,4
+R0139,Elmina East,3.18609,101.50093,No,,7:10,430,KL Sentral,Maybe,,3
+R0140,Elmina Green,3.19315,101.49095,Yes,SK Bukit Subang,7:20,440,KL Sentral,Maybe,No,5
+R0141,Elmina East,3.18637,101.50491,Yes,SK Bukit Subang,7:00,420,KL Sentral,"Yes, 20 min",No,4
+R0142,Elmina Ridge,3.17323,101.47525,Yes,SK Denai Alam,7:05,425,Shah Alam (Sek 7),Maybe,No,4
+R0143,Elmina West,3.18226,101.47706,No,,7:25,445,Shah Alam (Sek 7),Maybe,,3
+R0144,Elmina East,3.18783,101.5043,No,,7:35,455,Petaling Jaya,"Yes, 10 min",,5
+R0145,Elmina Ridge,3.17534,101.47225,Yes,SK Bukit Subang,7:15,435,Shah Alam (Sek 7),"Yes, 10 min",Maybe,4
+R0146,Elmina West,3.18421,101.47875,Yes,SJK(C) Regent Elmina,7:10,430,KL Sentral,"Yes, 10 min",No,3
+R0147,Elmina Green,3.19588,101.49219,No,,7:25,445,Petaling Jaya,Maybe,,5
+R0148,Elmina Valley,3.1768,101.48752,Yes,SK Denai Alam,7:20,440,KL Sentral,"Yes, 10 min",No,4
+R0149,Elmina West,3.18841,101.47881,Yes,SJK(C) Regent Elmina,7:05,425,Shah Alam (Sek 7),Maybe,Yes,5
+R0150,Elmina West,3.18254,101.47445,Yes,SMK Denai Alam,7:00,420,Sungai Buloh,"Yes, 10 min",No,4
+R0151,Elmina East,3.18354,101.49981,No,,7:20,440,Shah Alam (Sek 7),Maybe,,4
+R0152,Elmina West,3.18524,101.48104,Yes,SMK Denai Alam,7:10,430,Petaling Jaya,No,Maybe,4
+R0153,Elmina Valley,3.17256,101.4885,Yes,SMK Denai Alam,7:10,430,Petaling Jaya,Maybe,Maybe,3
+R0154,Elmina East,3.18959,101.50291,Yes,SK Bukit Subang,7:15,435,KL Sentral,"Yes, 20 min",Yes,5
+R0155,Elmina Green,3.19347,101.48784,No,,7:25,445,Shah Alam (Sek 7),"Yes, 20 min",,5
+R0156,Elmina East,3.18844,101.50324,No,,7:20,440,Shah Alam (Sek 7),"Yes, 20 min",,3
+R0157,Elmina East,3.18788,101.5011,No,,7:15,435,KL Sentral,Maybe,,4
+R0158,Elmina East,3.18983,101.49952,No,,7:15,435,Shah Alam (Sek 7),No,,5
+R0159,Elmina Valley,3.17247,101.48795,No,,7:25,445,Sungai Buloh,"Yes, 20 min",,4
+R0160,Elmina Valley,3.16969,101.4873,No,,7:30,450,Sungai Buloh,Maybe,,4
+R0161,Elmina West,3.18199,101.47552,Yes,SK Bukit Subang,7:10,430,KL Sentral,"Yes, 10 min",Yes,3
+R0162,Elmina East,3.19027,101.4989,No,,7:20,440,KL Sentral,Maybe,,2
+R0163,Elmina East,3.19043,101.50198,Yes,SK Denai Alam,7:10,430,Petaling Jaya,Maybe,No,4
+R0164,Elmina Green,3.1974,101.49119,No,,7:10,430,Shah Alam (Sek 7),"Yes, 20 min",,4
+R0165,Elmina Green,3.1929,101.48699,Yes,SK Denai Alam,7:15,435,KL Sentral,Maybe,Yes,5
+R0166,Elmina East,3.1854,101.50252,No,,7:10,430,KL Sentral,"Yes, 10 min",,4
+R0167,Elmina Ridge,3.16894,101.47717,Yes,SJK(C) Regent Elmina,7:05,425,Shah Alam (Sek 7),"Yes, 10 min",Yes,5
+R0168,Elmina West,3.18512,101.47677,No,,7:15,435,Shah Alam (Sek 7),"Yes, 20 min",,4
+R0169,Elmina Valley,3.17679,101.49012,No,,7:35,455,Petaling Jaya,"Yes, 20 min",,4
+R0170,Elmina West,3.18101,101.47386,No,,7:10,430,Shah Alam (Sek 7),"Yes, 10 min",,3
+R0171,Elmina East,3.18864,101.50661,No,,7:20,440,Petaling Jaya,"Yes, 20 min",,3
+R0172,Elmina East,3.18973,101.50371,Yes,SK Bukit Subang,7:10,430,Shah Alam (Sek 7),Maybe,Maybe,4
+R0173,Elmina East,3.18664,101.50122,Yes,SK Denai Alam,7:05,425,KL Sentral,"Yes, 10 min",No,5
+R0174,Elmina Green,3.19542,101.48973,Yes,SK Bukit Subang,7:05,425,Petaling Jaya,Maybe,Maybe,3
+R0175,Elmina Green,3.19447,101.48461,Yes,SK Denai Alam,7:15,435,KL Sentral,Maybe,No,5
+R0176,Elmina West,3.17795,101.47648,No,,7:10,430,Sungai Buloh,"Yes, 20 min",,5
+R0177,Elmina West,3.18536,101.47822,Yes,SK Bukit Subang,7:00,420,KL Sentral,"Yes, 10 min",Maybe,5
+R0178,Elmina East,3.19234,101.50143,Yes,SK Denai Alam,7:05,425,Petaling Jaya,Maybe,Maybe,3
+R0179,Elmina Valley,3.17721,101.48887,No,,7:15,435,Shah Alam (Sek 7),Maybe,,2
+R0180,Elmina Ridge,3.1704,101.4757,Yes,SMK Denai Alam,7:05,425,Petaling Jaya,"Yes, 20 min",Yes,5
+R0181,Elmina East,3.1876,101.49944,No,,7:10,430,Petaling Jaya,Maybe,,4
+R0182,Elmina West,3.1808,101.47422,Yes,SMK Denai Alam,7:10,430,Petaling Jaya,No,Maybe,5
+R0183,Elmina East,3.18745,101.50174,Yes,SMK Denai Alam,7:15,435,Shah Alam (Sek 7),"Yes, 10 min",Maybe,3
+R0184,Elmina East,3.18739,101.50283,Yes,SK Bukit Subang,7:10,430,Sungai Buloh,Maybe,Maybe,5
+R0185,Elmina East,3.19178,101.49887,No,,7:30,450,Petaling Jaya,Maybe,,4
+R0186,Elmina West,3.18463,101.47644,No,,7:15,435,Sungai Buloh,Maybe,,3
+R0187,Elmina Ridge,3.17271,101.47233,Yes,SK Bukit Subang,7:00,420,KL Sentral,Maybe,Maybe,5
+R0188,Elmina East,3.1925,101.50283,No,,7:00,420,Sungai Buloh,"Yes, 20 min",,4
+R0189,Elmina Valley,3.17839,101.48412,No,,7:25,445,KL Sentral,Maybe,,5
+R0190,Elmina Valley,3.17743,101.48472,No,,7:00,420,Petaling Jaya,"Yes, 10 min",,4
+R0191,Elmina Valley,3.17718,101.48715,Yes,SMK Denai Alam,7:15,435,Sungai Buloh,"Yes, 10 min",Yes,5
+R0192,Elmina Ridge,3.16958,101.47377,No,,7:40,460,Sungai Buloh,"Yes, 10 min",,5
+R0193,Elmina East,3.18746,101.5018,Yes,SMK Denai Alam,7:10,430,Sungai Buloh,"Yes, 20 min",No,4
+R0194,Elmina Green,3.19188,101.4857,Yes,SK Denai Alam,7:05,425,Petaling Jaya,"Yes, 10 min",Maybe,4
+R0195,Elmina East,3.18869,101.50392,Yes,SJK(C) Regent Elmina,7:05,425,Sungai Buloh,No,No,3
+R0196,Elmina Green,3.1934,101.48798,No,,7:10,430,Sungai Buloh,Maybe,,3
+R0197,Elmina East,3.18388,101.50252,No,,7:20,440,Petaling Jaya,"Yes, 10 min",,4
+R0198,Elmina Valley,3.17741,101.48775,Yes,SK Denai Alam,7:00,420,Petaling Jaya,"Yes, 20 min",No,5
+R0199,Elmina West,3.18093,101.47554,Yes,SMK Denai Alam,7:15,435,KL Sentral,"Yes, 20 min",Yes,3
+R0200,Elmina Green,3.1923,101.48893,No,,7:20,440,Petaling Jaya,"Yes, 10 min",,5
+R0201,Elmina West,3.18424,101.47615,Yes,SK Denai Alam,7:05,425,KL Sentral,Maybe,No,4
+R0202,Elmina Valley,3.17492,101.48996,No,,7:25,445,KL Sentral,"Yes, 10 min",,5
+R0203,Elmina West,3.18776,101.48199,No,,7:25,445,KL Sentral,"Yes, 10 min",,3
+R0204,Elmina Valley,3.17369,101.48768,No,,7:10,430,Petaling Jaya,No,,3
+R0205,Elmina West,3.18301,101.47716,No,,7:15,435,KL Sentral,"Yes, 10 min",,4
+R0206,Elmina Valley,3.17353,101.49122,No,,7:20,440,Shah Alam (Sek 7),No,,4
+R0207,Elmina West,3.18644,101.4735,No,,7:30,450,Shah Alam (Sek 7),Maybe,,3
+R0208,Elmina East,3.18493,101.50128,Yes,SK Bukit Subang,7:10,430,Shah Alam (Sek 7),"Yes, 10 min",Yes,5
+R0209,Elmina East,3.1881,101.5022,No,,7:15,435,Shah Alam (Sek 7),Maybe,,5
+R0210,Elmina West,3.17966,101.4776,No,,7:00,420,Petaling Jaya,Maybe,,3
+R0211,Elmina Valley,3.17543,101.48336,No,,7:25,445,Sungai Buloh,"Yes, 20 min",,3
+R0212,Elmina Valley,3.17943,101.48607,No,,7:30,450,Shah Alam (Sek 7),"Yes, 20 min",,5
+R0213,Elmina West,3.18448,101.47643,Yes,SJK(C) Regent Elmina,7:05,425,Petaling Jaya,"Yes, 10 min",Yes,4
+R0214,Elmina East,3.18452,101.50207,Yes,SJK(C) Regent Elmina,7:00,420,Sungai Buloh,"Yes, 10 min",Yes,4
+R0215,Elmina East,3.19005,101.50048,No,,7:25,445,KL Sentral,No,,5
+R0216,Elmina East,3.19211,101.50425,No,,7:10,430,Shah Alam (Sek 7),"Yes, 20 min",,2
+R0217,Elmina East,3.19092,101.50076,No,,7:20,440,Shah Alam (Sek 7),"Yes, 10 min",,4
+R0218,Elmina Ridge,3.16842,101.47559,Yes,SJK(C) Regent Elmina,7:10,430,Shah Alam (Sek 7),Maybe,No,2
+R0219,Elmina West,3.18057,101.47819,No,,7:20,440,Petaling Jaya,No,,4
+R0220,Elmina Valley,3.17259,101.489,Yes,SK Bukit Subang,7:05,425,KL Sentral,Maybe,No,5
+R0221,Elmina East,3.18645,101.50207,No,,7:25,445,KL Sentral,"Yes, 20 min",,5
+R0222,Elmina Ridge,3.16558,101.47662,No,,7:25,445,Petaling Jaya,"Yes, 10 min",,4
+R0223,Elmina Valley,3.17177,101.49048,Yes,SJK(C) Regent Elmina,7:10,430,KL Sentral,"Yes, 10 min",Yes,5
+R0224,Elmina Green,3.19161,101.4871,Yes,SJK(C) Regent Elmina,6:55,415,KL Sentral,"Yes, 10 min",Yes,5
+R0225,Elmina West,3.1812,101.47721,No,,7:15,435,KL Sentral,"Yes, 10 min",,5
+R0226,Elmina East,3.1934,101.50212,Yes,SJK(C) Regent Elmina,7:00,420,Shah Alam (Sek 7),Maybe,Yes,5
+R0227,Elmina Valley,3.17537,101.48671,No,,7:10,430,Shah Alam (Sek 7),"Yes, 20 min",,4
+R0228,Elmina East,3.18952,101.50181,Yes,SJK(C) Regent Elmina,7:05,425,Petaling Jaya,Maybe,Maybe,4
+R0229,Elmina West,3.17984,101.47748,Yes,SJK(C) Regent Elmina,7:10,430,Shah Alam (Sek 7),Maybe,Maybe,4
+R0230,Elmina Green,3.19186,101.48944,Yes,SJK(C) Regent Elmina,7:00,420,Shah Alam (Sek 7),Maybe,Maybe,3
+R0231,Elmina Green,3.19269,101.48986,No,,7:30,450,KL Sentral,"Yes, 20 min",,4
+R0232,Elmina Ridge,3.17295,101.47455,No,,7:15,435,KL Sentral,Maybe,,5
+R0233,Elmina East,3.19291,101.50345,Yes,SK Denai Alam,7:05,425,Shah Alam (Sek 7),No,Yes,5
+R0234,Elmina West,3.18505,101.47703,Yes,SMK Denai Alam,7:15,435,KL Sentral,"Yes, 20 min",Yes,4
+R0235,Elmina Green,3.19145,101.49188,Yes,SK Denai Alam,7:10,430,Sungai Buloh,Maybe,Yes,2
+R0236,Elmina West,3.18181,101.47765,Yes,SK Bukit Subang,7:15,435,Petaling Jaya,Maybe,Yes,5
+R0237,Elmina West,3.18422,101.47453,Yes,SK Denai Alam,7:10,430,Petaling Jaya,No,Maybe,3
+R0238,Elmina East,3.18792,101.49802,No,,7:25,445,KL Sentral,"Yes, 10 min",,5
+R0239,Elmina Ridge,3.17132,101.47362,Yes,SMK Denai Alam,7:10,430,KL Sentral,"Yes, 10 min",Yes,5
+R0240,Elmina West,3.18412,101.47417,Yes,SMK Denai Alam,7:10,430,KL Sentral,Maybe,Maybe,4
+R0241,Elmina West,3.18435,101.47925,Yes,SK Denai Alam,7:05,425,KL Sentral,"Yes, 20 min",Maybe,4
+R0242,Elmina West,3.18429,101.4788,No,,7:25,445,Petaling Jaya,"Yes, 20 min",,5
+R0243,Elmina West,3.18456,101.47323,No,,7:35,455,KL Sentral,"Yes, 10 min",,2
+R0244,Elmina Green,3.19074,101.48947,No,,7:10,430,Petaling Jaya,Maybe,,2
+R0245,Elmina West,3.18424,101.47747,Yes,SMK Denai Alam,7:10,430,Shah Alam (Sek 7),Maybe,Yes,4
+R0246,Elmina West,3.18885,101.47585,Yes,SK Bukit Subang,7:10,430,Shah Alam (Sek 7),Maybe,No,3
+R0247,Elmina Ridge,3.17123,101.47455,No,,7:15,435,Sungai Buloh,Maybe,,5
+R0248,Elmina Valley,3.17442,101.48647,Yes,SK Denai Alam,7:10,430,KL Sentral,"Yes, 10 min",No,2
+R0249,Elmina West,3.18163,101.47749,Yes,SMK Denai Alam,7:05,425,Petaling Jaya,Maybe,Yes,4
+R0250,Elmina Valley,3.17739,101.48933,Yes,SK Bukit Subang,7:15,435,KL Sentral,No,Yes,5
+R0251,Elmina Ridge,3.17134,101.47132,Yes,SK Denai Alam,7:05,425,Shah Alam (Sek 7),"Yes, 20 min",Yes,5
+R0252,Elmina East,3.1849,101.49979,Yes,SK Denai Alam,7:10,430,Shah Alam (Sek 7),"Yes, 10 min",No,3
+R0253,Elmina West,3.18195,101.4748,Yes,SJK(C) Regent Elmina,7:10,430,Shah Alam (Sek 7),Maybe,Maybe,3
+R0254,Elmina West,3.18281,101.47661,No,,7:15,435,Shah Alam (Sek 7),Maybe,,4
+R0255,Elmina Ridge,3.17104,101.47574,Yes,SK Denai Alam,7:15,435,Petaling Jaya,"Yes, 20 min",Maybe,2
+R0256,Elmina Valley,3.17457,101.48473,Yes,SMK Denai Alam,7:10,430,Petaling Jaya,"Yes, 10 min",Maybe,5
+R0257,Elmina Green,3.19377,101.49381,No,,7:20,440,KL Sentral,"Yes, 10 min",,4
+R0258,Elmina East,3.18891,101.5018,Yes,SJK(C) Regent Elmina,7:00,420,KL Sentral,Maybe,Yes,5
+R0259,Elmina Valley,3.17463,101.48452,No,,7:25,445,Shah Alam (Sek 7),No,,2
+R0260,Elmina Green,3.18726,101.49127,No,,7:25,445,Petaling Jaya,Maybe,,4
+R0261,Elmina West,3.18227,101.4773,No,,7:00,420,Sungai Buloh,Maybe,,4
+R0262,Elmina West,3.183,101.47792,Yes,SJK(C) Regent Elmina,6:55,415,Petaling Jaya,No,Maybe,2
+R0263,Elmina West,3.1828,101.47263,No,,7:35,455,KL Sentral,"Yes, 10 min",,4
+R0264,Elmina Green,3.19751,101.49114,Yes,SJK(C) Regent Elmina,7:10,430,Petaling Jaya,No,Yes,2
+R0265,Elmina Green,3.19816,101.48735,Yes,SK Bukit Subang,7:15,435,Petaling Jaya,No,Yes,2
+R0266,Elmina Green,3.19676,101.48903,Yes,SK Bukit Subang,7:10,430,Shah Alam (Sek 7),"Yes, 20 min",Yes,5
+R0267,Elmina East,3.18981,101.50137,Yes,SJK(C) Regent Elmina,7:05,425,Sungai Buloh,Maybe,Maybe,4
+R0268,Elmina West,3.18514,101.47212,Yes,SJK(C) Regent Elmina,6:55,415,KL Sentral,"Yes, 10 min",Yes,5
+R0269,Elmina Green,3.19142,101.48919,Yes,SK Bukit Subang,7:10,430,KL Sentral,"Yes, 20 min",Yes,5
+R0270,Elmina East,3.18859,101.50379,No,,7:00,420,Petaling Jaya,"Yes, 20 min",,3
+R0271,Elmina East,3.18892,101.50243,Yes,SK Bukit Subang,7:15,435,Petaling Jaya,"Yes, 20 min",Yes,4
+R0272,Elmina West,3.1818,101.47623,Yes,SJK(C) Regent Elmina,7:15,435,Sungai Buloh,"Yes, 10 min",Maybe,3
+R0273,Elmina East,3.18848,101.50175,Yes,SK Denai Alam,7:05,425,Sungai Buloh,No,No,5
+R0274,Elmina East,3.1884,101.50374,No,,7:20,440,Petaling Jaya,"Yes, 10 min",,4
+R0275,Elmina Valley,3.17847,101.4879,No,,7:25,445,Petaling Jaya,"Yes, 20 min",,3
+R0276,Elmina East,3.18803,101.5016,Yes,SK Denai Alam,7:05,425,Shah Alam (Sek 7),"Yes, 10 min",Maybe,5
+R0277,Elmina Green,3.18888,101.48964,No,,7:10,430,Petaling Jaya,"Yes, 10 min",,5
+R0278,Elmina Valley,3.17844,101.49098,Yes,SK Bukit Subang,7:05,425,KL Sentral,"Yes, 10 min",Yes,4
+R0279,Elmina Green,3.19154,101.48922,No,,7:35,455,Shah Alam (Sek 7),Maybe,,4
+R0280,Elmina Ridge,3.17426,101.47176,Yes,SJK(C) Regent Elmina,6:55,415,KL Sentral,Maybe,No,5
+R0281,Elmina East,3.19119,101.50171,No,,7:20,440,Sungai Buloh,"Yes, 20 min",,4
+R0282,Elmina Valley,3.17499,101.48969,Yes,SJK(C) Regent Elmina,7:05,425,Shah Alam (Sek 7),"Yes, 20 min",Yes,2
+R0283,Elmina Ridge,3.17419,101.47267,No,,7:20,440,Shah Alam (Sek 7),No,,2
+R0284,Elmina East,3.18745,101.5003,No,,7:10,430,KL Sentral,Maybe,,4
+R0285,Elmina West,3.18472,101.47829,No,,7:15,435,Sungai Buloh,"Yes, 20 min",,4
+R0286,Elmina Valley,3.18,101.48606,No,,7:15,435,Petaling Jaya,"Yes, 20 min",,4
+R0287,Elmina East,3.19203,101.502,Yes,SMK Denai Alam,7:15,435,Shah Alam (Sek 7),"Yes, 20 min",Yes,4
+R0288,Elmina West,3.18279,101.47971,Yes,SK Denai Alam,7:00,420,Petaling Jaya,No,Yes,4
+R0289,Elmina East,3.18979,101.50399,No,,7:35,455,Petaling Jaya,Maybe,,2
+R0290,Elmina East,3.18771,101.50202,No,,7:20,440,Sungai Buloh,"Yes, 20 min",,4
+R0291,Elmina Valley,3.17204,101.49216,No,,7:20,440,Sungai Buloh,Maybe,,2
+R0292,Elmina West,3.18519,101.47754,Yes,SK Bukit Subang,7:15,435,KL Sentral,"Yes, 20 min",Maybe,3
+R0293,Elmina West,3.18539,101.47806,No,,7:25,445,KL Sentral,Maybe,,5
+R0294,Elmina West,3.18845,101.47318,No,,7:15,435,KL Sentral,"Yes, 10 min",,4
+R0295,Elmina Ridge,3.17116,101.46938,No,,7:25,445,Shah Alam (Sek 7),Maybe,,5
+R0296,Elmina Green,3.1962,101.49149,No,,7:30,450,Sungai Buloh,"Yes, 10 min",,4
+R0297,Elmina Valley,3.17924,101.4884,Yes,SK Denai Alam,7:15,435,KL Sentral,"Yes, 10 min",Maybe,4
+R0298,Elmina West,3.18613,101.47681,Yes,SK Bukit Subang,7:05,425,Petaling Jaya,"Yes, 10 min",No,3
+R0299,Elmina Ridge,3.17017,101.47875,No,,7:25,445,Petaling Jaya,Maybe,,5
+R0300,Elmina Green,3.19478,101.4878,Yes,SMK Denai Alam,7:00,420,Shah Alam (Sek 7),"Yes, 20 min",Maybe,4
+R0301,Elmina East,3.19082,101.49907,Yes,SMK Denai Alam,7:10,430,Petaling Jaya,Maybe,Maybe,4
+R0302,Elmina West,3.1823,101.48065,Yes,SK Bukit Subang,7:15,435,Shah Alam (Sek 7),Maybe,No,5
+R0303,Elmina East,3.19223,101.5002,No,,7:30,450,KL Sentral,Maybe,,4
+R0304,Elmina Ridge,3.17466,101.47328,Yes,SJK(C) Regent Elmina,7:10,430,Sungai Buloh,Maybe,No,5
+R0305,Elmina Valley,3.17566,101.49161,Yes,SJK(C) Regent Elmina,7:10,430,Petaling Jaya,Maybe,Maybe,5
+R0306,Elmina East,3.18718,101.50195,Yes,SMK Denai Alam,7:15,435,KL Sentral,"Yes, 20 min",Yes,4
+R0307,Elmina West,3.18324,101.47386,No,,7:15,435,Shah Alam (Sek 7),"Yes, 20 min",,3
+R0308,Elmina West,3.18552,101.48016,No,,7:15,435,KL Sentral,Maybe,,4
+R0309,Elmina East,3.19,101.50471,Yes,SK Bukit Subang,7:00,420,Petaling Jaya,"Yes, 20 min",Maybe,5
+R0310,Elmina East,3.19183,101.4978,Yes,SJK(C) Regent Elmina,7:05,425,Shah Alam (Sek 7),"Yes, 20 min",Yes,5
+R0311,Elmina Green,3.19282,101.48987,No,,7:25,445,Petaling Jaya,"Yes, 20 min",,3
+R0312,Elmina West,3.18488,101.4707,Yes,SJK(C) Regent Elmina,7:05,425,Shah Alam (Sek 7),Maybe,No,5
+R0313,Elmina East,3.18915,101.50225,No,,7:20,440,Shah Alam (Sek 7),No,,3
+R0314,Elmina East,3.1894,101.50071,No,,7:05,425,Shah Alam (Sek 7),"Yes, 10 min",,5
+R0315,Elmina West,3.18114,101.4808,No,,7:10,430,KL Sentral,"Yes, 10 min",,4
+R0316,Elmina West,3.18706,101.47512,No,,7:40,460,Petaling Jaya,"Yes, 10 min",,3
+R0317,Elmina East,3.18797,101.50163,Yes,SMK Denai Alam,7:15,435,Petaling Jaya,"Yes, 20 min",Maybe,2
+R0318,Elmina East,3.18637,101.50341,No,,7:30,450,KL Sentral,Maybe,,5
+R0319,Elmina East,3.19096,101.50081,No,,7:15,435,Sungai Buloh,"Yes, 20 min",,5
+R0320,Elmina East,3.18846,101.50164,Yes,SJK(C) Regent Elmina,7:10,430,Petaling Jaya,Maybe,Maybe,2
+R0321,Elmina Green,3.19105,101.4901,Yes,SK Bukit Subang,7:20,440,Shah Alam (Sek 7),Maybe,Yes,5
+R0322,Elmina West,3.18376,101.47527,Yes,SK Bukit Subang,7:15,435,Petaling Jaya,"Yes, 10 min",Maybe,5
+R0323,Elmina West,3.18258,101.47643,Yes,SK Bukit Subang,7:15,435,Shah Alam (Sek 7),No,Maybe,4
+R0324,Elmina Ridge,3.16897,101.4726,Yes,SMK Denai Alam,7:10,430,Shah Alam (Sek 7),Maybe,Maybe,4
+R0325,Elmina East,3.19066,101.50385,Yes,SJK(C) Regent Elmina,7:10,430,KL Sentral,Maybe,Yes,5
+R0326,Elmina East,3.18534,101.50749,Yes,SK Denai Alam,7:20,440,Sungai Buloh,No,No,3
+R0327,Elmina Valley,3.17651,101.49063,Yes,SK Denai Alam,7:15,435,Shah Alam (Sek 7),Maybe,Maybe,5
+R0328,Elmina East,3.18775,101.50063,No,,7:10,430,Petaling Jaya,"Yes, 10 min",,4
+R0329,Elmina East,3.19247,101.50187,Yes,SK Bukit Subang,7:05,425,KL Sentral,Maybe,Maybe,2
+R0330,Elmina Valley,3.17361,101.48523,No,,7:50,470,Petaling Jaya,Maybe,,4
+R0331,Elmina Ridge,3.16964,101.46983,No,,7:15,435,Shah Alam (Sek 7),No,,5
+R0332,Elmina East,3.18967,101.50397,No,,7:25,445,KL Sentral,"Yes, 20 min",,5
+R0333,Elmina Green,3.19163,101.48827,Yes,SMK Denai Alam,7:10,430,Petaling Jaya,Maybe,Yes,2
+R0334,Elmina East,3.18634,101.50415,No,,7:15,435,Petaling Jaya,Maybe,,4
+R0335,Elmina West,3.1831,101.47709,Yes,SK Denai Alam,7:05,425,KL Sentral,"Yes, 20 min",Maybe,5
+R0336,Elmina Valley,3.17108,101.48879,No,,7:20,440,Petaling Jaya,No,,4
+R0337,Elmina East,3.18949,101.4992,Yes,SJK(C) Regent Elmina,7:00,420,KL Sentral,"Yes, 20 min",No,4
+R0338,Elmina Valley,3.17436,101.48991,No,,7:15,435,Shah Alam (Sek 7),No,,5
+R0339,Elmina Valley,3.17435,101.49161,Yes,SK Bukit Subang,7:10,430,KL Sentral,No,No,3
+R0340,Elmina Ridge,3.1736,101.47657,No,,7:25,445,Petaling Jaya,No,,4
+R0341,Elmina East,3.18676,101.50317,Yes,SJK(C) Regent Elmina,6:55,415,Petaling Jaya,No,Yes,5
+R0342,Elmina Valley,3.17248,101.4911,Yes,SK Bukit Subang,7:10,430,KL Sentral,"Yes, 10 min",Maybe,2
+R0343,Elmina East,3.18926,101.5027,No,,7:15,435,Shah Alam (Sek 7),"Yes, 10 min",,5
+R0344,Elmina West,3.1838,101.4804,No,,7:40,460,Sungai Buloh,"Yes, 10 min",,5
+R0345,Elmina Valley,3.17949,101.48849,Yes,SMK Denai Alam,7:10,430,Petaling Jaya,"Yes, 10 min",Maybe,3
+R0346,Elmina Ridge,3.17713,101.4758,Yes,SK Denai Alam,7:05,425,Shah Alam (Sek 7),No,No,5
+R0347,Elmina Green,3.18816,101.49133,No,,7:15,435,Sungai Buloh,Maybe,,3
+R0348,Elmina East,3.19117,101.50075,No,,7:20,440,Petaling Jaya,Maybe,,4
+R0349,Elmina Ridge,3.1693,101.4773,No,,7:00,420,Sungai Buloh,No,,2
+R0350,Elmina West,3.18101,101.47515,Yes,SK Bukit Subang,7:15,435,KL Sentral,"Yes, 20 min",Maybe,5
+R0351,Elmina West,3.18431,101.47679,No,,7:25,445,KL Sentral,"Yes, 10 min",,5
+R0352,Elmina West,3.18444,101.47618,No,,7:15,435,KL Sentral,Maybe,,4
+R0353,Elmina West,3.18383,101.47601,Yes,SK Denai Alam,7:05,425,KL Sentral,"Yes, 20 min",Maybe,5
+R0354,Elmina East,3.19444,101.50238,Yes,SK Denai Alam,7:10,430,Petaling Jaya,"Yes, 20 min",Maybe,4
+R0355,Elmina East,3.18946,101.49854,No,,7:30,450,KL Sentral,"Yes, 10 min",,5
+R0356,Elmina East,3.18797,101.49956,Yes,SK Denai Alam,7:15,435,Shah Alam (Sek 7),No,Yes,5
+R0357,Elmina West,3.18613,101.47972,No,,7:20,440,Sungai Buloh,"Yes, 10 min",,2
+R0358,Elmina East,3.18756,101.50643,Yes,SJK(C) Regent Elmina,7:10,430,Petaling Jaya,"Yes, 20 min",Maybe,2
+R0359,Elmina Green,3.19279,101.48615,Yes,SJK(C) Regent Elmina,7:10,430,Shah Alam (Sek 7),Maybe,Yes,2
+R0360,Elmina Green,3.19103,101.48866,No,,7:25,445,KL Sentral,"Yes, 10 min",,5
+R0361,Elmina Valley,3.17653,101.48922,Yes,SK Denai Alam,7:15,435,Petaling Jaya,"Yes, 20 min",No,5
+R0362,Elmina Valley,3.17463,101.48684,No,,7:20,440,Shah Alam (Sek 7),No,,4
+R0363,Elmina Valley,3.18267,101.4875,No,,7:20,440,Petaling Jaya,Maybe,,4
+R0364,Elmina West,3.18453,101.4776,No,,7:35,455,Petaling Jaya,"Yes, 10 min",,3
+R0365,Elmina Valley,3.17279,101.48646,Yes,SK Denai Alam,7:10,430,KL Sentral,No,No,3
+R0366,Elmina West,3.18264,101.47498,Yes,SK Bukit Subang,7:05,425,Sungai Buloh,No,Maybe,4
+R0367,Elmina Green,3.1944,101.48939,No,,7:05,425,Shah Alam (Sek 7),"Yes, 10 min",,2
+R0368,Elmina Green,3.18949,101.48684,Yes,SMK Denai Alam,7:15,435,Petaling Jaya,No,Maybe,4
+R0369,Elmina East,3.18875,101.50433,Yes,SK Bukit Subang,7:05,425,Petaling Jaya,"Yes, 10 min",Maybe,5
+R0370,Elmina Valley,3.17843,101.48894,No,,7:15,435,Shah Alam (Sek 7),"Yes, 10 min",,2
+R0371,Elmina West,3.18555,101.47474,Yes,SK Denai Alam,7:10,430,Petaling Jaya,Maybe,Maybe,5
+R0372,Elmina Valley,3.17619,101.48434,Yes,SK Denai Alam,7:15,435,Shah Alam (Sek 7),"Yes, 10 min",Yes,5
+R0373,Elmina West,3.1808,101.47601,Yes,SMK Denai Alam,7:15,435,Petaling Jaya,"Yes, 10 min",Yes,5
+R0374,Elmina Ridge,3.174,101.47147,Yes,SMK Denai Alam,7:15,435,Petaling Jaya,No,Yes,4
+R0375,Elmina East,3.19092,101.50241,Yes,SMK Denai Alam,7:05,425,Petaling Jaya,"Yes, 20 min",Maybe,3
+R0376,Elmina Ridge,3.17562,101.47207,Yes,SJK(C) Regent Elmina,7:00,420,KL Sentral,"Yes, 10 min",No,3
+R0377,Elmina Valley,3.17591,101.48731,Yes,SJK(C) Regent Elmina,6:50,410,KL Sentral,"Yes, 20 min",Maybe,5
+R0378,Elmina West,3.18611,101.47236,Yes,SMK Denai Alam,7:05,425,KL Sentral,Maybe,Maybe,4
+R0379,Elmina Valley,3.17822,101.48501,No,,7:15,435,Shah Alam (Sek 7),Maybe,,4
+R0380,Elmina Valley,3.17722,101.48672,No,,7:15,435,KL Sentral,"Yes, 20 min",,3
+R0381,Elmina West,3.18607,101.47915,Yes,SJK(C) Regent Elmina,7:15,435,Sungai Buloh,"Yes, 20 min",No,4
+R0382,Elmina East,3.19042,101.50162,No,,7:15,435,Shah Alam (Sek 7),No,,5
+R0383,Elmina Ridge,3.1737,101.47047,Yes,SK Denai Alam,7:15,435,Petaling Jaya,"Yes, 10 min",Maybe,2
+R0384,Elmina Green,3.19193,101.48904,Yes,SK Bukit Subang,7:05,425,Sungai Buloh,"Yes, 10 min",Yes,5
+R0385,Elmina East,3.18663,101.49842,Yes,SMK Denai Alam,7:10,430,KL Sentral,"Yes, 20 min",Yes,5
+R0386,Elmina Green,3.19369,101.48698,Yes,SK Bukit Subang,7:10,430,Shah Alam (Sek 7),"Yes, 20 min",No,5
+R0387,Elmina Valley,3.17485,101.48576,No,,7:15,435,Sungai Buloh,Maybe,,2
+R0388,Elmina Valley,3.17318,101.48807,Yes,SJK(C) Regent Elmina,7:05,425,KL Sentral,Maybe,Maybe,5
+R0389,Elmina West,3.18398,101.47566,No,,7:15,435,Petaling Jaya,"Yes, 20 min",,5
+R0390,Elmina Ridge,3.17613,101.47253,No,,7:25,445,KL Sentral,No,,3
+R0391,Elmina Green,3.19014,101.4852,No,,7:15,435,Petaling Jaya,Maybe,,4
+R0392,Elmina Valley,3.17491,101.48888,Yes,SK Bukit Subang,7:00,420,Shah Alam (Sek 7),"Yes, 10 min",Maybe,5
+R0393,Elmina Green,3.19359,101.48891,No,,7:35,455,Petaling Jaya,"Yes, 20 min",,4
+R0394,Elmina East,3.18925,101.50408,No,,7:20,440,Petaling Jaya,Maybe,,4
+R0395,Elmina East,3.19519,101.50283,No,,7:10,430,Petaling Jaya,"Yes, 10 min",,3
+R0396,Elmina Ridge,3.17125,101.47424,No,,7:35,455,Sungai Buloh,"Yes, 10 min",,3
+R0397,Elmina Valley,3.18036,101.4881,No,,7:35,455,Shah Alam (Sek 7),"Yes, 10 min",,4
+R0398,Elmina East,3.18782,101.50192,Yes,SJK(C) Regent Elmina,7:10,430,Petaling Jaya,"Yes, 10 min",Yes,5
+R0399,Elmina Green,3.192,101.4907,Yes,SJK(C) Regent Elmina,7:00,420,KL Sentral,"Yes, 20 min",Yes,4
+R0400,Elmina West,3.17983,101.48013,Yes,SJK(C) Regent Elmina,7:10,430,Sungai Buloh,"Yes, 10 min",Yes,4
+R0401,Elmina West,3.1793,101.47651,No,,7:25,445,Shah Alam (Sek 7),"Yes, 10 min",,4
+R0402,Elmina Ridge,3.17438,101.47561,Yes,SK Bukit Subang,7:15,435,Petaling Jaya,Maybe,No,3
+R0403,Elmina West,3.18717,101.47691,Yes,SMK Denai Alam,7:10,430,Shah Alam (Sek 7),"Yes, 10 min",Yes,5
+R0404,Elmina Green,3.19286,101.49263,Yes,SJK(C) Regent Elmina,7:00,420,Sungai Buloh,"Yes, 20 min",Yes,5
+R0405,Elmina West,3.18637,101.47778,No,,7:15,435,KL Sentral,Maybe,,3
+R0406,Elmina East,3.18909,101.50131,Yes,SJK(C) Regent Elmina,7:00,420,KL Sentral,Maybe,Yes,3
+R0407,Elmina Valley,3.17559,101.49088,Yes,SJK(C) Regent Elmina,7:15,435,Sungai Buloh,Maybe,Yes,5
+R0408,Elmina Valley,3.17639,101.48877,Yes,SJK(C) Regent Elmina,7:00,420,Shah Alam (Sek 7),"Yes, 20 min",Maybe,4
+R0409,Elmina East,3.18737,101.49939,Yes,SMK Denai Alam,7:15,435,Petaling Jaya,"Yes, 20 min",Yes,5
+R0410,Elmina Valley,3.17418,101.48958,Yes,SMK Denai Alam,7:15,435,KL Sentral,"Yes, 20 min",Maybe,4
+R0411,Elmina East,3.19008,101.50387,No,,7:10,430,KL Sentral,Maybe,,2
+R0412,Elmina East,3.18975,101.50241,Yes,SJK(C) Regent Elmina,6:55,415,KL Sentral,"Yes, 10 min",Yes,4
+R0413,Elmina East,3.19347,101.49975,Yes,SMK Denai Alam,7:10,430,Shah Alam (Sek 7),Maybe,Yes,5
+R0414,Elmina Green,3.19798,101.48806,Yes,SMK Denai Alam,7:10,430,KL Sentral,Maybe,Maybe,3
+R0415,Elmina East,3.18915,101.50377,Yes,SJK(C) Regent Elmina,7:10,430,Sungai Buloh,"Yes, 10 min",Yes,4
+R0416,Elmina Green,3.18842,101.4909,Yes,SK Bukit Subang,7:10,430,KL Sentral,"Yes, 10 min",Yes,3
+R0417,Elmina West,3.18631,101.47686,No,,7:10,430,Shah Alam (Sek 7),"Yes, 20 min",,5
+R0418,Elmina Green,3.19512,101.48756,No,,7:25,445,Petaling Jaya,"Yes, 10 min",,4
+R0419,Elmina Green,3.18954,101.48558,Yes,SK Bukit Subang,7:10,430,Petaling Jaya,"Yes, 10 min",No,5
+R0420,Elmina Ridge,3.17501,101.47411,No,,7:15,435,Petaling Jaya,"Yes, 10 min",,5
+R0421,Elmina West,3.18821,101.475,Yes,SK Bukit Subang,7:10,430,Sungai Buloh,Maybe,No,4
+R0422,Elmina East,3.18902,101.49958,Yes,SK Denai Alam,7:00,420,Shah Alam (Sek 7),Maybe,Yes,3
+R0423,Elmina Ridge,3.1697,101.47534,Yes,SK Denai Alam,7:20,440,Shah Alam (Sek 7),"Yes, 20 min",Maybe,4
+R0424,Elmina Valley,3.17659,101.48533,No,,7:10,430,Sungai Buloh,"Yes, 20 min",,4
+R0425,Elmina Valley,3.17309,101.49082,Yes,SMK Denai Alam,7:00,420,Petaling Jaya,"Yes, 20 min",Yes,4
+R0426,Elmina Ridge,3.17037,101.47228,No,,7:10,430,KL Sentral,Maybe,,2
+R0427,Elmina East,3.19003,101.50347,No,,7:15,435,Petaling Jaya,Maybe,,2
+R0428,Elmina East,3.18962,101.5021,Yes,SJK(C) Regent Elmina,7:05,425,KL Sentral,"Yes, 20 min",No,4
+R0429,Elmina East,3.18962,101.50254,No,,7:25,445,KL Sentral,Maybe,,5
+R0430,Elmina Green,3.19143,101.4924,No,,7:15,435,Petaling Jaya,"Yes, 10 min",,3
+R0431,Elmina West,3.19016,101.47619,No,,7:25,445,Petaling Jaya,"Yes, 10 min",,3
+R0432,Elmina West,3.18361,101.47867,No,,7:15,435,KL Sentral,"Yes, 10 min",,5
+R0433,Elmina Valley,3.17687,101.48407,No,,7:10,430,Shah Alam (Sek 7),Maybe,,4
+R0434,Elmina West,3.18603,101.47798,Yes,SK Denai Alam,7:15,435,Shah Alam (Sek 7),Maybe,No,2
+R0435,Elmina West,3.18201,101.47801,Yes,SMK Denai Alam,7:05,425,Shah Alam (Sek 7),Maybe,Maybe,4
+R0436,Elmina West,3.18133,101.47628,Yes,SJK(C) Regent Elmina,7:15,435,KL Sentral,No,No,2
+R0437,Elmina West,3.18075,101.47662,No,,7:25,445,Sungai Buloh,"Yes, 20 min",,5
+R0438,Elmina Ridge,3.17266,101.47616,Yes,SJK(C) Regent Elmina,7:05,425,Petaling Jaya,"Yes, 10 min",Yes,4
+R0439,Elmina East,3.18784,101.50146,Yes,SK Denai Alam,7:10,430,KL Sentral,Maybe,Maybe,5
+R0440,Elmina Ridge,3.17471,101.47386,Yes,SJK(C) Regent Elmina,7:10,430,Shah Alam (Sek 7),Maybe,Yes,4
+R0441,Elmina Valley,3.17387,101.49272,No,,7:10,430,Shah Alam (Sek 7),"Yes, 20 min",,3
+R0442,Elmina Valley,3.1753,101.48763,Yes,SMK Denai Alam,7:10,430,Petaling Jaya,"Yes, 10 min",Maybe,2
+R0443,Elmina West,3.18591,101.47522,Yes,SK Bukit Subang,7:25,445,Petaling Jaya,Maybe,Yes,4
+R0444,Elmina East,3.18902,101.5011,No,,7:10,430,KL Sentral,Maybe,,5
+R0445,Elmina Ridge,3.1696,101.47492,No,,7:05,425,KL Sentral,No,,4
+R0446,Elmina West,3.18133,101.47419,Yes,SK Bukit Subang,7:10,430,Petaling Jaya,"Yes, 10 min",Yes,4
+R0447,Elmina East,3.19209,101.50271,No,,7:15,435,KL Sentral,Maybe,,2
+R0448,Elmina East,3.18633,101.49889,Yes,SMK Denai Alam,7:05,425,KL Sentral,Maybe,Yes,3
+R0449,Elmina West,3.18471,101.47841,No,,7:15,435,Sungai Buloh,Maybe,,3
+R0450,Elmina East,3.18669,101.49971,Yes,SJK(C) Regent Elmina,6:55,415,Shah Alam (Sek 7),Maybe,No,3
+R0451,Elmina Valley,3.17457,101.48849,Yes,SK Denai Alam,7:10,430,KL Sentral,Maybe,No,2
+R0452,Elmina Valley,3.17774,101.48487,Yes,SK Bukit Subang,7:15,435,KL Sentral,Maybe,Yes,4
+R0453,Elmina Ridge,3.17246,101.47664,No,,7:25,445,Sungai Buloh,"Yes, 20 min",,4
+R0454,Elmina West,3.18555,101.47972,No,,7:10,430,Shah Alam (Sek 7),Maybe,,5
+R0455,Elmina West,3.18924,101.47685,No,,7:15,435,KL Sentral,Maybe,,3
+R0456,Elmina West,3.18262,101.47518,No,,7:30,450,Sungai Buloh,"Yes, 20 min",,5
+R0457,Elmina West,3.18181,101.4747,No,,7:15,435,Shah Alam (Sek 7),Maybe,,4
+R0458,Elmina East,3.18753,101.50265,No,,7:35,455,KL Sentral,Maybe,,4
+R0459,Elmina West,3.18099,101.47523,Yes,SK Denai Alam,7:10,430,Shah Alam (Sek 7),Maybe,Maybe,3
+R0460,Elmina Green,3.19183,101.48748,Yes,SK Denai Alam,7:05,425,Shah Alam (Sek 7),No,Yes,3
+R0461,Elmina Green,3.19447,101.4896,No,,7:20,440,KL Sentral,"Yes, 10 min",,5
+R0462,Elmina Ridge,3.1728,101.47456,Yes,SJK(C) Regent Elmina,7:10,430,Petaling Jaya,"Yes, 10 min",No,5
+R0463,Elmina West,3.18401,101.47743,Yes,SJK(C) Regent Elmina,7:05,425,Petaling Jaya,Maybe,Maybe,5
+R0464,Elmina West,3.18443,101.47431,Yes,SJK(C) Regent Elmina,7:05,425,Petaling Jaya,Maybe,Maybe,4
+R0465,Elmina Green,3.19097,101.48862,No,,7:20,440,Petaling Jaya,"Yes, 10 min",,2
+R0466,Elmina West,3.18364,101.47575,No,,7:20,440,Petaling Jaya,No,,4
+R0467,Elmina West,3.18526,101.47783,Yes,SMK Denai Alam,7:05,425,KL Sentral,Maybe,Maybe,4
+R0468,Elmina West,3.18634,101.47557,No,,7:20,440,KL Sentral,Maybe,,4
+R0469,Elmina West,3.17913,101.47652,No,,7:20,440,Shah Alam (Sek 7),Maybe,,4
+R0470,Elmina West,3.18294,101.47613,No,,6:55,415,Petaling Jaya,"Yes, 10 min",,4
+R0471,Elmina Ridge,3.17196,101.4722,No,,7:30,450,Sungai Buloh,"Yes, 10 min",,5
+R0472,Elmina Green,3.19371,101.48512,Yes,SMK Denai Alam,7:05,425,KL Sentral,"Yes, 10 min",No,3
+R0473,Elmina West,3.18807,101.47623,Yes,SK Denai Alam,7:05,425,Sungai Buloh,"Yes, 20 min",Yes,4
+R0474,Elmina Green,3.19109,101.4902,No,,7:25,445,KL Sentral,"Yes, 10 min",,4
+R0475,Elmina West,3.18561,101.4748,Yes,SJK(C) Regent Elmina,7:00,420,KL Sentral,"Yes, 10 min",Yes,2
+R0476,Elmina West,3.18624,101.47531,Yes,SJK(C) Regent Elmina,7:00,420,KL Sentral,"Yes, 10 min",Yes,5
+R0477,Elmina East,3.18967,101.50168,No,,7:10,430,Petaling Jaya,"Yes, 20 min",,4
+R0478,Elmina Valley,3.17621,101.49239,No,,7:05,425,Petaling Jaya,Maybe,,5
+R0479,Elmina East,3.18777,101.50279,Yes,SJK(C) Regent Elmina,7:00,420,Shah Alam (Sek 7),"Yes, 20 min",Yes,2
+R0480,Elmina West,3.1835,101.47767,No,,7:10,430,KL Sentral,"Yes, 20 min",,5
+R0481,Elmina West,3.18416,101.47536,Yes,SMK Denai Alam,7:15,435,Petaling Jaya,"Yes, 20 min",Yes,2
+R0482,Elmina West,3.18417,101.47388,No,,7:30,450,KL Sentral,"Yes, 10 min",,3
+R0483,Elmina Ridge,3.17421,101.47581,Yes,SMK Denai Alam,7:20,440,KL Sentral,No,Yes,4
+R0484,Elmina Green,3.1932,101.48722,Yes,SMK Denai Alam,7:00,420,Shah Alam (Sek 7),"Yes, 10 min",No,5
+R0485,Elmina West,3.18324,101.47708,Yes,SK Denai Alam,7:15,435,Petaling Jaya,"Yes, 10 min",No,3
+R0486,Elmina Green,3.19355,101.49278,Yes,SK Denai Alam,7:15,435,Petaling Jaya,Maybe,No,4
+R0487,Elmina Valley,3.18029,101.48653,Yes,SMK Denai Alam,7:10,430,Petaling Jaya,"Yes, 20 min",Yes,5
+R0488,Elmina East,3.18945,101.5025,Yes,SK Denai Alam,7:15,435,Petaling Jaya,"Yes, 10 min",No,3
+R0489,Elmina East,3.18735,101.50249,No,,7:10,430,KL Sentral,"Yes, 20 min",,4
+R0490,Elmina Green,3.19356,101.48496,Yes,SMK Denai Alam,7:10,430,Petaling Jaya,"Yes, 20 min",Yes,4
+R0491,Elmina Green,3.19496,101.48797,Yes,SK Denai Alam,7:10,430,Shah Alam (Sek 7),"Yes, 10 min",Maybe,3
+R0492,Elmina West,3.18162,101.47787,Yes,SMK Denai Alam,7:05,425,Shah Alam (Sek 7),"Yes, 10 min",Yes,5
+R0493,Elmina East,3.1921,101.49641,Yes,SK Denai Alam,7:05,425,Shah Alam (Sek 7),"Yes, 20 min",Yes,3
+R0494,Elmina Green,3.19341,101.48803,No,,7:20,440,KL Sentral,Maybe,,4
+R0495,Elmina East,3.18755,101.50569,No,,7:20,440,KL Sentral,No,,3
+R0496,Elmina West,3.184,101.47757,No,,7:20,440,Sungai Buloh,Maybe,,2
+R0497,Elmina Green,3.19304,101.48894,Yes,SJK(C) Regent Elmina,7:05,425,Petaling Jaya,"Yes, 10 min",Yes,3
+R0498,Elmina Valley,3.17271,101.48826,Yes,SK Bukit Subang,7:10,430,Petaling Jaya,Maybe,Yes,4
+R0499,Elmina Ridge,3.16938,101.47736,No,,7:35,455,Shah Alam (Sek 7),Maybe,,3
+R0500,Elmina West,3.17952,101.47947,Yes,SK Bukit Subang,7:10,430,Sungai Buloh,Maybe,Maybe,4
