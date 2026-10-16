@@ -9,157 +9,160 @@
 <style>
   :root { --ink:#17201D; --muted:#5B6460; --line:#E4E0D8; --bg:#F7F5F0; --teal:#0D6B58; --teal-bg:#E3F1EC; --teal-ink:#08493C; --org:#E0703A; --org-bg:#FBE9DF; --org-ink:#9A3412; --amber:#CA8A04; --amber-bg:#FDF3D7; --amber-ink:#854D0E; --red:#B42318; --red-bg:#FDE7E5; }
   * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); font-family:'Manrope',system-ui,sans-serif; color:var(--ink); }
-  .wrap { max-width:1400px; margin:0 auto; padding:28px 32px 40px; display:flex; flex-direction:column; gap:18px; }
-  .head { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
-  .brand { display:flex; align-items:center; gap:14px; }
-  .logo { width:48px; height:48px; border-radius:12px; background:var(--teal); display:flex; align-items:center; justify-content:center; }
-  h1 { margin:0; font-size:24px; font-weight:800; }
-  .sub { font-size:14px; color:var(--muted); }
-  .seg { display:flex; padding:4px; background:#fff; border:1px solid var(--line); border-radius:14px; gap:2px; }
-  .seg button { border:none; background:none; font-family:inherit; font-size:14px; font-weight:600; color:var(--ink); padding:9px 16px; border-radius:10px; cursor:pointer; }
+  html, body { margin:0; background:var(--bg); font-family:'Manrope',system-ui,sans-serif; color:var(--ink); }
+
+  /* One-screen layout */
+  .wrap { height:100vh; padding:14px 18px; display:grid; gap:12px;
+          grid-template-columns:repeat(12,minmax(0,1fr)); grid-template-rows:auto auto minmax(0,1.15fr) minmax(0,1fr); }
+  .card { background:#fff; border:1px solid var(--line); border-radius:16px; padding:14px 16px; min-height:0; min-width:0; display:flex; flex-direction:column; overflow:hidden; }
+  .s3 { grid-column:span 3; } .s4 { grid-column:span 4; } .s8 { grid-column:span 8; } .s12 { grid-column:span 12; }
+
+  .head { grid-column:span 12; display:flex; align-items:center; justify-content:space-between; gap:14px; }
+  .brand { display:flex; align-items:center; gap:12px; min-width:0; }
+  .logo { width:38px; height:38px; border-radius:10px; background:var(--teal); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  h1 { margin:0; font-size:19px; font-weight:800; white-space:nowrap; }
+  .sub { font-size:12px; color:var(--muted); }
+  .chips { display:flex; gap:8px; align-items:center; flex-wrap:wrap; justify-content:flex-end; }
+  .chip { font-size:12px; font-weight:600; padding:6px 10px; border-radius:10px; background:#fff; border:1px solid var(--line); white-space:nowrap; }
+  .chip b { color:var(--teal); }
+  .tag { font-size:11px; font-weight:700; padding:4px 10px; border-radius:999px; background:var(--org-bg); color:var(--org-ink); white-space:nowrap; }
+  .seg { display:flex; padding:3px; background:#fff; border:1px solid var(--line); border-radius:12px; gap:2px; }
+  .seg button { border:none; background:none; font-family:inherit; font-size:12px; font-weight:600; color:var(--ink); padding:7px 12px; border-radius:9px; cursor:pointer; white-space:nowrap; }
   .seg button.on { background:var(--teal); color:#fff; }
   .seg.small { background:var(--bg); border:none; }
-  .seg.small button { font-size:13px; padding:7px 14px; }
-  .tag { font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; background:var(--org-bg); color:var(--org-ink); }
-  .grid4 { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; }
-  .card { background:#fff; border:1px solid var(--line); border-radius:20px; padding:22px; }
-  .k-label { font-size:14px; color:var(--muted); font-weight:600; }
-  .k-val { font-size:38px; font-weight:800; letter-spacing:-1px; margin:8px 0 6px; }
-  .k-note { font-size:13px; color:var(--muted); }
-  h2 { margin:0; font-size:18px; font-weight:800; }
-  .legend { display:flex; gap:18px; font-size:13px; color:var(--muted); margin:10px 0 6px; flex-wrap:wrap; }
-  .legend span { display:flex; align-items:center; gap:6px; }
-  .sw { width:12px; height:12px; border-radius:3px; display:inline-block; }
-  .chart { position:relative; height:280px; display:flex; align-items:flex-end; gap:10px; border-bottom:1px solid var(--line); margin-top:16px; }
-  .slot { flex:1; display:flex; align-items:flex-end; justify-content:center; gap:4px; height:100%; }
-  .bar { width:40%; max-width:22px; border-radius:4px 4px 0 0; transition:height .4s; }
+  .seg.small button { padding:5px 10px; }
+
+  .kpis { grid-column:span 12; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+  .kpi { background:#fff; border:1px solid var(--line); border-radius:16px; padding:12px 16px; min-width:0; }
+  .k-label { font-size:12px; color:var(--muted); font-weight:600; }
+  .k-val { font-size:28px; font-weight:800; letter-spacing:-.5px; line-height:1.15; margin:2px 0; }
+  .k-note { font-size:11px; color:var(--muted); line-height:1.35; }
+
+  h2 { margin:0; font-size:14px; font-weight:800; }
+  .ctop { display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+  .legend { display:flex; gap:14px; font-size:11px; color:var(--muted); margin:6px 0 0; flex-wrap:wrap; }
+  .legend span { display:flex; align-items:center; gap:5px; }
+  .sw { width:10px; height:10px; border-radius:3px; display:inline-block; }
+  .chart { position:relative; flex:1; min-height:80px; display:flex; align-items:flex-end; gap:6px; border-bottom:1px solid var(--line); margin-top:8px; }
+  .slot { flex:1; display:flex; align-items:flex-end; justify-content:center; gap:3px; height:100%; }
+  .bar { width:42%; max-width:20px; border-radius:3px 3px 0 0; transition:height .4s; }
   .cap { position:absolute; left:0; right:0; border-top:2px dashed #8A918D; pointer-events:none; }
-  .cap b { position:absolute; right:0; top:-22px; font-size:11px; color:var(--muted); font-weight:600; background:#fff; padding:0 4px; }
-  .xl { display:flex; gap:10px; margin-top:8px; }
-  .xl span { flex:1; text-align:center; font-size:12px; color:var(--muted); }
-  .status { padding:14px 0; border-top:1px solid #F0EDE6; }
-  .status-top { display:flex; justify-content:space-between; align-items:center; gap:8px; }
-  .track { height:10px; background:#F0EDE6; border-radius:5px; margin:10px 0 8px; overflow:hidden; }
-  .fill { height:100%; border-radius:5px; }
-  table { width:100%; border-collapse:collapse; font-size:14px; }
-  th { text-align:left; font-size:12px; color:var(--muted); font-weight:600; padding:8px 0; border-bottom:1px solid var(--line); }
-  td { padding:11px 0; border-bottom:1px solid #F0EDE6; }
+  .cap b { position:absolute; right:0; top:-18px; font-size:10px; color:var(--muted); font-weight:600; background:#fff; padding:0 4px; }
+  .xl { display:flex; gap:6px; margin-top:5px; }
+  .xl span { flex:1; text-align:center; font-size:10px; color:var(--muted); }
+
+  .scroll { flex:1; min-height:0; overflow:auto; margin-top:6px; }
+  table { width:100%; border-collapse:collapse; font-size:12px; }
+  th { text-align:left; font-size:11px; color:var(--muted); font-weight:600; padding:5px 4px 5px 0; border-bottom:1px solid var(--line); position:sticky; top:0; background:#fff; }
+  td { padding:6px 4px 6px 0; border-bottom:1px solid #F0EDE6; white-space:nowrap; }
   .num { text-align:right; }
-  .prow { display:grid; grid-template-columns:1fr 100px 44px; gap:12px; align-items:center; font-size:14px; padding:6px 0; }
-  .mini { background:var(--bg); border-radius:14px; padding:14px 16px; }
-  .mini b { font-size:28px; font-weight:800; display:block; }
-  .mini span { font-size:13px; color:var(--muted); }
-  .grid2 { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); gap:16px; }
-  .foot { font-size:12px; color:var(--muted); line-height:1.6; }
-  @media (max-width:1000px) { .grid4 { grid-template-columns:repeat(2,minmax(0,1fr)); } .grid2 { grid-template-columns:1fr; } }
-  @media (max-width:600px) { .wrap { padding:16px; } .grid4 { grid-template-columns:1fr; } .chart, .xl { gap:3px; } .xl span { font-size:9px; } }
+  .status { padding:8px 0; border-top:1px solid #F0EDE6; }
+  .status:first-child { border-top:none; }
+  .status-top { display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:13px; }
+  .track { height:8px; background:#F0EDE6; border-radius:4px; margin:7px 0 5px; overflow:hidden; }
+  .fill { height:100%; border-radius:4px; }
+  .prow { display:grid; grid-template-columns:1fr 80px 36px; gap:10px; align-items:center; font-size:12px; padding:4px 0; }
+  .foot { grid-column:span 12; font-size:10px; color:var(--muted); display:none; }
+  #err { position:fixed; bottom:8px; left:18px; margin:0; color:var(--red); font-size:12px; }
+
+  /* Small screens: fall back to a normal scrolling page */
+  @media (max-width:1100px), (max-height:640px) {
+    .wrap { height:auto; grid-template-rows:none; }
+    .s3, .s4, .s8 { grid-column:span 12; }
+    .kpis { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .head { flex-wrap:wrap; }
+    .chart { height:220px; flex:none; }
+    .scroll { max-height:320px; }
+    .foot { display:block; }
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <!-- Header -->
+  <!-- Header with AI model summary -->
   <div class="head">
     <div class="brand">
-      <div class="logo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17h4l3-10 3 10h6"/></svg></div>
+      <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17h4l3-10 3 10h6"/></svg></div>
       <div><h1>City of Elmina morning traffic</h1><div class="sub">GerakBijak township dashboard - weekday mornings, <span id="h-res">--</span> residents</div></div>
     </div>
-    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+    <div class="chips">
+      <span class="chip" title="Gradient boosting model trained on TomTom traffic forecasts">AI error <b id="m-mae">--</b></span>
+      <span class="chip"><b id="m-imp">--</b> better than route average</span>
+      <span class="chip"><b id="m-rows">--</b> TomTom readings</span>
+      <span class="chip" style="display:none;"><b id="m-res">--</b></span>
       <span class="tag" style="background:#E3F1EC;color:#08493C;">Live from resident data</span>
       <div class="seg" id="exit-seg"><button data-exit="gce" class="on">GCE interchange</button><button data-exit="pe">Persiaran Elmina</button></div>
     </div>
   </div>
 
-  <!-- KPI cards -->
-  <div class="grid4">
-    <div class="card"><div class="k-label">Households taking part</div><div class="k-val" id="k-house">--</div><div class="k-note" id="k-house-note">--</div></div>
-    <div class="card"><div class="k-label">Time saved per household</div><div class="k-val" style="color:var(--teal);" id="k-saved">--</div><div class="k-note" id="k-saved-note">each weekday morning</div></div>
-    <div class="card"><div class="k-label">Cars removed at peak</div><div class="k-val" id="k-cars">--</div><div class="k-note" id="k-cars-note">--</div></div>
-    <div class="card"><div class="k-label">CO2 avoided</div><div class="k-val" id="k-co2">--</div><div class="k-note" id="k-co2-note">per month, estimate</div></div>
+  <!-- KPI row -->
+  <div class="kpis">
+    <div class="kpi"><div class="k-label">Households taking part</div><div class="k-val" id="k-house">--</div><div class="k-note" id="k-house-note">--</div></div>
+    <div class="kpi"><div class="k-label">Time saved per household</div><div class="k-val" style="color:var(--teal);" id="k-saved">--</div><div class="k-note" id="k-saved-note">each weekday morning</div></div>
+    <div class="kpi"><div class="k-label">Cars removed at peak</div><div class="k-val" id="k-cars">--</div><div class="k-note" id="k-cars-note">--</div></div>
+    <div class="kpi"><div class="k-label">CO2 avoided</div><div class="k-val" id="k-co2">--</div><div class="k-note" id="k-co2-note">per month, estimate</div></div>
   </div>
 
-  <!-- Main chart -->
-  <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+  <!-- Row A: chart + rush table -->
+  <div class="card s8">
+    <div class="ctop">
       <div><h2 id="c-title">Cars leaving per 5 minutes</h2><div class="sub" id="c-sub">--</div></div>
       <div class="seg small" id="view-seg"><button data-view="both" class="on">Both</button><button data-view="before">Before</button><button data-view="after">After</button></div>
     </div>
     <div class="legend">
       <span><i class="sw" style="background:var(--org);"></i>Before GerakBijak</span>
       <span><i class="sw" style="background:var(--teal);"></i>After GerakBijak</span>
-      <span><i style="width:18px;border-top:2px dashed #8A918D;display:inline-block;"></i><span id="c-cap">Exit capacity</span></span>
+      <span><i style="width:16px;border-top:2px dashed #8A918D;display:inline-block;"></i><span id="c-cap">Exit capacity</span></span>
     </div>
     <div class="chart" id="chart"></div>
     <div class="xl" id="xl"></div>
   </div>
-
-  <!-- Bottom row -->
-  <div class="grid4">
-    <div class="card">
-      <h2>Exit status, busiest 5 minutes</h2>
-      <div id="exit-status" style="margin-top:12px;"></div>
-    </div>
-    <div class="card">
-      <h2>School-run carpools</h2>
-      <table style="margin-top:12px;">
-        <thead><tr><th>School</th><th class="num">Groups</th><th class="num">Cars removed</th></tr></thead>
-        <tbody id="carpool-table"></tbody>
-      </table>
-    </div>
-    <div class="card">
-      <h2>Participation by precinct</h2>
-      <div id="precincts" style="margin-top:12px;"></div>
-    </div>
-    <div class="card">
-      <h2>Merchant rewards</h2>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0;">
-        <div class="mini"><b>310</b><span>vouchers redeemed</span></div>
-        <div class="mini"><b>12</b><span>partner merchants</span></div>
-      </div>
-      <div class="sub" style="line-height:1.6;">Most redeemed: RM5 cafe voucher at Elmina Lakeside Mall partners. Merchants fund most rewards in exchange for new weekday customers.</div>
-    </div>
-  </div>
-
-  <!-- AI prediction row (from the trained model) -->
-  <div class="grid2">
-    <div class="card">
-      <h2>AI travel-time prediction</h2>
-      <div class="sub" style="margin-top:4px;">Gradient boosting model trained on TomTom traffic forecasts</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;">
-        <div class="mini"><b id="m-mae">--</b><span>average error per trip</span></div>
-        <div class="mini"><b id="m-imp" style="color:var(--teal);">--</b><span>more accurate than a route average</span></div>
-        <div class="mini"><b id="m-rows">--</b><span>traffic readings used to train</span></div>
-        <div class="mini"><b id="m-res">--</b><span>surveyed households (dummy)</span></div>
-      </div>
-    </div>
-    <div class="card">
-      <h2>Morning rush by route, from Elmina East</h2>
-      <div class="sub" style="margin-top:4px;">Predicted by the model for a normal weekday</div>
-      <table style="margin-top:12px;">
-        <thead><tr><th>Destination</th><th>Rush hour</th><th class="num">Early trip</th><th class="num">Worst trip</th><th class="num">Rush adds</th></tr></thead>
+  <div class="card s4">
+    <h2>Morning rush by route, from Elmina East</h2>
+    <div class="sub">Predicted by the AI model for a normal weekday</div>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Destination</th><th>Rush hour</th><th class="num">Early</th><th class="num">Worst</th><th class="num">Rush adds</th></tr></thead>
         <tbody id="rush-table"></tbody>
       </table>
     </div>
   </div>
 
-  <!-- Residents list (from dummy_residents.csv, updates when someone signs up) -->
-  <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+  <!-- Row B: exits, carpools, precincts, residents -->
+  <div class="card s3">
+    <h2>Exit status, busiest 5 minutes</h2>
+    <div id="exit-status" style="margin-top:4px;"></div>
+  </div>
+  <div class="card s3">
+    <h2>School-run carpools</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>School</th><th class="num">Groups</th><th class="num">Cars off</th></tr></thead>
+        <tbody id="carpool-table"></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card s3">
+    <h2>Can leave earlier, by precinct</h2>
+    <div id="precincts" style="margin-top:6px;"></div>
+  </div>
+  <div class="card s3">
+    <div class="ctop">
       <div><h2>Residents</h2><div class="sub" id="r-sub">--</div></div>
       <div class="seg small" id="r-seg"><button data-r="new" class="on">Newest</button><button data-r="all">All</button></div>
     </div>
-    <div style="overflow-x:auto;">
-      <table style="margin-top:12px;min-width:640px;">
-        <thead><tr><th>ID</th><th>Name</th><th>Precinct</th><th>Leaves</th><th>Going to</th><th>School run</th><th>Can shift</th><th>Joined</th></tr></thead>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>ID</th><th>Name</th><th>Precinct</th><th>Leaves</th><th>Joined</th></tr></thead>
         <tbody id="r-table"></tbody>
       </table>
     </div>
   </div>
 
-  <div class="foot">How these numbers are made: travel times come from the AI model trained on TomTom data. Exit counts, carpools and participation are calculated from the resident list (500 fictional residents plus anyone who signs up), using the leave time, how much earlier they can leave, and the school run of every resident. The "after" bars move willing residents into earlier 5-minute slots so each exit stays under capacity. Merchant rewards are demo figures. A one-term pilot replaces the fictional residents with real participants.</div>
-  <p id="err" style="color:var(--red);"></p>
+  <div class="foot">Travel times come from the AI model trained on TomTom data. Exit counts, carpools and participation are calculated from the resident list (500 fictional residents plus app sign-ups).</div>
 </div>
+<p id="err"></p>
 
 <script src="js/gb-auth.js"></script>
 <script>
@@ -258,11 +261,10 @@
       .map((p) => '<div class="prow"><span>' + p[0] + '</span><div class="track" style="margin:0;"><div class="fill" style="width:' + p[1] + '%;background:var(--teal);"></div></div><b class="num">' + p[1] + "%</b></div>").join("");
 
     // Residents table
-    $("r-sub").textContent = n + " residents, " + signups.length + " signed up through the app";
+    $("r-sub").textContent = n + " residents, " + signups.length + " joined through the app";
     const list = rview === "new" ? people.slice().sort((a, b) => b.resident_id.localeCompare(a.resident_id)).slice(0, 8) : people;
-    $("r-table").innerHTML = list.map((r) => "<tr><td>" + r.resident_id + "</td><td>" + r.name + "</td><td>" + r.precinct + "</td><td>" + r.leave_time +
-      "</td><td>" + r.destination + "</td><td>" + (r.school_run === "Yes" ? r.school : "-") + "</td><td>" + (r.shift_willing || "-") + "</td><td>" +
-      (r.source === "signup" ? '<span class="tag" style="background:var(--teal-bg);color:var(--teal-ink);">App sign-up</span>' : '<span class="k-note">Survey</span>') + "</td></tr>").join("");
+    $("r-table").innerHTML = list.map((r) => "<tr><td>" + r.resident_id + "</td><td>" + r.name + "</td><td>" + r.precinct.replace("Elmina ", "") + "</td><td>" + r.leave_time + "</td><td>" +
+      (r.source === "signup" ? '<span class="tag" style="background:var(--teal-bg);color:var(--teal-ink);">App</span>' : '<span class="k-note">Survey</span>') + "</td></tr>").join("");
   }
 
   function fillFromModel(d) {
@@ -281,33 +283,4 @@
     $("rush-table").innerHTML = rows.map(([dest, x]) =>
       "<tr><td>" + dest + "</td><td>" + x.rush_from + " to " + x.rush_to + '</td><td class="num">' + Math.round(x.leave_630_min) +
       ' min</td><td class="num">' + Math.round(x.peak_min) + ' min</td><td class="num" style="font-weight:800;color:' +
-      (x.rush_adds_pct >= 15 ? "var(--org-ink)" : "var(--teal)") + ';">+' + x.rush_adds_min.toFixed(1) + " min (" + x.rush_adds_pct + "%)</td></tr>").join("");
-  }
-
-  function load() {
-    return GB.residents().then((list) => {
-      people = list;
-      Object.keys(EXITS).forEach((k) => (sim[k] = simulate(list.filter((r) => EXITS[k].precincts.includes(r.precinct)), EXITS[k].cap)));
-      drawPeople(); drawChart(); drawStatus();
-    });
-  }
-
-  $("exit-seg").querySelectorAll("button").forEach((b) => (b.onclick = () => {
-    exit = b.dataset.exit; $("exit-seg").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b)); drawChart();
-  }));
-  $("view-seg").querySelectorAll("button").forEach((b) => (b.onclick = () => {
-    view = b.dataset.view; $("view-seg").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b)); drawChart();
-  }));
-  $("r-seg").querySelectorAll("button").forEach((b) => (b.onclick = () => {
-    rview = b.dataset.r; $("r-seg").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b)); drawPeople();
-  }));
-
-  fetch("data/gerakbijak_data.json").then((r) => r.json()).then(fillFromModel)
-    .catch((e) => { $("err").textContent = "Could not load the prediction data (data/gerakbijak_data.json)."; console.error(e); });
-  load().catch((e) => { $("err").textContent = "Could not load the resident list (data/dummy_residents.csv)."; console.error(e); });
-  // With server.py running, refresh every 15 seconds so new sign-ups appear without reloading
-  GB.hasApi().then((on) => { if (on) setInterval(() => load().catch(() => {}), 15000); });
-})();
-</script>
-</body>
-</html>
+      (x.rush_adds_pct >= 15 ? "var(--org-ink)" : "var(--teal)") + ';">+' +
