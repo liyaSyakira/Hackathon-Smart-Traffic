@@ -6,34 +6,12 @@
 <title>GerakBijak - Profile</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root { --ink:#17201D; --muted:#5B6460; --line:#E4E0D8; --bg:#F7F5F0; --teal:#0D6B58; --teal-bg:#E3F1EC; --teal-ink:#08493C; --org-bg:#FBE9DF; --org-ink:#9A3412; }
-  * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); font-family:'Manrope',system-ui,sans-serif; color:var(--ink); }
-  .app { max-width:430px; margin:0 auto; min-height:100vh; padding:20px 20px 40px; display:flex; flex-direction:column; gap:14px; }
-  .top { display:flex; align-items:center; gap:12px; }
-  .round { width:44px; height:44px; border-radius:22px; border:1px solid var(--line); background:#fff; display:flex; align-items:center; justify-content:center; text-decoration:none; }
-  .card { background:#fff; border:1px solid var(--line); border-radius:20px; padding:20px; display:flex; flex-direction:column; gap:12px; }
-  .avatar { width:64px; height:64px; border-radius:32px; background:var(--teal); color:#fff; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:800; flex-shrink:0; }
-  .pill { font-size:12px; font-weight:700; padding:4px 10px; border-radius:999px; background:var(--teal-bg); color:var(--teal-ink); }
-  .row { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-top:1px solid #F0EDE6; font-size:14px; }
-  .row span { color:var(--muted); }
-  .row b { text-align:right; }
-  .label { font-size:13px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.6px; }
-  label { font-size:13px; font-weight:600; color:var(--muted); display:flex; flex-direction:column; gap:6px; }
-  input, select { height:46px; border-radius:12px; border:1px solid var(--line); background:#fff; color:var(--ink); font-family:inherit; font-size:15px; padding:0 12px; width:100%; }
-  .two { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-  .btn { height:50px; border:none; border-radius:14px; background:var(--teal); color:#fff; font-family:inherit; font-size:16px; font-weight:700; cursor:pointer; }
-  .btn2 { height:50px; border:1px solid var(--line); border-radius:14px; background:#fff; color:var(--ink); font-family:inherit; font-size:15px; font-weight:700; cursor:pointer; }
-  .stress { display:flex; gap:6px; }
-  .stress i { flex:1; height:8px; border-radius:4px; background:#F0EDE6; }
-  .hide { display:none !important; }
-</style>
+<link rel="stylesheet" href="css/profile.css">
 </head>
 <body>
 <div class="app">
   <div class="top">
-    <a class="round" href="app.html" aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17201D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></a>
+    <a class="round" href="index.html" aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17201D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></a>
     <div style="font-size:17px;font-weight:800;">My profile</div>
   </div>
 
@@ -92,57 +70,6 @@
 </div>
 
 <script src="js/gb-auth.js"></script>
-<script>
-(function () {
-  const $ = (id) => document.getElementById(id);
-  const fill = (sel, list) => list.forEach((v) => sel.add(new Option(v, v)));
-  fill($("e-precinct"), GB.PRECINCTS); fill($("e-dest"), GB.WORK); fill($("e-school"), GB.SCHOOLS);
-  for (let m = 390; m <= 510; m += 5) $("e-leave").add(new Option(Math.floor(m / 60) + ":" + String(m % 60).padStart(2, "0")));
-  $("e-run").onchange = () => $("e-school-box").classList.toggle("hide", $("e-run").value === "No");
-
-  let user = null;
-  function render(u) {
-    $("p-avatar").textContent = GB.initials(u.name);
-    $("p-name").textContent = u.name;
-    $("p-sub").textContent = u.email || ("Dummy resident from " + u.precinct);
-    $("p-id").textContent = "Resident " + u.resident_id;
-    $("v-precinct").textContent = u.precinct;
-    $("v-leave").textContent = u.leave_time;
-    $("v-dest").textContent = u.destination;
-    $("v-shift").textContent = u.shift_willing || "-";
-    $("v-run").textContent = u.school_run;
-    $("v-school").textContent = u.school || "-";
-    $("v-carpool").textContent = u.carpool || "-";
-    const s = parseInt(u.frustration, 10) || 0;
-    $("v-stress").innerHTML = [1, 2, 3, 4, 5].map((k) => '<i style="background:' + (k <= s ? (s >= 4 ? "#E0703A" : "#0D6B58") : "#F0EDE6") + ';"></i>').join("");
-    $("v-stress-t").textContent = s + " of 5. " + (s >= 4 ? "Traffic is one of your biggest daily frustrations." : "Traffic bothers you a little.");
-  }
-
-  function openEdit() {
-    $("e-name").value = user.name; $("e-precinct").value = user.precinct; $("e-leave").value = user.leave_time;
-    $("e-dest").value = user.destination; $("e-shift").value = user.shift_willing || "Maybe"; $("e-run").value = user.school_run;
-    $("e-school").value = user.school || GB.SCHOOLS[0]; $("e-carpool").value = user.carpool || "Maybe"; $("e-stress").value = user.frustration || "3";
-    $("e-school-box").classList.toggle("hide", user.school_run === "No");
-    $("view").classList.add("hide"); $("form").classList.remove("hide");
-  }
-  function closeEdit() { $("form").classList.add("hide"); $("view").classList.remove("hide"); }
-
-  $("edit").onclick = openEdit;
-  $("cancel").onclick = closeEdit;
-  $("out").onclick = () => GB.signOut();
-  $("form").onsubmit = async (ev) => {
-    ev.preventDefault();
-    if (!$("e-name").value.trim()) { $("err").textContent = "Please enter your name."; return; }
-    const ch = { name: $("e-name").value.trim(), precinct: $("e-precinct").value, leave_time: $("e-leave").value,
-      destination: $("e-dest").value, shift_willing: $("e-shift").value, school_run: $("e-run").value,
-      school: $("e-school").value, carpool: $("e-carpool").value, frustration: $("e-stress").value };
-    await GB.update(user.resident_id, ch);
-    user = await GB.current(); render(user); closeEdit(); $("err").textContent = "";
-  };
-
-  GB.requireUser().then((u) => { user = u; render(u); })
-    .catch((e) => { if (e.message !== "not signed in") $("err").textContent = "Could not load your profile."; });
-})();
-</script>
+<script src="js/profile.js"></script>
 </body>
 </html>

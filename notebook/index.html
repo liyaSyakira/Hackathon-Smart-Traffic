@@ -46,7 +46,7 @@
   <div class="done hide" id="gb-done">
     <div style="width:44px;height:44px;border-radius:22px;background:#fff;display:flex;align-items:center;justify-content:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B58" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></div>
     <div style="font-size:22px;font-weight:800;" id="gb-done-title">Left on time</div>
-    <div style="font-size:15px;line-height:1.5;">+10 points added. Have a smooth trip!</div>
+    <div style="font-size:15px;line-height:1.5;">Have a smooth trip!</div>
     <button class="btn2" id="gb-undo" style="align-self:flex-start;background:transparent;color:#fff;border-color:#fff;padding:0 18px;">Undo</button>
   </div>
 
@@ -60,10 +60,6 @@
   <div class="card row" data-go="carpool" style="flex-direction:row;padding:16px 18px;">
     <div class="icon" style="background:var(--teal-bg);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B58" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15 14.5c3 0 6 1.9 6 5.5"/></svg></div>
     <div style="flex:1;"><div style="font-size:15px;font-weight:700;">2 families can share your school run</div><div style="font-size:13px;color:var(--muted);">SK Denai Alam, 7:20 drop-off</div></div>
-  </div>
-  <div class="card row" data-go="rewards" style="flex-direction:row;padding:16px 18px;">
-    <div class="icon" style="background:var(--org-bg);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9A3412" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13"/><path d="M3 12h18"/></svg></div>
-    <div style="flex:1;"><div style="font-size:15px;font-weight:700;"><span class="gb-points">230</span> points this month</div><div style="font-size:13px;color:var(--muted);">Redeem at Elmina Lakeside Mall partners</div></div>
   </div>
   <p id="gb-error" style="color:#B42318;"></p>
 </main>
@@ -90,32 +86,10 @@
   <button class="btn" id="gb-join">Join this group</button>
 </main>
 
-<!-- ================= REWARDS ================= -->
-<main id="tab-rewards" class="hide">
-  <div style="font-size:17px;font-weight:800;">Rewards</div>
-  <div class="card dark">
-    <div class="label" style="color:#C9D1CD;">Your points</div>
-    <div style="display:flex;align-items:baseline;gap:8px;"><span style="font-size:56px;font-weight:800;letter-spacing:-1.5px;line-height:1;" class="gb-points">230</span><span style="color:#C9D1CD;font-weight:600;">pts</span></div>
-    <div class="two">
-      <div class="box" style="background:#26302C;"><b>42 min</b><span style="color:#C9D1CD;">saved this month</span></div>
-      <div class="box" style="background:#26302C;"><b>6.4 kg CO2</b><span style="color:#C9D1CD;">avoided this month</span></div>
-    </div>
-  </div>
-  <div class="card" style="gap:4px;">
-    <div style="font-size:15px;font-weight:700;margin-bottom:6px;">This week</div>
-    <div class="act"><div><b style="font-size:14px;">Left in your slot</b><div style="font-size:12px;color:var(--muted);">Mon</div></div><b style="color:var(--teal);">+10</b></div>
-    <div class="act"><div><b style="font-size:14px;">Shared school run</b><div style="font-size:12px;color:var(--muted);">Tue</div></div><b style="color:var(--teal);">+20</b></div>
-    <div class="act"><div><b style="font-size:14px;">Left in your slot</b><div style="font-size:12px;color:var(--muted);">Wed</div></div><b style="color:var(--teal);">+10</b></div>
-  </div>
-  <div style="font-size:15px;font-weight:700;">Redeem with township partners</div>
-  <div id="gb-vouchers" style="display:flex;flex-direction:column;gap:10px;"></div>
-  <div style="font-size:12px;color:var(--muted);">Vouchers are funded by township merchants, who gain new customers in return.</div>
-</main>
-
 <nav aria-label="Main">
   <button data-tab="today" class="on"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Today</button>
   <button data-tab="carpool"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15 14.5c3 0 6 1.9 6 5.5"/></svg>Carpool</button>
-  <button data-tab="rewards"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg>Rewards</button>
+  <a href="profile.html"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>Profile</a>
 </nav>
 </div>
 

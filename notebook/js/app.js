@@ -1,41 +1,12 @@
 (function () {
   const $ = (id) => document.getElementById(id);
   const toMin = (t) => { const [h, m] = t.split(":").map(Number); return h * 60 + m; };
-  let data = null, points = 230, left = false, joined = false;
-  const redeemed = {};
-  const vouchers = [
-    { id: "cafe", name: "RM5 cafe voucher", partner: "Partner cafe, Elmina Lakeside Mall", cost: 100 },
-    { id: "grocer", name: "RM10 grocery voucher", partner: "Partner grocer, Elmina City Centre", cost: 180 },
-    { id: "class", name: "Free kids class", partner: "Partner tuition centre", cost: 250 },
-    { id: "dining", name: "RM20 dining voucher", partner: "Partner restaurant, Elmina Lakeside Mall", cost: 350 },
-  ];
+  let data = null, joined = false;
 
   // Tomorrow's date (next weekday)
   const d = new Date(); d.setDate(d.getDate() + 1);
   while (d.getDay() === 0 || d.getDay() === 6) d.setDate(d.getDate() + 1);
   $("gb-day").textContent = "Tomorrow, " + d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
-
-  function setPoints() { document.querySelectorAll(".gb-points").forEach((e) => (e.textContent = points)); renderVouchers(); }
-
-  function renderVouchers() {
-    $("gb-vouchers").innerHTML = "";
-    vouchers.forEach((v) => {
-      const done = redeemed[v.id], ok = points >= v.cost;
-      const div = document.createElement("div");
-      div.className = "card voucher";
-      div.style.cssText = "flex-direction:row;padding:14px 16px;";
-      div.innerHTML = '<div style="flex:1;"><b style="font-size:15px;">' + v.name + '</b><div style="font-size:12px;color:#5B6460;">' + v.partner +
-        '</div><div style="font-size:12px;font-weight:700;color:#9A3412;">' + v.cost + ' pts</div></div>';
-      const b = document.createElement("button");
-      b.textContent = done ? "Redeemed" : ok ? "Redeem" : "Locked";
-      b.disabled = done || !ok;
-      b.style.background = done ? "#E3F1EC" : ok ? "#0D6B58" : "#F0EDE6";
-      b.style.color = done ? "#08493C" : ok ? "#fff" : "#5B6460";
-      b.onclick = () => { redeemed[v.id] = true; points -= v.cost; setPoints(); };
-      div.appendChild(b);
-      $("gb-vouchers").appendChild(div);
-    });
-  }
 
   function show() {
     const o = $("gb-origin").value, dest = $("gb-destination").value;
@@ -76,15 +47,15 @@
   }
 
   function tab(name) {
-    ["today", "carpool", "rewards"].forEach((t) => $("tab-" + t).classList.toggle("hide", t !== name));
-    document.querySelectorAll("nav button").forEach((x) => x.classList.toggle("on", x.dataset.tab === name));
+    ["today", "carpool"].forEach((t) => $("tab-" + t).classList.toggle("hide", t !== name));
+    document.querySelectorAll("nav button[data-tab]").forEach((x) => x.classList.toggle("on", x.dataset.tab === name));
     window.scrollTo(0, 0);
   }
-  document.querySelectorAll("nav button").forEach((x) => (x.onclick = () => tab(x.dataset.tab)));
+  document.querySelectorAll("nav button[data-tab]").forEach((x) => (x.onclick = () => tab(x.dataset.tab)));
   document.querySelectorAll("[data-go]").forEach((x) => (x.onclick = () => tab(x.dataset.go)));
 
-  $("gb-leave").onclick = () => { if (!left) { left = true; points += 10; setPoints(); } $("gb-plan").classList.add("hide"); $("gb-done").classList.remove("hide"); };
-  $("gb-undo").onclick = () => { if (left) { left = false; points -= 10; setPoints(); } $("gb-done").classList.add("hide"); $("gb-plan").classList.remove("hide"); };
+  $("gb-leave").onclick = () => { $("gb-plan").classList.add("hide"); $("gb-done").classList.remove("hide"); };
+  $("gb-undo").onclick = () => { $("gb-done").classList.add("hide"); $("gb-plan").classList.remove("hide"); };
   $("gb-join").onclick = () => { joined = !joined; $("gb-join").textContent = joined ? "Request sent. Tap to cancel" : "Join this group"; };
 
   fetch("data/gerakbijak_data.json")
@@ -99,7 +70,6 @@
       $("gb-usual").value = first.peak_time;
       ["gb-origin", "gb-destination", "gb-usual"].forEach((id) => $(id).addEventListener("change", show));
       show();
-      setPoints();
     })
     .catch((e) => { $("gb-error").textContent = "Could not load trip data. Please try again later."; console.error(e); });
 })();
