@@ -87,7 +87,7 @@
   const fill = (sel, list) => list.forEach((v) => sel.add(new Option(v, v)));
 
   // Already signed in? Go straight to the app
-  GB.current().then((u) => { if (u) location.href = "app.html"; }).catch(() => {});
+  GB.current().then((u) => { if (u) location.href = "index.html"; }).catch(() => {});
 
   function tab(up) {
     $("tab-in").classList.toggle("on", !up); $("tab-up").classList.toggle("on", up);
@@ -123,7 +123,7 @@
     ev.preventDefault(); $("in-err").textContent = "";
     if (!$("in-id").value.trim() || !$("in-pw").value) { $("in-err").textContent = "Please enter your resident ID and password."; return; }
     const r = await GB.signIn($("in-id").value, $("in-pw").value);
-    if (r.ok) location.href = "app.html"; else $("in-err").textContent = r.msg;
+    if (r.ok) location.href = "index.html"; else $("in-err").textContent = r.msg;
   };
 
   $("form-up").onsubmit = async (ev) => {
@@ -137,7 +137,7 @@
       destination: $("up-dest").value, school_run: $("up-school-run").value, school: $("up-school").value,
       carpool: $("up-carpool").value, shift_willing: $("up-shift").value,
     });
-    if (r.ok) location.href = "app.html"; else $("up-err").textContent = r.msg;
+    if (r.ok) location.href = "index.html"; else $("up-err").textContent = r.msg;
   };
 })();
 </script>
