@@ -1,145 +1,145 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GerakBijak - Sign in</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root { --ink:#17201D; --muted:#5B6460; --line:#E4E0D8; --bg:#F7F5F0; --teal:#0D6B58; --teal-bg:#E3F1EC; --teal-ink:#08493C; --org-bg:#FBE9DF; --org-ink:#9A3412; }
-  * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); font-family:'Manrope',system-ui,sans-serif; color:var(--ink); }
-  .app { max-width:430px; margin:0 auto; min-height:100vh; padding:32px 20px 40px; display:flex; flex-direction:column; gap:18px; }
-  .brand { display:flex; align-items:center; gap:10px; font-size:20px; font-weight:800; }
-  .logo { width:40px; height:40px; border-radius:12px; background:var(--teal); display:flex; align-items:center; justify-content:center; }
-  h1 { margin:8px 0 0; font-size:28px; font-weight:800; letter-spacing:-.5px; line-height:1.2; }
-  .muted { color:var(--muted); font-size:14px; line-height:1.5; }
-  .seg { display:grid; grid-template-columns:1fr 1fr; padding:4px; background:#fff; border:1px solid var(--line); border-radius:14px; }
-  .seg button { border:none; background:none; font-family:inherit; font-size:15px; font-weight:700; color:var(--muted); padding:11px; border-radius:10px; cursor:pointer; }
-  .seg button.on { background:var(--teal); color:#fff; }
-  .card { background:#fff; border:1px solid var(--line); border-radius:20px; padding:20px; display:flex; flex-direction:column; gap:14px; }
-  label { font-size:13px; font-weight:600; color:var(--muted); display:flex; flex-direction:column; gap:6px; }
-  input, select { height:46px; border-radius:12px; border:1px solid var(--line); background:#fff; color:var(--ink); font-family:inherit; font-size:15px; padding:0 12px; width:100%; }
-  input:focus, select:focus { outline:2px solid var(--teal); outline-offset:1px; border-color:var(--teal); }
-  .two { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-  .btn { height:52px; border:none; border-radius:14px; background:var(--teal); color:#fff; font-family:inherit; font-size:16px; font-weight:700; cursor:pointer; }
-  .err { color:#B42318; font-size:14px; min-height:0; margin:0; }
-  .hint { background:var(--teal-bg); color:var(--teal-ink); border-radius:14px; padding:12px 14px; font-size:13px; line-height:1.5; }
-  .chips { display:flex; flex-wrap:wrap; gap:8px; }
-  .chips button { border:1px solid var(--line); background:#fff; border-radius:999px; padding:7px 12px; font-family:inherit; font-size:13px; font-weight:600; color:var(--ink); cursor:pointer; }
-  .hide { display:none !important; }
-  .section-t { font-size:13px; font-weight:800; color:var(--ink); text-transform:uppercase; letter-spacing:.6px; margin-top:4px; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GerakBijak - Sign in</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/login.css">
+
 </head>
 <body>
-<div class="app">
-  <div class="brand"><div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17h4l3-10 3 10h6"/></svg></div>GerakBijak</div>
-  <div>
-    <h1 id="title">Welcome back</h1>
-    <div class="muted" id="subtitle">Sign in to see your best time to leave tomorrow.</div>
+  <div class="app">
+    <div class="brand">
+      <div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 17h4l3-10 3 10h6" />
+        </svg></div>GerakBijak
+    </div>
+    <div>
+      <h1 id="title">Welcome back</h1>
+      <div class="muted" id="subtitle">Sign in to see your best time to leave tomorrow.</div>
+    </div>
+
+    <div class="seg"><button id="tab-in" class="on">Sign in</button><button id="tab-up">Sign up</button></div>
+
+    <!-- SIGN IN -->
+    <form class="card" id="form-in" novalidate>
+      <label>Resident ID or email<input id="in-id" autocomplete="username" placeholder="e.g. R0001"></label>
+      <label>Password<input id="in-pw" type="password" autocomplete="current-password"
+          placeholder="Your password"></label>
+      <p class="err" id="in-err"></p>
+      <button class="btn" type="submit">Sign in</button>
+      <div class="hint">
+        <b>Demo accounts</b><br>Every resident in dummy_residents.csv can sign in with their ID and the password
+        <b>elmina123</b>. Tap one to fill in:
+        <div class="chips" id="demo-chips" style="margin-top:8px;"></div>
+      </div>
+    </form>
+
+    <!-- SIGN UP -->
+    <form class="card hide" id="form-up" novalidate>
+      <div class="section-t">About you</div>
+      <label>Full name<input id="up-name" autocomplete="name" placeholder="e.g. Aina Rahman"></label>
+      <label>Email<input id="up-email" type="email" autocomplete="email" placeholder="you@example.com"></label>
+      <label>Password<input id="up-pw" type="password" autocomplete="new-password"
+          placeholder="At least 6 characters"></label>
+
+      <div class="section-t">Your morning</div>
+      <label>Where you live<select id="up-precinct"></select></label>
+      <div class="two">
+        <label>Usually leave at<select id="up-leave"></select></label>
+        <label>Going to<select id="up-dest"></select></label>
+      </div>
+      <label>Do you drop children at school?<select id="up-school-run">
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select></label>
+      <div class="two" id="school-box">
+        <label>School<select id="up-school"></select></label>
+        <label>Share the school run?<select id="up-carpool">
+            <option>Yes</option>
+            <option>Maybe</option>
+            <option>No</option>
+          </select></label>
+      </div>
+      <label>Could you leave a little earlier?<select id="up-shift">
+          <option>Yes, 10 min</option>
+          <option>Yes, 20 min</option>
+          <option>Maybe</option>
+          <option>No</option>
+        </select></label>
+
+      <p class="err" id="up-err"></p>
+      <button class="btn" type="submit">Create account</button>
+      <div class="muted" style="font-size:12px;" id="up-note">Prototype only: your account is saved in this browser, not
+        on a server.</div>
+    </form>
   </div>
 
-  <div class="seg"><button id="tab-in" class="on">Sign in</button><button id="tab-up">Sign up</button></div>
+  <script src="js/gb-auth.js"></script>
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      const fill = (sel, list) => list.forEach((v) => sel.add(new Option(v, v)));
 
-  <!-- SIGN IN -->
-  <form class="card" id="form-in" novalidate>
-    <label>Resident ID or email<input id="in-id" autocomplete="username" placeholder="e.g. R0001"></label>
-    <label>Password<input id="in-pw" type="password" autocomplete="current-password" placeholder="Your password"></label>
-    <p class="err" id="in-err"></p>
-    <button class="btn" type="submit">Sign in</button>
-    <div class="hint">
-      <b>Demo accounts</b><br>Every resident in dummy_residents.csv can sign in with their ID and the password <b>elmina123</b>. Tap one to fill in:
-      <div class="chips" id="demo-chips" style="margin-top:8px;"></div>
-    </div>
-  </form>
+      // Already signed in? Go straight to the app
+      GB.current().then((u) => { if (u) location.href = "index.html"; }).catch(() => { });
 
-  <!-- SIGN UP -->
-  <form class="card hide" id="form-up" novalidate>
-    <div class="section-t">About you</div>
-    <label>Full name<input id="up-name" autocomplete="name" placeholder="e.g. Aina Rahman"></label>
-    <label>Email<input id="up-email" type="email" autocomplete="email" placeholder="you@example.com"></label>
-    <label>Password<input id="up-pw" type="password" autocomplete="new-password" placeholder="At least 6 characters"></label>
+      function tab(up) {
+        $("tab-in").classList.toggle("on", !up); $("tab-up").classList.toggle("on", up);
+        $("form-in").classList.toggle("hide", up); $("form-up").classList.toggle("hide", !up);
+        $("title").textContent = up ? "Create your account" : "Welcome back";
+        $("subtitle").textContent = up ? "Tell us about your morning and we will plan your best time to leave."
+          : "Sign in to see your best time to leave tomorrow.";
+      }
+      $("tab-in").onclick = () => tab(false);
+      $("tab-up").onclick = () => tab(true);
 
-    <div class="section-t">Your morning</div>
-    <label>Where you live<select id="up-precinct"></select></label>
-    <div class="two">
-      <label>Usually leave at<select id="up-leave"></select></label>
-      <label>Going to<select id="up-dest"></select></label>
-    </div>
-    <label>Do you drop children at school?<select id="up-school-run"><option value="Yes">Yes</option><option value="No">No</option></select></label>
-    <div class="two" id="school-box">
-      <label>School<select id="up-school"></select></label>
-      <label>Share the school run?<select id="up-carpool"><option>Yes</option><option>Maybe</option><option>No</option></select></label>
-    </div>
-    <label>Could you leave a little earlier?<select id="up-shift"><option>Yes, 10 min</option><option>Yes, 20 min</option><option>Maybe</option><option>No</option></select></label>
+      // Sign-up choices
+      fill($("up-precinct"), GB.PRECINCTS);
+      fill($("up-dest"), GB.WORK);
+      fill($("up-school"), GB.SCHOOLS);
+      for (let m = 390; m <= 510; m += 5) $("up-leave").add(new Option(Math.floor(m / 60) + ":" + String(m % 60).padStart(2, "0")));
+      $("up-leave").value = "7:10";
+      $("up-school-run").onchange = () => $("school-box").classList.toggle("hide", $("up-school-run").value === "No");
 
-    <p class="err" id="up-err"></p>
-    <button class="btn" type="submit">Create account</button>
-    <div class="muted" style="font-size:12px;" id="up-note">Prototype only: your account is saved in this browser, not on a server.</div>
-  </form>
-</div>
+      GB.hasApi().then((on) => { if (on) $("up-note").textContent = "Your account is added to the GerakBijak resident list. Your password is stored scrambled (hashed)."; });
 
-<script src="js/gb-auth.js"></script>
-<script>
-(function () {
-  const $ = (id) => document.getElementById(id);
-  const fill = (sel, list) => list.forEach((v) => sel.add(new Option(v, v)));
+      // Demo chips from the CSV
+      GB.residents().then((all) => {
+        all.slice(0, 4).forEach((r) => {
+          const b = document.createElement("button"); b.type = "button";
+          b.textContent = r.resident_id + " - " + r.name + ", " + r.precinct.replace("Elmina ", "");
+          b.onclick = () => { $("in-id").value = r.resident_id; $("in-pw").value = GB.DEMO_PASSWORD; };
+          $("demo-chips").appendChild(b);
+        });
+      }).catch((e) => { $("in-err").textContent = "Could not load dummy_residents.csv. Put it in the data folder."; console.error(e); });
 
-  // Already signed in? Go straight to the app
-  GB.current().then((u) => { if (u) location.href = "index.html"; }).catch(() => {});
+      $("form-in").onsubmit = async (ev) => {
+        ev.preventDefault(); $("in-err").textContent = "";
+        if (!$("in-id").value.trim() || !$("in-pw").value) { $("in-err").textContent = "Please enter your resident ID and password."; return; }
+        const r = await GB.signIn($("in-id").value, $("in-pw").value);
+        if (r.ok) location.href = "index.html"; else $("in-err").textContent = r.msg;
+      };
 
-  function tab(up) {
-    $("tab-in").classList.toggle("on", !up); $("tab-up").classList.toggle("on", up);
-    $("form-in").classList.toggle("hide", up); $("form-up").classList.toggle("hide", !up);
-    $("title").textContent = up ? "Create your account" : "Welcome back";
-    $("subtitle").textContent = up ? "Tell us about your morning and we will plan your best time to leave."
-                                   : "Sign in to see your best time to leave tomorrow.";
-  }
-  $("tab-in").onclick = () => tab(false);
-  $("tab-up").onclick = () => tab(true);
-
-  // Sign-up choices
-  fill($("up-precinct"), GB.PRECINCTS);
-  fill($("up-dest"), GB.WORK);
-  fill($("up-school"), GB.SCHOOLS);
-  for (let m = 390; m <= 510; m += 5) $("up-leave").add(new Option(Math.floor(m / 60) + ":" + String(m % 60).padStart(2, "0")));
-  $("up-leave").value = "7:10";
-  $("up-school-run").onchange = () => $("school-box").classList.toggle("hide", $("up-school-run").value === "No");
-
-  GB.hasApi().then((on) => { if (on) $("up-note").textContent = "Your account is added to the GerakBijak resident list. Your password is stored scrambled (hashed)."; });
-
-  // Demo chips from the CSV
-  GB.residents().then((all) => {
-    all.slice(0, 4).forEach((r) => {
-      const b = document.createElement("button"); b.type = "button";
-      b.textContent = r.resident_id + " - " + r.name + ", " + r.precinct.replace("Elmina ", "");
-      b.onclick = () => { $("in-id").value = r.resident_id; $("in-pw").value = GB.DEMO_PASSWORD; };
-      $("demo-chips").appendChild(b);
-    });
-  }).catch((e) => { $("in-err").textContent = "Could not load dummy_residents.csv. Put it in the data folder."; console.error(e); });
-
-  $("form-in").onsubmit = async (ev) => {
-    ev.preventDefault(); $("in-err").textContent = "";
-    if (!$("in-id").value.trim() || !$("in-pw").value) { $("in-err").textContent = "Please enter your resident ID and password."; return; }
-    const r = await GB.signIn($("in-id").value, $("in-pw").value);
-    if (r.ok) location.href = "index.html"; else $("in-err").textContent = r.msg;
-  };
-
-  $("form-up").onsubmit = async (ev) => {
-    ev.preventDefault(); $("up-err").textContent = "";
-    const name = $("up-name").value.trim(), email = $("up-email").value.trim(), pw = $("up-pw").value;
-    if (!name) return ($("up-err").textContent = "Please enter your name.");
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return ($("up-err").textContent = "Please enter a valid email.");
-    if (pw.length < 6) return ($("up-err").textContent = "Password needs at least 6 characters.");
-    const r = await GB.signUp({
-      name, email, password: pw, precinct: $("up-precinct").value, leave_time: $("up-leave").value,
-      destination: $("up-dest").value, school_run: $("up-school-run").value, school: $("up-school").value,
-      carpool: $("up-carpool").value, shift_willing: $("up-shift").value,
-    });
-    if (r.ok) location.href = "index.html"; else $("up-err").textContent = r.msg;
-  };
-})();
-</script>
+      $("form-up").onsubmit = async (ev) => {
+        ev.preventDefault(); $("up-err").textContent = "";
+        const name = $("up-name").value.trim(), email = $("up-email").value.trim(), pw = $("up-pw").value;
+        if (!name) return ($("up-err").textContent = "Please enter your name.");
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return ($("up-err").textContent = "Please enter a valid email.");
+        if (pw.length < 6) return ($("up-err").textContent = "Password needs at least 6 characters.");
+        const r = await GB.signUp({
+          name, email, password: pw, precinct: $("up-precinct").value, leave_time: $("up-leave").value,
+          destination: $("up-dest").value, school_run: $("up-school-run").value, school: $("up-school").value,
+          carpool: $("up-carpool").value, shift_willing: $("up-shift").value,
+        });
+        if (r.ok) location.href = "index.html"; else $("up-err").textContent = r.msg;
+      };
+    })();
+  </script>
 </body>
+
 </html>
