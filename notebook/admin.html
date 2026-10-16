@@ -63,10 +63,10 @@
   <div class="head">
     <div class="brand">
       <div class="logo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17h4l3-10 3 10h6"/></svg></div>
-      <div><h1>City of Elmina morning traffic</h1><div class="sub">GerakBijak township dashboard - weekday mornings, 6:40 to 7:40</div></div>
+      <div><h1>City of Elmina morning traffic</h1><div class="sub">GerakBijak township dashboard - weekday mornings, <span id="h-res">--</span> residents</div></div>
     </div>
     <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-      <span class="tag">Simulated pilot data</span>
+      <span class="tag" style="background:#E3F1EC;color:#08493C;">Live from resident data</span>
       <div class="seg" id="exit-seg"><button data-exit="gce" class="on">GCE interchange</button><button data-exit="pe">Persiaran Elmina</button></div>
     </div>
   </div>
@@ -76,7 +76,7 @@
     <div class="card"><div class="k-label">Households taking part</div><div class="k-val" id="k-house">--</div><div class="k-note" id="k-house-note">--</div></div>
     <div class="card"><div class="k-label">Time saved per household</div><div class="k-val" style="color:var(--teal);" id="k-saved">--</div><div class="k-note" id="k-saved-note">each weekday morning</div></div>
     <div class="card"><div class="k-label">Cars removed at peak</div><div class="k-val" id="k-cars">--</div><div class="k-note" id="k-cars-note">--</div></div>
-    <div class="card"><div class="k-label">CO2 avoided</div><div class="k-val" id="k-co2">--</div><div class="k-note">per month, less idling and fewer trips</div></div>
+    <div class="card"><div class="k-label">CO2 avoided</div><div class="k-val" id="k-co2">--</div><div class="k-note" id="k-co2-note">per month, estimate</div></div>
   </div>
 
   <!-- Main chart -->
@@ -143,88 +143,139 @@
     </div>
   </div>
 
-  <div class="foot">Prototype figures: the travel-time prediction and route table use the trained model on TomTom data. Exit counts, carpools, precinct participation and rewards are simulated from dummy households, since real resident data is private. A one-term pilot replaces them with real trip data from participating residents.</div>
+  <!-- Residents list (from dummy_residents.csv, updates when someone signs up) -->
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+      <div><h2>Residents</h2><div class="sub" id="r-sub">--</div></div>
+      <div class="seg small" id="r-seg"><button data-r="new" class="on">Newest</button><button data-r="all">All</button></div>
+    </div>
+    <div style="overflow-x:auto;">
+      <table style="margin-top:12px;min-width:640px;">
+        <thead><tr><th>ID</th><th>Name</th><th>Precinct</th><th>Leaves</th><th>Going to</th><th>School run</th><th>Can shift</th><th>Joined</th></tr></thead>
+        <tbody id="r-table"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="foot">How these numbers are made: travel times come from the AI model trained on TomTom data. Exit counts, carpools and participation are calculated from the resident list (500 fictional residents plus anyone who signs up), using the leave time, how much earlier they can leave, and the school run of every resident. The "after" bars move willing residents into earlier 5-minute slots so each exit stays under capacity. Merchant rewards are demo figures. A one-term pilot replaces the fictional residents with real participants.</div>
   <p id="err" style="color:var(--red);"></p>
 </div>
 
+<script src="js/gb-auth.js"></script>
 <script>
 (function () {
   const $ = (id) => document.getElementById(id);
-  const times = ["6:40","6:45","6:50","6:55","7:00","7:05","7:10","7:15","7:20","7:25","7:30","7:35","7:40"];
+  const fmt = (m) => Math.floor(m / 60) + ":" + String(m % 60).padStart(2, "0");
+  const START = 395, END = 470, STEP = 5;               // 6:35 to 7:50
+  const slots = []; for (let m = START; m <= END; m += STEP) slots.push(m);
 
-  // Simulated cars leaving per 5 minutes at each exit (before and after spreading departures)
-  const exits = {
-    gce: { name: "GCE Elmina interchange", cap: 75,
-      before: [15,20,30,39,59,79,118,130,108,64,44,35,25],
-      after:  [25,35,54,64,72,71,69,67,59,49,39,30,22] },
-    pe: { name: "Persiaran Elmina to Subang", cap: 55,
-      before: [11,14,21,28,42,56,84,92,76,45,31,25,18],
-      after:  [18,25,38,45,52,51,50,48,42,35,28,21,16] },
+  // Which exit each precinct uses (approximate)
+  const EXITS = {
+    gce: { name: "GCE Elmina interchange", cap: 45, precincts: ["Elmina East", "Elmina Green"] },
+    pe:  { name: "Persiaran Elmina to Subang", cap: 55, precincts: ["Elmina West", "Elmina Valley", "Elmina Ridge"] },
   };
-  const carpools = [["SK Denai Alam",14,31],["SJK(C) Regent Elmina",11,26],["SK Bukit Subang",9,21],["SMK Denai Alam",7,18]];
-  const precincts = [["Elmina West",48],["Elmina East",44],["Elmina Valley",39],["Elmina Green",36],["Elmina Ridge",31]];
+  const SHIFT = { "Yes, 10 min": 10, "Yes, 20 min": 20 };
+  let exit = "gce", view = "both", rview = "new", people = [], sim = {};
 
-  let exit = "gce", view = "both";
-  const peak = (a) => Math.max(...a);
+  // Before: when residents leave today. After: willing residents move earlier so the exit stays under capacity.
+  function simulate(list, cap) {
+    const idx = (m) => Math.round((Math.min(Math.max(m, START), END) - START) / STEP);
+    const before = slots.map(() => 0), after = slots.map(() => 0), bins = slots.map(() => []);
+    list.forEach((r) => { const k = idx(+r.leave_min); before[k]++; bins[k].push(r); });
+    const moved = [];
+    for (let k = 0; k < slots.length; k++) {
+      const flex = bins[k].filter((r) => SHIFT[r.shift_willing]).sort((a, b) => SHIFT[b.shift_willing] - SHIFT[a.shift_willing]);
+      let count = bins[k].length;
+      for (const r of flex) {
+        if (count <= cap) break;
+        const maxBack = SHIFT[r.shift_willing] / STEP;
+        for (let j = k - 1; j >= Math.max(0, k - maxBack); j--) {
+          if (after[j] < cap) { after[j]++; count--; moved.push((k - j) * STEP); break; }
+        }
+      }
+      after[k] += count;
+    }
+    return { before, after, moved: moved.length, avgShift: moved.length ? moved.reduce((a, b) => a + b, 0) / moved.length : 0 };
+  }
 
   function drawChart() {
-    const e = exits[exit], top = 140;
+    const e = EXITS[exit], s = sim[exit];
+    const top = Math.max(e.cap * 1.25, ...s.before, ...s.after) * 1.1;
+    const pb = Math.max(...s.before), pa = Math.max(...s.after);
     $("c-title").textContent = "Cars leaving per 5 minutes at " + e.name;
-    $("c-sub").textContent = "Peak drops from " + peak(e.before) + " to " + peak(e.after) + " cars per 5 minutes, spread across 6:50 to 7:30";
+    $("c-sub").textContent = "Peak drops from " + pb + " to " + pa + " cars per 5 minutes. " + s.moved + " residents leave on average " + s.avgShift.toFixed(0) + " min earlier.";
     $("c-cap").textContent = "Exit capacity, " + e.cap + " cars";
     let html = '<div class="cap" style="bottom:' + (e.cap / top * 100) + '%;"><b>' + e.cap + ' cars</b></div>';
-    times.forEach((t, i) => {
+    slots.forEach((m, i) => {
       html += '<div class="slot">';
-      if (view !== "after") html += '<div class="bar" title="Before ' + t + ': ' + e.before[i] + ' cars" style="height:' + (e.before[i] / top * 100) + '%;background:#E0703A;"></div>';
-      if (view !== "before") html += '<div class="bar" title="After ' + t + ': ' + e.after[i] + ' cars" style="height:' + (e.after[i] / top * 100) + '%;background:#0D6B58;"></div>';
+      if (view !== "after") html += '<div class="bar" title="Before ' + fmt(m) + ': ' + s.before[i] + ' cars" style="height:' + (s.before[i] / top * 100) + '%;background:#E0703A;"></div>';
+      if (view !== "before") html += '<div class="bar" title="After ' + fmt(m) + ': ' + s.after[i] + ' cars" style="height:' + (s.after[i] / top * 100) + '%;background:#0D6B58;"></div>';
       html += "</div>";
     });
     $("chart").innerHTML = html;
-    $("xl").innerHTML = times.map((t) => "<span>" + t + "</span>").join("");
+    $("xl").innerHTML = slots.map((m) => "<span>" + fmt(m) + "</span>").join("");
   }
 
   function drawStatus() {
-    $("exit-status").innerHTML = Object.values(exits).map((e) => {
-      const now = peak(e.after), pct = Math.round(now / e.cap * 100);
-      const s = pct > 100 ? ["Over limit", "var(--red-bg)", "var(--red)", "var(--red)"]
-              : pct >= 90 ? ["Near limit", "var(--amber-bg)", "var(--amber-ink)", "var(--amber)"]
-              : ["Flowing", "var(--teal-bg)", "var(--teal-ink)", "var(--teal)"];
-      return '<div class="status"><div class="status-top"><b style="font-size:15px;">' + e.name + '</b><span class="tag" style="background:' + s[1] + ';color:' + s[2] + ';">' + s[0] + '</span></div>' +
-        '<div class="track"><div class="fill" style="width:' + Math.min(pct, 100) + '%;background:' + s[3] + ';"></div></div>' +
-        '<div class="k-note">' + now + " of " + e.cap + " cars per 5 min (was " + peak(e.before) + ")</div></div>";
+    $("exit-status").innerHTML = Object.keys(EXITS).map((key) => {
+      const e = EXITS[key], now = Math.max(...sim[key].after), was = Math.max(...sim[key].before), pct = Math.round(now / e.cap * 100);
+      const st = pct > 100 ? ["Over limit", "var(--red-bg)", "var(--red)", "var(--red)"]
+               : pct >= 90 ? ["Near limit", "var(--amber-bg)", "var(--amber-ink)", "var(--amber)"]
+               : ["Flowing", "var(--teal-bg)", "var(--teal-ink)", "var(--teal)"];
+      return '<div class="status"><div class="status-top"><b style="font-size:15px;">' + e.name + '</b><span class="tag" style="background:' + st[1] + ';color:' + st[2] + ';">' + st[0] + '</span></div>' +
+        '<div class="track"><div class="fill" style="width:' + Math.min(pct, 100) + '%;background:' + st[3] + ';"></div></div>' +
+        '<div class="k-note">' + now + " of " + e.cap + " cars per 5 min (was " + was + ")</div></div>";
     }).join("");
   }
 
-  function drawStatic() {
-    $("carpool-table").innerHTML = carpools.map((c) => "<tr><td>" + c[0] + '</td><td class="num">' + c[1] + '</td><td class="num" style="color:var(--teal);font-weight:800;">' + c[2] + "</td></tr>").join("");
-    $("precincts").innerHTML = precincts.map((p) => '<div class="prow"><span>' + p[0] + '</span><div class="track" style="margin:0;"><div class="fill" style="width:' + p[1] + '%;background:var(--teal);"></div></div><b class="num">' + p[1] + "%</b></div>").join("");
-    const cars = carpools.reduce((s, c) => s + c[2], 0), groups = carpools.reduce((s, c) => s + c[1], 0);
+  function drawPeople() {
+    const n = people.length, willing = people.filter((r) => SHIFT[r.shift_willing]);
+    const signups = people.filter((r) => r.source === "signup");
+    $("h-res").textContent = n;
+    $("k-house").textContent = willing.length;
+    $("k-house-note").textContent = Math.round(willing.length / n * 100) + "% of " + n + " residents can leave earlier";
+    $("m-res").textContent = n;
+
+    // Carpools: families on the same school run who said Yes or Maybe, in groups of 3
+    const schools = {};
+    people.filter((r) => r.school_run === "Yes" && r.school).forEach((r) => {
+      schools[r.school] = schools[r.school] || 0;
+      if (r.carpool === "Yes" || r.carpool === "Maybe") schools[r.school]++;
+    });
+    const rows = Object.entries(schools).map(([name, keen]) => [name, Math.floor(keen / 3), Math.floor(keen / 3) * 2]).sort((a, b) => b[2] - a[2]);
+    $("carpool-table").innerHTML = rows.map((c) => "<tr><td>" + c[0] + '</td><td class="num">' + c[1] + '</td><td class="num" style="color:var(--teal);font-weight:800;">' + c[2] + "</td></tr>").join("");
+    const cars = rows.reduce((s, c) => s + c[2], 0), groups = rows.reduce((s, c) => s + c[1], 0);
     $("k-cars").textContent = cars;
     $("k-cars-note").textContent = "through " + groups + " shared school runs";
-    $("k-co2").textContent = "1.2 t";
+    // CO2 estimate: each car removed skips about 6 km of school trips a day, 20 school days, 0.17 kg CO2 per km
+    $("k-co2").textContent = (cars * 6 * 20 * 0.17 / 1000).toFixed(1) + " t";
+    $("k-co2-note").textContent = "per month from shared school runs (estimate)";
+
+    // Participation by precinct (can leave earlier)
+    const pre = {};
+    people.forEach((r) => { pre[r.precinct] = pre[r.precinct] || [0, 0]; pre[r.precinct][1]++; if (SHIFT[r.shift_willing]) pre[r.precinct][0]++; });
+    $("precincts").innerHTML = Object.entries(pre).map(([p, v]) => [p, Math.round(v[0] / v[1] * 100)]).sort((a, b) => b[1] - a[1])
+      .map((p) => '<div class="prow"><span>' + p[0] + '</span><div class="track" style="margin:0;"><div class="fill" style="width:' + p[1] + '%;background:var(--teal);"></div></div><b class="num">' + p[1] + "%</b></div>").join("");
+
+    // Residents table
+    $("r-sub").textContent = n + " residents, " + signups.length + " signed up through the app";
+    const list = rview === "new" ? people.slice().sort((a, b) => b.resident_id.localeCompare(a.resident_id)).slice(0, 8) : people;
+    $("r-table").innerHTML = list.map((r) => "<tr><td>" + r.resident_id + "</td><td>" + r.name + "</td><td>" + r.precinct + "</td><td>" + r.leave_time +
+      "</td><td>" + r.destination + "</td><td>" + (r.school_run === "Yes" ? r.school : "-") + "</td><td>" + (r.shift_willing || "-") + "</td><td>" +
+      (r.source === "signup" ? '<span class="tag" style="background:var(--teal-bg);color:var(--teal-ink);">App sign-up</span>' : '<span class="k-note">Survey</span>') + "</td></tr>").join("");
   }
 
-  function fillFromData(d) {
-    const r = d.residents || {}, m = d.model || {};
-    const n = r.residents || 0, part = r.participation_rate || 0;
-    $("k-house").textContent = Math.round(n * part);
-    $("k-house-note").textContent = Math.round(part * 100) + "% of " + n + " surveyed households";
+  function fillFromModel(d) {
+    const m = d.model || {};
     $("m-mae").textContent = "+/- " + m.mae_min + " min";
     $("m-imp").textContent = m.improvement_pct + "%";
     $("m-rows").textContent = (m.training_rows || 0).toLocaleString();
-    $("m-res").textContent = n;
-
-    // Time saved: average minutes the rush adds on Elmina East work routes
     const rows = [];
-    d.destinations.forEach((dest) => {
-      const x = d.routes["Elmina East|" + dest];
-      if (x && x.rush_from) rows.push([dest, x]);
-    });
+    d.destinations.forEach((dest) => { const x = d.routes["Elmina East|" + dest]; if (x && x.rush_from) rows.push([dest, x]); });
     rows.sort((a, b) => b[1].rush_adds_min - a[1].rush_adds_min);
     const work = rows.filter((x) => x[1].rush_adds_min >= 3);
     if (work.length) {
-      const avg = work.reduce((s, x) => s + x[1].rush_adds_min, 0) / work.length;
-      $("k-saved").textContent = Math.round(avg) + " min";
+      $("k-saved").textContent = Math.round(work.reduce((s, x) => s + x[1].rush_adds_min, 0) / work.length) + " min";
       $("k-saved-note").textContent = "rush delay avoided on work trips, each weekday morning";
     }
     $("rush-table").innerHTML = rows.map(([dest, x]) =>
@@ -233,22 +284,29 @@
       (x.rush_adds_pct >= 15 ? "var(--org-ink)" : "var(--teal)") + ';">+' + x.rush_adds_min.toFixed(1) + " min (" + x.rush_adds_pct + "%)</td></tr>").join("");
   }
 
+  function load() {
+    return GB.residents().then((list) => {
+      people = list;
+      Object.keys(EXITS).forEach((k) => (sim[k] = simulate(list.filter((r) => EXITS[k].precincts.includes(r.precinct)), EXITS[k].cap)));
+      drawPeople(); drawChart(); drawStatus();
+    });
+  }
+
   $("exit-seg").querySelectorAll("button").forEach((b) => (b.onclick = () => {
-    exit = b.dataset.exit;
-    $("exit-seg").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
-    drawChart();
+    exit = b.dataset.exit; $("exit-seg").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b)); drawChart();
   }));
   $("view-seg").querySelectorAll("button").forEach((b) => (b.onclick = () => {
-    view = b.dataset.view;
-    $("view-seg").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
-    drawChart();
+    view = b.dataset.view; $("view-seg").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b)); drawChart();
+  }));
+  $("r-seg").querySelectorAll("button").forEach((b) => (b.onclick = () => {
+    rview = b.dataset.r; $("r-seg").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b)); drawPeople();
   }));
 
-  drawChart(); drawStatus(); drawStatic();
-  fetch("data/gerakbijak_data.json")
-    .then((res) => res.json())
-    .then(fillFromData)
+  fetch("data/gerakbijak_data.json").then((r) => r.json()).then(fillFromModel)
     .catch((e) => { $("err").textContent = "Could not load the prediction data (data/gerakbijak_data.json)."; console.error(e); });
+  load().catch((e) => { $("err").textContent = "Could not load the resident list (data/dummy_residents.csv)."; console.error(e); });
+  // With server.py running, refresh every 15 seconds so new sign-ups appear without reloading
+  GB.hasApi().then((on) => { if (on) setInterval(() => load().catch(() => {}), 15000); });
 })();
 </script>
 </body>

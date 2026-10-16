@@ -50,8 +50,9 @@
   .act { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-top:1px solid #F0EDE6; }
   .voucher { display:flex; align-items:center; gap:12px; }
   .voucher button { height:44px; min-width:92px; border-radius:12px; border:none; font-family:inherit; font-weight:700; font-size:14px; cursor:pointer; }
-  nav { position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:430px; display:grid; grid-template-columns:repeat(3,1fr); background:#fff; border-top:1px solid var(--line); padding:8px 12px 18px; }
+  nav { position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:430px; display:grid; grid-template-columns:repeat(4,1fr); background:#fff; border-top:1px solid var(--line); padding:8px 12px 18px; }
   nav button { background:none; border:none; font-family:inherit; display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px 0; font-size:12px; font-weight:600; color:var(--muted); cursor:pointer; }
+  nav a { display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px 0; font-size:12px; font-weight:600; color:var(--muted); text-decoration:none; }
   nav button.on { color:var(--teal); font-weight:700; }
   .hide { display:none !important; }
   .done { background:var(--teal); color:#fff; border-radius:20px; padding:22px 20px; display:flex; flex-direction:column; gap:12px; }
@@ -64,9 +65,9 @@
 <main id="tab-today">
   <div class="top">
     <div class="brand"><div class="logo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17h4l3-10 3 10h6"/></svg></div>GerakBijak</div>
-    <div class="round" aria-label="Notifications"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17201D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></div>
+    <a class="round" href="profile.html" id="gb-avatar" aria-label="My profile" style="background:#0D6B58;color:#fff;font-weight:800;font-size:15px;text-decoration:none;border:none;">--</a>
   </div>
-  <div><div class="hello">Selamat pagi, Aina</div><div class="day" id="gb-day">Tomorrow</div></div>
+  <div><div class="hello" id="gb-hello">Selamat pagi</div><div class="day" id="gb-day">Tomorrow</div></div>
 
   <div class="card" style="gap:10px;">
     <div class="trip">
@@ -108,7 +109,7 @@
 
   <div class="card row" data-go="carpool" style="flex-direction:row;padding:16px 18px;">
     <div class="icon" style="background:var(--teal-bg);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B58" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15 14.5c3 0 6 1.9 6 5.5"/></svg></div>
-    <div style="flex:1;"><div style="font-size:15px;font-weight:700;">2 families can share your school run</div><div style="font-size:13px;color:var(--muted);">SK Denai Alam, 7:20 drop-off</div></div>
+    <div style="flex:1;"><div style="font-size:15px;font-weight:700;" id="gb-cp-title">Finding families near you</div><div style="font-size:13px;color:var(--muted);" id="gb-cp-sub">School-run match</div></div>
   </div>
   <div class="card row" data-go="rewards" style="flex-direction:row;padding:16px 18px;">
     <div class="icon" style="background:var(--org-bg);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9A3412" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13"/><path d="M3 12h18"/></svg></div>
@@ -121,10 +122,8 @@
 <main id="tab-carpool" class="hide">
   <div style="font-size:17px;font-weight:800;">School-run match</div>
   <div class="card">
-    <div><div class="label">Matched by AI</div><div style="font-size:22px;font-weight:800;line-height:1.25;">SK Denai Alam<br>7:20 drop-off</div><div style="font-size:14px;color:var(--muted);">3 households in Elmina West, all within 400 m</div></div>
-    <div class="person"><div class="avatar" style="background:#0D6B58;">A</div><div style="flex:1;"><b>You (Aina)</b><div style="font-size:13px;color:var(--muted);">Elmina West</div></div><span class="pill teal">2 kids</span></div>
-    <div class="person"><div class="avatar" style="background:#9A3412;">N1</div><div style="flex:1;"><b>Neighbour 1</b><div style="font-size:13px;color:var(--muted);">200 m away</div></div><span class="pill teal">1 kid</span></div>
-    <div class="person"><div class="avatar" style="background:#4C5A86;">N2</div><div style="flex:1;"><b>Neighbour 2</b><div style="font-size:13px;color:var(--muted);">350 m away</div></div><span class="pill teal">2 kids</span></div>
+    <div><div class="label">Matched by AI</div><div style="font-size:22px;font-weight:800;line-height:1.25;" id="gb-cp-school">--</div><div style="font-size:14px;color:var(--muted);" id="gb-cp-desc">--</div></div>
+    <div id="gb-cp-people" style="display:flex;flex-direction:column;gap:10px;"></div>
   </div>
   <div class="card">
     <div style="font-size:15px;font-weight:700;">Who drives this week</div>
@@ -165,9 +164,11 @@
   <button data-tab="today" class="on"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Today</button>
   <button data-tab="carpool"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15 14.5c3 0 6 1.9 6 5.5"/></svg>Carpool</button>
   <button data-tab="rewards"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg>Rewards</button>
+  <a href="profile.html"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>Profile</a>
 </nav>
 </div>
 
+<script src="js/gb-auth.js"></script>
 <script>
 (function () {
   const $ = (id) => document.getElementById(id);
@@ -258,21 +259,61 @@
   $("gb-undo").onclick = () => { if (left) { left = false; points -= 10; setPoints(); } $("gb-done").classList.add("hide"); $("gb-plan").classList.remove("hide"); };
   $("gb-join").onclick = () => { joined = !joined; $("gb-join").textContent = joined ? "Request sent. Tap to cancel" : "Join this group"; };
 
-  fetch("data/gerakbijak_data.json")
-    .then((res) => res.json())
-    .then((json) => {
+  // Distance in metres between two homes
+  function metres(a, b) {
+    const R = 6371000, r = Math.PI / 180;
+    const dLat = (b.lat - a.lat) * r, dLon = (b.lon - a.lon) * r;
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dLon / 2) ** 2;
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+
+  // Carpool: nearest residents in dummy_residents.csv going to the same school and open to sharing
+  function carpool(me, all) {
+    const box = $("gb-cp-people");
+    const first = me.name.split(" ")[0];
+    if (me.school_run !== "Yes" || !me.school) {
+      $("gb-cp-title").textContent = "No school run in your profile";
+      $("gb-cp-sub").textContent = "Add one in your profile to find carpools";
+      $("gb-cp-school").textContent = "No school run";
+      $("gb-cp-desc").textContent = "Add your school in My profile and we will match you with neighbours.";
+      box.innerHTML = ""; $("gb-join").classList.add("hide");
+      return;
+    }
+    const home = { lat: +me.lat, lon: +me.lon };
+    const matches = all
+      .filter((r) => r.resident_id !== me.resident_id && r.school === me.school && (r.carpool === "Yes" || r.carpool === "Maybe"))
+      .map((r) => Object.assign({ m: metres(home, { lat: +r.lat, lon: +r.lon }) }, r))
+      .sort((a, b) => a.m - b.m).slice(0, 2);
+    const drop = me.leave_time;
+    $("gb-cp-title").textContent = matches.length + " " + (matches.length === 1 ? "family" : "families") + " can share your school run";
+    $("gb-cp-sub").textContent = me.school + ", leaving about " + drop;
+    $("gb-cp-school").innerHTML = me.school + "<br>leave about " + drop;
+    const far = matches.length ? Math.round(matches[matches.length - 1].m / 50) * 50 : 0;
+    $("gb-cp-desc").textContent = (matches.length + 1) + " households near " + me.precinct + ", all within " + Math.max(far, 50) + " m";
+    const colors = ["#9A3412", "#4C5A86"];
+    box.innerHTML = '<div class="person"><div class="avatar" style="background:#0D6B58;">' + GB.initials(me.name) + '</div><div style="flex:1;"><b>You (' + first + ')</b><div style="font-size:13px;color:var(--muted);">' + me.precinct + '</div></div><span class="pill teal">Driver</span></div>' +
+      matches.map((r, k) => '<div class="person"><div class="avatar" style="background:' + colors[k] + ';">N' + (k + 1) + '</div><div style="flex:1;"><b>Neighbour ' + (k + 1) + '</b><div style="font-size:13px;color:var(--muted);">' + (Math.round(r.m / 10) * 10) + ' m away, leaves ' + r.leave_time + '</div></div><span class="pill teal">' + (r.carpool === "Yes" ? "Keen" : "Maybe") + '</span></div>').join("");
+  }
+
+  Promise.all([fetch("data/gerakbijak_data.json").then((res) => res.json()), GB.requireUser(), GB.residents()])
+    .then(([json, me, all]) => {
       data = json;
+      $("gb-avatar").textContent = GB.initials(me.name);
+      $("gb-hello").textContent = "Selamat pagi, " + me.name.split(" ")[0];
       data.origins.forEach((o) => $("gb-origin").add(new Option(o, o)));
       data.destinations.forEach((x) => $("gb-destination").add(new Option(x, x)));
-      $("gb-destination").value = "KL Sentral";
-      const first = data.routes[data.origins[0] + "|KL Sentral"];
+      const origin = GB.originFor(me.precinct);
+      $("gb-origin").value = data.origins.includes(origin) ? origin : data.origins[0];
+      $("gb-destination").value = data.destinations.includes(me.destination) ? me.destination : data.destinations[0];
+      const first = data.routes[$("gb-origin").value + "|" + $("gb-destination").value];
       first.times.forEach((t) => $("gb-usual").add(new Option(t, t)));
-      $("gb-usual").value = first.peak_time;
+      $("gb-usual").value = first.times.includes(me.leave_time) ? me.leave_time : first.peak_time;
       ["gb-origin", "gb-destination", "gb-usual"].forEach((id) => $(id).addEventListener("change", show));
       show();
       setPoints();
+      carpool(me, all);
     })
-    .catch((e) => { $("gb-error").textContent = "Could not load trip data. Please try again later."; console.error(e); });
+    .catch((e) => { if (e.message !== "not signed in") { $("gb-error").textContent = "Could not load trip data. Please try again later."; console.error(e); } });
 })();
 </script>
 </body>
