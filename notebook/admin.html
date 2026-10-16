@@ -10,13 +10,9 @@
   :root { --ink:#17201D; --muted:#5B6460; --line:#E4E0D8; --bg:#F7F5F0; --teal:#0D6B58; --teal-bg:#E3F1EC; --teal-ink:#08493C; --org:#E0703A; --org-bg:#FBE9DF; --org-ink:#9A3412; --amber:#CA8A04; --amber-bg:#FDF3D7; --amber-ink:#854D0E; --red:#B42318; --red-bg:#FDE7E5; }
   * { box-sizing:border-box; }
   html, body { margin:0; background:var(--bg); font-family:'Manrope',system-ui,sans-serif; color:var(--ink); }
-
-  /* One-screen layout */
-  .wrap { height:100vh; padding:14px 18px; display:grid; gap:12px;
-          grid-template-columns:repeat(12,minmax(0,1fr)); grid-template-rows:auto auto minmax(0,1.15fr) minmax(0,1fr); }
+  .wrap { height:100vh; padding:14px 18px; display:grid; gap:12px; grid-template-columns:repeat(12,minmax(0,1fr)); grid-template-rows:auto auto minmax(0,1.15fr) minmax(0,1fr); }
   .card { background:#fff; border:1px solid var(--line); border-radius:16px; padding:14px 16px; min-height:0; min-width:0; display:flex; flex-direction:column; overflow:hidden; }
-  .s3 { grid-column:span 3; } .s4 { grid-column:span 4; } .s8 { grid-column:span 8; } .s12 { grid-column:span 12; }
-
+  .s3 { grid-column:span 3; } .s4 { grid-column:span 4; } .s8 { grid-column:span 8; }
   .head { grid-column:span 12; display:flex; align-items:center; justify-content:space-between; gap:14px; }
   .brand { display:flex; align-items:center; gap:12px; min-width:0; }
   .logo { width:38px; height:38px; border-radius:10px; background:var(--teal); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
@@ -31,13 +27,11 @@
   .seg button.on { background:var(--teal); color:#fff; }
   .seg.small { background:var(--bg); border:none; }
   .seg.small button { padding:5px 10px; }
-
   .kpis { grid-column:span 12; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
   .kpi { background:#fff; border:1px solid var(--line); border-radius:16px; padding:12px 16px; min-width:0; }
   .k-label { font-size:12px; color:var(--muted); font-weight:600; }
   .k-val { font-size:28px; font-weight:800; letter-spacing:-.5px; line-height:1.15; margin:2px 0; }
   .k-note { font-size:11px; color:var(--muted); line-height:1.35; }
-
   h2 { margin:0; font-size:14px; font-weight:800; }
   .ctop { display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
   .legend { display:flex; gap:14px; font-size:11px; color:var(--muted); margin:6px 0 0; flex-wrap:wrap; }
@@ -50,7 +44,6 @@
   .cap b { position:absolute; right:0; top:-18px; font-size:10px; color:var(--muted); font-weight:600; background:#fff; padding:0 4px; }
   .xl { display:flex; gap:6px; margin-top:5px; }
   .xl span { flex:1; text-align:center; font-size:10px; color:var(--muted); }
-
   .scroll { flex:1; min-height:0; overflow:auto; margin-top:6px; }
   table { width:100%; border-collapse:collapse; font-size:12px; }
   th { text-align:left; font-size:11px; color:var(--muted); font-weight:600; padding:5px 4px 5px 0; border-bottom:1px solid var(--line); position:sticky; top:0; background:#fff; }
@@ -64,8 +57,6 @@
   .prow { display:grid; grid-template-columns:1fr 80px 36px; gap:10px; align-items:center; font-size:12px; padding:4px 0; }
   .foot { grid-column:span 12; font-size:10px; color:var(--muted); display:none; }
   #err { position:fixed; bottom:8px; left:18px; margin:0; color:var(--red); font-size:12px; }
-
-  /* Small screens: fall back to a normal scrolling page */
   @media (max-width:1100px), (max-height:640px) {
     .wrap { height:auto; grid-template-rows:none; }
     .s3, .s4, .s8 { grid-column:span 12; }
@@ -80,23 +71,20 @@
 <body>
 <div class="wrap">
 
-  <!-- Header with AI model summary -->
   <div class="head">
     <div class="brand">
       <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17h4l3-10 3 10h6"/></svg></div>
       <div><h1>City of Elmina morning traffic</h1><div class="sub">GerakBijak township dashboard - weekday mornings, <span id="h-res">--</span> residents</div></div>
     </div>
     <div class="chips">
-      <span class="chip" title="Gradient boosting model trained on TomTom traffic forecasts">AI error <b id="m-mae">--</b></span>
+      <span class="chip">AI error <b id="m-mae">--</b></span>
       <span class="chip"><b id="m-imp">--</b> better than route average</span>
       <span class="chip"><b id="m-rows">--</b> TomTom readings</span>
-      <span class="chip" style="display:none;"><b id="m-res">--</b></span>
       <span class="tag" style="background:#E3F1EC;color:#08493C;">Live from resident data</span>
       <div class="seg" id="exit-seg"><button data-exit="gce" class="on">GCE interchange</button><button data-exit="pe">Persiaran Elmina</button></div>
     </div>
   </div>
 
-  <!-- KPI row -->
   <div class="kpis">
     <div class="kpi"><div class="k-label">Households taking part</div><div class="k-val" id="k-house">--</div><div class="k-note" id="k-house-note">--</div></div>
     <div class="kpi"><div class="k-label">Time saved per household</div><div class="k-val" style="color:var(--teal);" id="k-saved">--</div><div class="k-note" id="k-saved-note">each weekday morning</div></div>
@@ -104,7 +92,6 @@
     <div class="kpi"><div class="k-label">CO2 avoided</div><div class="k-val" id="k-co2">--</div><div class="k-note" id="k-co2-note">per month, estimate</div></div>
   </div>
 
-  <!-- Row A: chart + rush table -->
   <div class="card s8">
     <div class="ctop">
       <div><h2 id="c-title">Cars leaving per 5 minutes</h2><div class="sub" id="c-sub">--</div></div>
@@ -129,7 +116,6 @@
     </div>
   </div>
 
-  <!-- Row B: exits, carpools, precincts, residents -->
   <div class="card s3">
     <h2>Exit status, busiest 5 minutes</h2>
     <div id="exit-status" style="margin-top:4px;"></div>
@@ -169,10 +155,9 @@
 (function () {
   const $ = (id) => document.getElementById(id);
   const fmt = (m) => Math.floor(m / 60) + ":" + String(m % 60).padStart(2, "0");
-  const START = 395, END = 470, STEP = 5;               // 6:35 to 7:50
+  const START = 395, END = 470, STEP = 5;
   const slots = []; for (let m = START; m <= END; m += STEP) slots.push(m);
 
-  // Which exit each precinct uses (approximate)
   const EXITS = {
     gce: { name: "GCE Elmina interchange", cap: 45, precincts: ["Elmina East", "Elmina Green"] },
     pe:  { name: "Persiaran Elmina to Subang", cap: 55, precincts: ["Elmina West", "Elmina Valley", "Elmina Ridge"] },
@@ -180,7 +165,6 @@
   const SHIFT = { "Yes, 10 min": 10, "Yes, 20 min": 20 };
   let exit = "gce", view = "both", rview = "new", people = [], sim = {};
 
-  // Before: when residents leave today. After: willing residents move earlier so the exit stays under capacity.
   function simulate(list, cap) {
     const idx = (m) => Math.round((Math.min(Math.max(m, START), END) - START) / STEP);
     const before = slots.map(() => 0), after = slots.map(() => 0), bins = slots.map(() => []);
@@ -225,7 +209,7 @@
       const st = pct > 100 ? ["Over limit", "var(--red-bg)", "var(--red)", "var(--red)"]
                : pct >= 90 ? ["Near limit", "var(--amber-bg)", "var(--amber-ink)", "var(--amber)"]
                : ["Flowing", "var(--teal-bg)", "var(--teal-ink)", "var(--teal)"];
-      return '<div class="status"><div class="status-top"><b style="font-size:15px;">' + e.name + '</b><span class="tag" style="background:' + st[1] + ';color:' + st[2] + ';">' + st[0] + '</span></div>' +
+      return '<div class="status"><div class="status-top"><b>' + e.name + '</b><span class="tag" style="background:' + st[1] + ';color:' + st[2] + ';">' + st[0] + '</span></div>' +
         '<div class="track"><div class="fill" style="width:' + Math.min(pct, 100) + '%;background:' + st[3] + ';"></div></div>' +
         '<div class="k-note">' + now + " of " + e.cap + " cars per 5 min (was " + was + ")</div></div>";
     }).join("");
@@ -237,9 +221,7 @@
     $("h-res").textContent = n;
     $("k-house").textContent = willing.length;
     $("k-house-note").textContent = Math.round(willing.length / n * 100) + "% of " + n + " residents can leave earlier";
-    $("m-res").textContent = n;
 
-    // Carpools: families on the same school run who said Yes or Maybe, in groups of 3
     const schools = {};
     people.filter((r) => r.school_run === "Yes" && r.school).forEach((r) => {
       schools[r.school] = schools[r.school] || 0;
@@ -250,20 +232,17 @@
     const cars = rows.reduce((s, c) => s + c[2], 0), groups = rows.reduce((s, c) => s + c[1], 0);
     $("k-cars").textContent = cars;
     $("k-cars-note").textContent = "through " + groups + " shared school runs";
-    // CO2 estimate: each car removed skips about 6 km of school trips a day, 20 school days, 0.17 kg CO2 per km
     $("k-co2").textContent = (cars * 6 * 20 * 0.17 / 1000).toFixed(1) + " t";
     $("k-co2-note").textContent = "per month from shared school runs (estimate)";
 
-    // Participation by precinct (can leave earlier)
     const pre = {};
     people.forEach((r) => { pre[r.precinct] = pre[r.precinct] || [0, 0]; pre[r.precinct][1]++; if (SHIFT[r.shift_willing]) pre[r.precinct][0]++; });
     $("precincts").innerHTML = Object.entries(pre).map(([p, v]) => [p, Math.round(v[0] / v[1] * 100)]).sort((a, b) => b[1] - a[1])
       .map((p) => '<div class="prow"><span>' + p[0] + '</span><div class="track" style="margin:0;"><div class="fill" style="width:' + p[1] + '%;background:var(--teal);"></div></div><b class="num">' + p[1] + "%</b></div>").join("");
 
-    // Residents table
     $("r-sub").textContent = n + " residents, " + signups.length + " joined through the app";
     const list = rview === "new" ? people.slice().sort((a, b) => b.resident_id.localeCompare(a.resident_id)).slice(0, 8) : people;
-    $("r-table").innerHTML = list.map((r) => "<tr><td>" + r.resident_id + "</td><td>" + r.name + "</td><td>" + r.precinct.replace("Elmina ", "") + "</td><td>" + r.leave_time + "</td><td>" +
+    $("r-table").innerHTML = list.map((r) => "<tr><td>" + r.resident_id + "</td><td>" + r.name + "</td><td>" + String(r.precinct || "").replace("Elmina ", "") + "</td><td>" + r.leave_time + "</td><td>" +
       (r.source === "signup" ? '<span class="tag" style="background:var(--teal-bg);color:var(--teal-ink);">App</span>' : '<span class="k-note">Survey</span>') + "</td></tr>").join("");
   }
 
@@ -283,4 +262,32 @@
     $("rush-table").innerHTML = rows.map(([dest, x]) =>
       "<tr><td>" + dest + "</td><td>" + x.rush_from + " to " + x.rush_to + '</td><td class="num">' + Math.round(x.leave_630_min) +
       ' min</td><td class="num">' + Math.round(x.peak_min) + ' min</td><td class="num" style="font-weight:800;color:' +
-      (x.rush_adds_pct >= 15 ? "var(--org-ink)" : "var(--teal)") + ';">+' +
+      (x.rush_adds_pct >= 15 ? "var(--org-ink)" : "var(--teal)") + ';">+' + x.rush_adds_min.toFixed(1) + " min (" + x.rush_adds_pct + "%)</td></tr>").join("");
+  }
+
+  function load() {
+    return GB.residents().then((list) => {
+      people = list;
+      Object.keys(EXITS).forEach((k) => (sim[k] = simulate(list.filter((r) => EXITS[k].precincts.includes(r.precinct)), EXITS[k].cap)));
+      drawPeople(); drawChart(); drawStatus();
+    });
+  }
+
+  $("exit-seg").querySelectorAll("button").forEach((b) => (b.onclick = () => {
+    exit = b.dataset.exit; $("exit-seg").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b)); drawChart();
+  }));
+  $("view-seg").querySelectorAll("button").forEach((b) => (b.onclick = () => {
+    view = b.dataset.view; $("view-seg").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b)); drawChart();
+  }));
+  $("r-seg").querySelectorAll("button").forEach((b) => (b.onclick = () => {
+    rview = b.dataset.r; $("r-seg").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b)); drawPeople();
+  }));
+
+  fetch("data/gerakbijak_data.json").then((r) => r.json()).then(fillFromModel)
+    .catch((e) => { $("err").textContent = "Could not load the prediction data."; console.error(e); });
+  load().catch((e) => { $("err").textContent = "Could not load the resident list."; console.error(e); });
+  GB.hasApi().then((on) => { if (on) setInterval(() => load().catch(() => {}), 15000); });
+})();
+</script>
+</body>
+</html>
