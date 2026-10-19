@@ -33,26 +33,25 @@
 
   async function carpool() {
     const title = $("gb-carpool-school-title"), sub = $("gb-carpool-subtext");
-    const meRow = $("gb-carpool-name") ? $("gb-carpool-name").closest(".person") : null;
-    const card = meRow ? meRow.parentElement : null;
-    // Today tab carpool card (text inside the [data-go="carpool"] row)
-    const todayCard = document.querySelector('[data-go="carpool"]');
-    const todayLines = todayCard ? todayCard.querySelectorAll("div[style*='flex:1'] > div") : [];
+    const people = $("gb-carpool-people");
+    const todayTitle = $("gb-cp-title"), todaySub = $("gb-cp-sub");
+    const setText = (el, t) => { if (el) el.textContent = t; };
 
-    if ($("gb-carpool-name")) $("gb-carpool-name").textContent = "You (" + first + ")";
-    if ($("gb-carpool-avatar")) $("gb-carpool-avatar").textContent = GB.initials(user.name || "R");
-    if ($("gb-carpool-precinct")) $("gb-carpool-precinct").textContent = user.precinct || "";
-    if ($("gb-carpool-kids")) $("gb-carpool-kids").textContent = "Driver";
+    setText($("gb-carpool-name"), "You (" + first + ")");
+    setText($("gb-carpool-avatar"), GB.initials(user.name || "R"));
+    setText($("gb-carpool-precinct"), user.precinct || "");
+    setText($("gb-carpool-kids"), "Driver");
+    if (people) people.innerHTML = "";
 
-    // Remove the fixed example neighbours
-    if (card) card.querySelectorAll(".person").forEach((p) => { if (p !== meRow) p.remove(); });
+    // Hide the rota and stats until there is a group
+    const showGroup = (on) => ["gb-rota-card", "gb-cp-stats", "gb-join"].forEach((id) => { if ($(id)) $(id).classList.toggle("hide", !on); });
 
     if (user.school_run !== "Yes" || !user.school) {
-      if (title) title.textContent = "No school run";
-      if (sub) sub.textContent = "Add your school in My profile and we will match you with neighbours.";
-      if (todayLines[0]) todayLines[0].textContent = "No school run in your profile";
-      if (todayLines[1]) todayLines[1].textContent = "Add one in your profile to find carpools";
-      if ($("gb-join")) $("gb-join").classList.add("hide");
+      setText(title, "No school run");
+      setText(sub, "Add your school in My profile and we will match you with neighbours.");
+      setText(todayTitle, "No school run in your profile");
+      setText(todaySub, "Add one in your profile to find carpools");
+      showGroup(false);
       return;
     }
 
@@ -69,13 +68,15 @@
     const fam = matches.length + " " + (matches.length === 1 ? "family" : "families");
 
     if (title) title.innerHTML = user.school + "<br>leave about " + leave;
-    if (sub) sub.textContent = matches.length
+    setText(sub, matches.length
       ? (matches.length + 1) + " households near " + user.precinct + ", all within " + Math.max(far, 50) + " m"
-      : "No neighbours matched yet. We will tell you when one signs up.";
-    if (todayLines[0]) todayLines[0].textContent = fam + " can share your school run";
-    if (todayLines[1]) todayLines[1].textContent = user.school + ", leaving about " + leave;
-    if ($("gb-join")) $("gb-join").classList.toggle("hide", matches.length === 0);
+      : "No neighbours matched yet. We will tell you when one signs up.");
+    setText(todayTitle, matches.length ? fam + " can share your school run" : "No carpool match yet");
+    setText(todaySub, user.school + ", leaving about " + leave);
+    showGroup(matches.length > 0);
+    if (!matches.length) return;
 
+    // Neighbour rows
     const colors = ["#9A3412", "#4C5A86"];
     matches.forEach((r, k) => {
       const div = document.createElement("div");
@@ -84,8 +85,22 @@
         '<div style="flex:1;"><b>Neighbour ' + (k + 1) + '</b><div style="font-size:13px;color:var(--muted);">' +
         (Math.round(r.m / 10) * 10) + " m away, leaves " + r.leave_time + "</div></div>" +
         '<span class="pill teal">' + (r.carpool === "Yes" ? "Keen" : "Maybe") + "</span>";
-      card.appendChild(div);
+      if (people) people.appendChild(div);
     });
+
+    // Who drives this week: take turns, You first
+    const drivers = ["You"].concat(matches.map((_, k) => "N" + (k + 1)));
+    const days = ["Mon", "Tue", "Wed", "Thu", "Fri"], full = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+    if ($("gb-rota")) $("gb-rota").innerHTML = days.map((day, k) => {
+      const who = drivers[k % drivers.length];
+      return '<div class="' + (who === "You" ? "me" : "") + '">' + day + "<b>" + who + "</b></div>";
+    }).join("");
+    const mine = full.filter((_, k) => drivers[k % drivers.length] === "You");
+    setText($("gb-rota-text"), "You drive " + mine.join(" and ").replace(/ and (?=.* and )/g, ", ") + ". Swap a day anytime from the group chat.");
+
+    // Stats: one car saved per neighbour who shares, distance to the furthest one
+    setText($("gb-cp-cars"), matches.length + (matches.length === 1 ? " car" : " cars"));
+    setText($("gb-cp-far"), Math.max(far, 50) + " m");
   }
 
   // 4. Trip prediction
