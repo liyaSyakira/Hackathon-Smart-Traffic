@@ -1,65 +1,101 @@
 (async function () {
   const $ = (id) => document.getElementById(id);
   const toMin = (t) => { const [h, m] = t.split(":").map(Number); return h * 60 + m; };
+  // "7:00" and "07:00" count as the same time
+  const sameTime = (a, b) => a && b && toMin(a) === toMin(b);
   let data = null, joined = false;
 
-  // 1. Dapatkan user yang sedang log masuk dari GB auth system
+  // 1. Get the signed-in resident (requireUser sends them to login.html if not signed in)
   let user = null;
   try {
     user = await GB.requireUser();
   } catch (err) {
-    return; // Jika belum login, requireUser akan redirect ke login.html
+    return;
   }
+  const first = String(user.name || "Resident").split(" ")[0];
 
-  // 2. Kemaskini ucapan nama mengikut profil user
+  // 2. Greeting
   const helloEl = document.querySelector(".hello");
-  if (helloEl && user) {
-    helloEl.textContent = "Selamat pagi, " + (user.name || "Resident");
-  }
+  if (helloEl) helloEl.textContent = "Selamat pagi, " + first;
 
-  // 3. Kemaskini maklumat Carpool mengikut user yang sedang log masuk
-  if (user) {
-    const carpoolName = document.getElementById("gb-carpool-name");
-    const carpoolAvatar = document.getElementById("gb-carpool-avatar");
-    const carpoolPrecinct = document.getElementById("gb-carpool-precinct");
-
-    if (carpoolName) {
-      carpoolName.textContent = "You (" + (user.name || "Resident") + ")";
-    }
-    if (carpoolAvatar) {
-      carpoolAvatar.textContent = GB.initials(user.name || "R");
-    }
-    if (carpoolPrecinct && user.precinct) {
-      carpoolPrecinct.textContent = user.precinct;
-    }
-
-
-  const carpoolSchoolTitle = document.getElementById("gb-carpool-school-title");
-    const carpoolSubtext = document.getElementById("gb-carpool-subtext");
-    
-    // Tentukan sekolah: Jika user buat school run, ambil user.school; jika tidak, default ke "SK Denai Alam"
-    const userSchool = (user.school_run === "Yes" && user.school) ? user.school : "SK Denai Alam";
-    const userPrecinct = user.precinct || "Elmina West";
-
-    if (carpoolSchoolTitle) {
-      carpoolSchoolTitle.innerHTML = userSchool + "<br>7:20 drop-off";
-    }
-    if (carpoolSubtext) {
-      carpoolSubtext.textContent = "3 households in " + userPrecinct + ", all within 400 m";
-    }
-  }
-
-  // Setkan tarikh esok (hari bekerja seterusnya)
+  // Tomorrow's date (next weekday)
   const d = new Date(); d.setDate(d.getDate() + 1);
   while (d.getDay() === 0 || d.getDay() === 6) d.setDate(d.getDate() + 1);
-  if ($("gb-day")) {
-    $("gb-day").textContent = "Tomorrow, " + d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
+  if ($("gb-day")) $("gb-day").textContent = "Tomorrow, " + d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
+
+  // 3. Carpool: real neighbours from the resident list (same school, open to sharing, nearest first)
+  function metres(a, b) {
+    const R = 6371000, r = Math.PI / 180;
+    const dLat = (b.lat - a.lat) * r, dLon = (b.lon - a.lon) * r;
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dLon / 2) ** 2;
+    return 2 * R * Math.asin(Math.sqrt(h));
   }
 
+  async function carpool() {
+    const title = $("gb-carpool-school-title"), sub = $("gb-carpool-subtext");
+    const meRow = $("gb-carpool-name") ? $("gb-carpool-name").closest(".person") : null;
+    const card = meRow ? meRow.parentElement : null;
+    // Today tab carpool card (text inside the [data-go="carpool"] row)
+    const todayCard = document.querySelector('[data-go="carpool"]');
+    const todayLines = todayCard ? todayCard.querySelectorAll("div[style*='flex:1'] > div") : [];
+
+    if ($("gb-carpool-name")) $("gb-carpool-name").textContent = "You (" + first + ")";
+    if ($("gb-carpool-avatar")) $("gb-carpool-avatar").textContent = GB.initials(user.name || "R");
+    if ($("gb-carpool-precinct")) $("gb-carpool-precinct").textContent = user.precinct || "";
+    if ($("gb-carpool-kids")) $("gb-carpool-kids").textContent = "Driver";
+
+    // Remove the fixed example neighbours
+    if (card) card.querySelectorAll(".person").forEach((p) => { if (p !== meRow) p.remove(); });
+
+    if (user.school_run !== "Yes" || !user.school) {
+      if (title) title.textContent = "No school run";
+      if (sub) sub.textContent = "Add your school in My profile and we will match you with neighbours.";
+      if (todayLines[0]) todayLines[0].textContent = "No school run in your profile";
+      if (todayLines[1]) todayLines[1].textContent = "Add one in your profile to find carpools";
+      if ($("gb-join")) $("gb-join").classList.add("hide");
+      return;
+    }
+
+    const all = await GB.residents();
+    const home = { lat: +user.lat, lon: +user.lon };
+    const matches = all
+      .filter((r) => r.resident_id !== user.resident_id && r.school === user.school && (r.carpool === "Yes" || r.carpool === "Maybe"))
+      .map((r) => Object.assign({ m: metres(home, { lat: +r.lat, lon: +r.lon }) }, r))
+      .sort((a, b) => a.m - b.m)
+      .slice(0, 2);
+
+    const leave = user.leave_time || "";
+    const far = matches.length ? Math.round(matches[matches.length - 1].m / 50) * 50 : 0;
+    const fam = matches.length + " " + (matches.length === 1 ? "family" : "families");
+
+    if (title) title.innerHTML = user.school + "<br>leave about " + leave;
+    if (sub) sub.textContent = matches.length
+      ? (matches.length + 1) + " households near " + user.precinct + ", all within " + Math.max(far, 50) + " m"
+      : "No neighbours matched yet. We will tell you when one signs up.";
+    if (todayLines[0]) todayLines[0].textContent = fam + " can share your school run";
+    if (todayLines[1]) todayLines[1].textContent = user.school + ", leaving about " + leave;
+    if ($("gb-join")) $("gb-join").classList.toggle("hide", matches.length === 0);
+
+    const colors = ["#9A3412", "#4C5A86"];
+    matches.forEach((r, k) => {
+      const div = document.createElement("div");
+      div.className = "person";
+      div.innerHTML = '<div class="avatar" style="background:' + colors[k] + ';">N' + (k + 1) + '</div>' +
+        '<div style="flex:1;"><b>Neighbour ' + (k + 1) + '</b><div style="font-size:13px;color:var(--muted);">' +
+        (Math.round(r.m / 10) * 10) + " m away, leaves " + r.leave_time + "</div></div>" +
+        '<span class="pill teal">' + (r.carpool === "Yes" ? "Keen" : "Maybe") + "</span>";
+      card.appendChild(div);
+    });
+  }
+
+  // 4. Trip prediction
   function show() {
     const o = $("gb-origin").value, dest = $("gb-destination").value;
     const r = data.routes[o + "|" + dest];
-    if (!r) return;
+    if (!r) {
+      if ($("gb-route")) $("gb-route").textContent = "No prediction yet for " + o + " to " + dest + ".";
+      return;
+    }
     const usual = $("gb-usual").value, i = r.times.indexOf(usual);
     const usualMin = i >= 0 ? r.minutes[i] : r.peak_min;
     let b = i >= 0 ? i : 0;
@@ -68,43 +104,45 @@
       if (diff >= 0 && diff <= 20 && r.minutes[k] < r.minutes[b]) b = k;
     }
     const saved = Math.max(0, usualMin - r.minutes[b]);
-    if ($("gb-best")) $("gb-best").textContent = r.times[b];
-    if ($("gb-slot")) $("gb-slot").textContent = "Slot " + r.times[b];
-    if ($("gb-route")) $("gb-route").textContent = "From " + o + " to " + dest + ". Leave at " + r.times[b] + " for a smoother trip.";
-    if ($("gb-best-min")) $("gb-best-min").textContent = Math.round(r.minutes[b]) + " min";
-    if ($("gb-usual-min")) $("gb-usual-min").textContent = Math.round(usualMin) + " min";
-    if ($("gb-usual-lbl")) $("gb-usual-lbl").textContent = "If you leave " + usual;
-    if ($("gb-saved")) $("gb-saved").textContent = saved >= 0.5 ? saved.toFixed(1) + " min" : "0 min";
-    
-    const inRush = r.rush_from && toMin(r.times[b]) >= toMin(r.rush_from) && toMin(r.times[b]) <= toMin(r.rush_to);
-    if ($("gb-dot")) $("gb-dot").style.background = inRush ? "#EAB308" : "#16A34A";
-    if ($("gb-traffic")) {
-      $("gb-traffic").innerHTML = r.rush_from
-        ? "<b>Morning rush</b> " + r.rush_from + " to " + r.rush_to + " (up to " + r.rush_adds_pct + "% longer)"
-        : "<b>Busiest</b> at " + r.peak_time;
-    }
-    if ($("gb-done-title")) $("gb-done-title").textContent = "Left on time at " + r.times[b];
-    if ($("gb-waze")) $("gb-waze").href = "https://waze.com/ul?q=" + encodeURIComponent(dest) + "&navigate=yes";
-    if ($("gb-gmaps")) $("gb-gmaps").href = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(dest);
+    $("gb-best").textContent = r.times[b];
+    $("gb-slot").textContent = "Slot " + r.times[b];
+    $("gb-route").textContent = "From " + o + " to " + dest + ". Leave at " + r.times[b] + " for a smoother trip.";
+    $("gb-best-min").textContent = Math.round(r.minutes[b]) + " min";
+    $("gb-usual-min").textContent = Math.round(usualMin) + " min";
+    $("gb-usual-lbl").textContent = "If you leave " + usual;
+    $("gb-saved").textContent = saved >= 0.5 ? saved.toFixed(1) + " min" : "0 min";
 
-    // Bawaan 7 slot masa di sekitar waktu biasa
+    const inRush = r.rush_from && toMin(r.times[b]) >= toMin(r.rush_from) && toMin(r.times[b]) <= toMin(r.rush_to);
+    $("gb-dot").style.background = inRush ? "#EAB308" : "#16A34A";
+    $("gb-traffic").innerHTML = r.rush_from
+      ? "<b>Morning rush</b> " + r.rush_from + " to " + r.rush_to + " (up to " + r.rush_adds_pct + "% longer)"
+      : "<b>Busiest</b> at " + r.peak_time;
+    $("gb-done-title").textContent = "Left on time at " + r.times[b];
+    $("gb-waze").href = "https://waze.com/ul?q=" + encodeURIComponent(dest) + "&navigate=yes";
+    $("gb-gmaps").href = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(dest);
+
+    // Bars: 7 time slots around the usual time
     const u = i >= 0 ? i : b, start = Math.max(0, Math.min(u - 5, r.times.length - 7));
     const slice = r.times.slice(start, start + 7).map((t, k) => ({ t, m: r.minutes[start + k], idx: start + k }));
     const lo = Math.min(...slice.map((s) => s.m)) - 2, hi = Math.max(...slice.map((s) => s.m));
-    if ($("gb-bars")) {
-      $("gb-bars").innerHTML = slice.map((s) =>
-        '<div title="' + s.t + ": " + s.m + ' min" style="height:' + Math.round(20 + 76 * (s.m - lo) / Math.max(1, hi - lo)) + 'px;background:' +
-        (s.idx === b ? "#0D6B58" : s.idx === u ? "#E0703A" : "#D3D7D3") + ';"></div>').join("");
-    }
-    if ($("gb-ticks")) {
-      $("gb-ticks").innerHTML = slice.map((s) => '<span style="' + (s.idx === b ? "color:#0D6B58;font-weight:800;" : "") + '">' + s.t + "</span>").join("");
-    }
+    $("gb-bars").innerHTML = slice.map((s) =>
+      '<div title="' + s.t + ": " + s.m + ' min" style="height:' + Math.round(20 + 76 * (s.m - lo) / Math.max(1, hi - lo)) + "px;background:" +
+      (s.idx === b ? "#0D6B58" : s.idx === u ? "#E0703A" : "#D3D7D3") + ';"></div>').join("");
+    $("gb-ticks").innerHTML = slice.map((s) => '<span style="' + (s.idx === b ? "color:#0D6B58;font-weight:800;" : "") + '">' + s.t + "</span>").join("");
+  }
+
+  // Fill the "I usually leave at" list for the chosen route, keeping the resident's time if possible
+  function fillTimes(preferred) {
+    const r = data.routes[$("gb-origin").value + "|" + $("gb-destination").value];
+    $("gb-usual").innerHTML = "";
+    if (!r) return;
+    r.times.forEach((t) => $("gb-usual").add(new Option(t, t)));
+    const match = r.times.find((t) => sameTime(t, preferred));
+    $("gb-usual").value = match || r.peak_time;
   }
 
   function tab(name) {
-    ["today", "carpool"].forEach((t) => {
-      if ($(t ? "tab-" + t : "")) $("tab-" + t).classList.toggle("hide", t !== name);
-    });
+    ["today", "carpool"].forEach((t) => { if ($("tab-" + t)) $("tab-" + t).classList.toggle("hide", t !== name); });
     document.querySelectorAll("nav button[data-tab]").forEach((x) => x.classList.toggle("on", x.dataset.tab === name));
     window.scrollTo(0, 0);
   }
@@ -115,43 +153,29 @@
   if ($("gb-undo")) $("gb-undo").onclick = () => { $("gb-done").classList.add("hide"); $("gb-plan").classList.remove("hide"); };
   if ($("gb-join")) $("gb-join").onclick = () => { joined = !joined; $("gb-join").textContent = joined ? "Request sent. Tap to cancel" : "Join this group"; };
 
+  carpool().catch((e) => console.error("Carpool:", e));
+
   fetch("data/gerakbijak_data.json")
     .then((res) => res.json())
     .then((json) => {
       data = json;
-      
-      // Isikan Dropdown Origins
       data.origins.forEach((o) => $("gb-origin").add(new Option(o, o)));
-      
-      // Isikan Dropdown Destinations
       data.destinations.forEach((x) => $("gb-destination").add(new Option(x, x)));
 
-      // 3. Tetapkan nilai laluan & waktu asal berdasarkan data profil user
-      const userOrigin = GB.originFor(user.precinct);
-      if (data.origins.includes(userOrigin)) {
-        $("gb-origin").value = userOrigin;
-      }
-      
-      const userDest = user.school_run === "Yes" && user.school ? user.school : (user.destination || "KL Sentral");
-      if (data.destinations.includes(userDest)) {
-        $("gb-destination").value = userDest;
-      }
+      // From: the collected route closest to the resident's precinct
+      const origin = GB.originFor(user.precinct);
+      $("gb-origin").value = data.origins.includes(origin) ? origin : data.origins[0];
 
-      const activeRouteKey = $("gb-origin").value + "|" + $("gb-destination").value;
-      const activeRoute = data.routes[activeRouteKey] || data.routes[data.origins[0] + "|KL Sentral"];
+      // To: the school if it is a predicted destination, otherwise their workplace
+      const picks = [user.school_run === "Yes" ? user.school : "", user.destination].filter(Boolean);
+      const dest = picks.find((p) => data.destinations.includes(p));
+      $("gb-destination").value = dest || data.destinations[0];
+      if (!dest) console.warn("No prediction for this resident's destination:", picks.join(" / "), "- showing", data.destinations[0]);
 
-      activeRoute.times.forEach((t) => $("gb-usual").add(new Option(t, t)));
-      
-      if (user.leave_time && activeRoute.times.includes(user.leave_time)) {
-        $("gb-usual").value = user.leave_time;
-      } else {
-        $("gb-usual").value = activeRoute.peak_time;
-      }
-
-      ["gb-origin", "gb-destination", "gb-usual"].forEach((id) => {
-        if ($(id)) $(id).addEventListener("change", show);
-      });
-      
+      fillTimes(user.leave_time);
+      $("gb-origin").addEventListener("change", () => { fillTimes($("gb-usual").value); show(); });
+      $("gb-destination").addEventListener("change", () => { fillTimes($("gb-usual").value); show(); });
+      $("gb-usual").addEventListener("change", show);
       show();
     })
     .catch((e) => {

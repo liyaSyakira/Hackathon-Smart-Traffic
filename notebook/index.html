@@ -17,7 +17,7 @@
     <div class="brand"><div class="logo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17h4l3-10 3 10h6"/></svg></div>GerakBijak</div>
     <div class="round" aria-label="Notifications"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17201D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></div>
   </div>
-  <div><div class="hello">Selamat pagi, Aina</div><div class="day" id="gb-day">Tomorrow</div></div>
+  <div><div class="hello">Selamat pagi</div><div class="day" id="gb-day">Tomorrow</div></div>
 
   <div class="card" style="gap:10px;">
     <div class="trip">
@@ -59,7 +59,7 @@
 
   <div class="card row" data-go="carpool" style="flex-direction:row;padding:16px 18px;">
     <div class="icon" style="background:var(--teal-bg);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B58" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15 14.5c3 0 6 1.9 6 5.5"/></svg></div>
-    <div style="flex:1;"><div style="font-size:15px;font-weight:700;">2 families can share your school run</div><div style="font-size:13px;color:var(--muted);">SK Denai Alam, 7:20 drop-off</div></div>
+    <div style="flex:1;"><div style="font-size:15px;font-weight:700;" id="gb-cp-title">Finding families near you</div><div style="font-size:13px;color:var(--muted);" id="gb-cp-sub">School-run match</div></div>
   </div>
   <p id="gb-error" style="color:#B42318;"></p>
 </main>
@@ -68,19 +68,18 @@
 <main id="tab-carpool" class="hide">
   <div style="font-size:17px;font-weight:800;">School-run match</div>
   <div class="card">
-    <div><div class="label">Matched by AI</div><div style="font-size:22px;font-weight:800;line-height:1.25;" id="gb-carpool-school-title">SK Denai Alam<br>7:20 drop-off</div><div style="font-size:14px;color:var(--muted);" id="gb-carpool-subtext">3 households in Elmina West, all within 400 m</div></div>
-    <div class="person"><div class="avatar" id="gb-carpool-avatar" style="background:#0D6B58;">A</div><div style="flex:1;"><b id="gb-carpool-name">You (Aina)</b><div style="font-size:13px;color:var(--muted);" id="gb-carpool-precinct">Elmina West</div></div><span class="pill teal" id="gb-carpool-kids">2 kids</span></div>
-    <div class="person"><div class="avatar" style="background:#9A3412;">N1</div><div style="flex:1;"><b>Neighbour 1</b><div style="font-size:13px;color:var(--muted);">200 m away</div></div><span class="pill teal">1 kid</span></div>
-    <div class="person"><div class="avatar" style="background:#4C5A86;">N2</div><div style="flex:1;"><b>Neighbour 2</b><div style="font-size:13px;color:var(--muted);">350 m away</div></div><span class="pill teal">2 kids</span></div>
+    <div><div class="label">Matched by AI</div><div style="font-size:22px;font-weight:800;line-height:1.25;" id="gb-carpool-school-title">--</div><div style="font-size:14px;color:var(--muted);" id="gb-carpool-subtext">Finding neighbours…</div></div>
+    <div class="person"><div class="avatar" id="gb-carpool-avatar" style="background:#0D6B58;">--</div><div style="flex:1;"><b id="gb-carpool-name">You</b><div style="font-size:13px;color:var(--muted);" id="gb-carpool-precinct">--</div></div><span class="pill teal" id="gb-carpool-kids">Driver</span></div>
+    <div id="gb-carpool-people" style="display:flex;flex-direction:column;gap:10px;"></div>
   </div>
-  <div class="card">
+  <div class="card" id="gb-rota-card">
     <div style="font-size:15px;font-weight:700;">Who drives this week</div>
-    <div class="week"><div class="me">Mon<b>You</b></div><div>Tue<b>N1</b></div><div>Wed<b>N2</b></div><div class="me">Thu<b>You</b></div><div>Fri<b>N1</b></div></div>
-    <div style="font-size:13px;color:var(--muted);">You drive Monday and Thursday. Swap a day anytime from the group chat.</div>
+    <div class="week" id="gb-rota"></div>
+    <div style="font-size:13px;color:var(--muted);" id="gb-rota-text">--</div>
   </div>
-  <div class="two">
-    <div class="box" style="background:var(--teal-bg);padding:14px 16px;"><b style="font-size:24px;color:var(--teal-ink);">2 cars</b><span style="color:#0B5A4A;">off the road each school morning</span></div>
-    <div class="box" style="background:var(--org-bg);padding:14px 16px;"><b style="font-size:24px;color:var(--org-ink);">+20 pts</b><span style="color:#7C2D12;">for every shared run</span></div>
+  <div class="two" id="gb-cp-stats">
+    <div class="box" style="background:var(--teal-bg);padding:14px 16px;"><b style="font-size:24px;color:var(--teal-ink);" id="gb-cp-cars">--</b><span style="color:#0B5A4A;">off the road each school morning</span></div>
+    <div class="box" style="background:var(--org-bg);padding:14px 16px;"><b style="font-size:24px;color:var(--org-ink);" id="gb-cp-far">--</b><span style="color:#7C2D12;">to your furthest carpool neighbour</span></div>
   </div>
   <div style="font-size:12px;color:var(--muted);line-height:1.5;">Only distance is shown. House numbers and phone numbers are shared after every family accepts.</div>
   <button class="btn" id="gb-join">Join this group</button>
