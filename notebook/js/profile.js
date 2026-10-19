@@ -9,7 +9,7 @@
     function render(u) {
       $("p-avatar").textContent = GB.initials(u.name);
       $("p-name").textContent = u.name;
-      $("p-sub").textContent = u.email || ("Dummy resident from " + u.precinct);
+      $("p-sub").textContent = "Resident of " + u.precinct;
       $("p-id").textContent = "Resident " + u.resident_id;
       $("v-precinct").textContent = u.precinct;
       $("v-leave").textContent = u.leave_time;
