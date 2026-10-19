@@ -72,7 +72,9 @@ def save(cols, rows):
 
 
 def public(r):
-    return {k: v for k, v in r.items() if k not in PRIVATE}
+    out = {k: v for k, v in r.items() if k not in PRIVATE}
+    out["source"] = "signup" if r.get("password_hash") else "csv"   # joined through the app?
+    return out
 
 
 def find(rows, key):

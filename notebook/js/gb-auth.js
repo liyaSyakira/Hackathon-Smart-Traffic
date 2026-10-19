@@ -52,7 +52,7 @@ window.GB = (function () {
   }
   function withName(r) {
     const n = parseInt(r.resident_id.slice(1), 10) || 1;
-    return Object.assign({}, r, { name: r.name || NAMES[(n - 1) % NAMES.length], source: r.email ? "signup" : "csv" });
+    return Object.assign({}, r, { name: r.name || NAMES[(n - 1) % NAMES.length], source: r.source || (r.email ? "signup" : "csv") });
   }
 
   let cache = null;

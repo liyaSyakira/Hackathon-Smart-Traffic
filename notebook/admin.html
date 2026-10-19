@@ -77,9 +77,6 @@
       <div><h1>City of Elmina morning traffic</h1><div class="sub">GerakBijak township dashboard - weekday mornings, <span id="h-res">--</span> residents</div></div>
     </div>
     <div class="chips">
-      <span class="chip">AI error <b id="m-mae">--</b></span>
-      <span class="chip"><b id="m-imp">--</b> better than route average</span>
-      <span class="chip"><b id="m-rows">--</b> TomTom readings</span>
       <span class="tag" style="background:#E3F1EC;color:#08493C;">Live from resident data</span>
       <div class="seg" id="exit-seg"><button data-exit="gce" class="on">GCE interchange</button><button data-exit="pe">Persiaran Elmina</button></div>
     </div>
@@ -247,10 +244,6 @@
   }
 
   function fillFromModel(d) {
-    const m = d.model || {};
-    $("m-mae").textContent = "+/- " + m.mae_min + " min";
-    $("m-imp").textContent = m.improvement_pct + "%";
-    $("m-rows").textContent = (m.training_rows || 0).toLocaleString();
     const rows = [];
     d.destinations.forEach((dest) => { const x = d.routes["Elmina East|" + dest]; if (x && x.rush_from) rows.push([dest, x]); });
     rows.sort((a, b) => b[1].rush_adds_min - a[1].rush_adds_min);
