@@ -128,6 +128,23 @@ window.GB = (function () {
     else { const e = store.get("gb_edits") || {}; e[id] = Object.assign(e[id] || {}, changes); store.set("gb_edits", e); }
   }
 
+  // Profile photo: saved on the server (data/photos) or, without server.py, in this browser
+  async function setPhoto(id, dataUrl) {
+    if (await hasApi()) return api("photo", { id, image: dataUrl });
+    store.set("gb_photo_" + id, dataUrl);
+    return { ok: true };
+  }
+  function photoFor(u) { return (u && (u.photo || store.get("gb_photo_" + u.resident_id))) || ""; }
+  // Show the photo inside an avatar circle, or the initials if there is no photo
+  function paintAvatar(el, u) {
+    if (!el || !u) return;
+    const pic = photoFor(u);
+    el.style.backgroundImage = pic ? 'url("' + pic + '")' : "";
+    el.style.backgroundSize = "cover";
+    el.style.backgroundPosition = "center";
+    el.textContent = pic ? "" : initials(u.name);
+  }
+
   async function current() { const id = store.get("gb_session"); return id ? find(id) : null; }
   async function requireUser() {
     const u = await current();
@@ -140,5 +157,5 @@ window.GB = (function () {
   function originFor(precinct) { return precinct === "Elmina East" ? "Elmina East" : "Elmina Valley"; }
   function initials(name) { return String(name || "?").split(/\s+/).map((p) => p[0]).join("").slice(0, 2).toUpperCase(); }
 
-  return { hasApi, DEMO_PASSWORD, WORK, SCHOOLS, PRECINCTS, residents, signIn, signUp, update, current, requireUser, signOut, originFor, initials };
+  return { setPhoto, photoFor, paintAvatar, hasApi, DEMO_PASSWORD, WORK, SCHOOLS, PRECINCTS, residents, signIn, signUp, update, current, requireUser, signOut, originFor, initials };
 })();

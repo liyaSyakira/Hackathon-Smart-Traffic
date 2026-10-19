@@ -7,6 +7,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/profile.css">
+<style>
+  .photo-btn { position:relative; padding:0; border:none; background:none; cursor:pointer; flex-shrink:0; border-radius:50%; }
+  .photo-btn .cam { position:absolute; right:-2px; bottom:-2px; width:28px; height:28px; border-radius:14px; background:#fff; border:1px solid var(--line, #E4E0D8); display:flex; align-items:center; justify-content:center; }
+  .photo-link { background:none; border:none; padding:0; margin-left:10px; font-family:inherit; font-size:12px; font-weight:700; color:#0D6B58; cursor:pointer; }
+</style>
 </head>
 <body>
 <div class="app">
@@ -16,11 +21,15 @@
   </div>
 
   <div class="card" style="flex-direction:row;align-items:center;gap:16px;">
-    <div class="avatar" id="p-avatar">--</div>
+    <button type="button" class="photo-btn" id="p-photo-btn" aria-label="Change profile photo">
+      <div class="avatar" id="p-avatar">--</div>
+      <span class="cam"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0D6B58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></span>
+    </button>
+    <input type="file" id="p-file" accept="image/*" hidden>
     <div style="flex:1;min-width:0;">
       <div style="font-size:20px;font-weight:800;" id="p-name">--</div>
       <div style="font-size:13px;color:var(--muted);" id="p-sub">--</div>
-      <div style="margin-top:6px;"><span class="pill" id="p-id">--</span></div>
+      <div style="margin-top:6px;display:flex;align-items:center;flex-wrap:wrap;"><span class="pill" id="p-id">--</span></div>
     </div>
   </div>
 

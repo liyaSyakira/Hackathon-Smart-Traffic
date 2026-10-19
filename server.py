@@ -12,17 +12,20 @@ API used by js/gb-auth.js:
   POST /api/signin      -> checks resident ID or email + password
   POST /api/profile     -> saves profile edits into the CSV
 """
+import base64
 import csv
 import hashlib
 import json
 import os
 import secrets
 import threading
+import time
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.join(ROOT, "notebook")
 CSV_PATH = os.path.join(SITE, "data", "dummy_residents.csv")
+PHOTOS = os.path.join(SITE, "data", "photos")   # profile pictures, one per resident: R0001.jpg
 PORT = 8000
 DEMO_PASSWORD = "elmina123"          # for the original 500 dummy residents
 EXTRA = ["name", "email", "password_hash"]
@@ -74,6 +77,9 @@ def save(cols, rows):
 def public(r):
     out = {k: v for k, v in r.items() if k not in PRIVATE}
     out["source"] = "signup" if r.get("password_hash") else "csv"   # joined through the app?
+    pic = os.path.join(PHOTOS, r["resident_id"] + ".jpg")
+    if os.path.exists(pic):   # ?v= makes the browser load a new photo straight away
+        out["photo"] = "data/photos/" + r["resident_id"] + ".jpg?v=" + str(int(os.path.getmtime(pic)))
     return out
 
 
@@ -163,6 +169,23 @@ class Handler(SimpleHTTPRequestHandler):
                 save(cols, rows)
                 print(f"  NEW RESIDENT saved to CSV: {new['resident_id']} {name} ({new['precinct']})")
                 return self.send_json(200, {"ok": True, "user": public(new)})
+
+            if path == "/api/photo":
+                r = find(rows, data.get("id"))
+                if not r:
+                    return self.send_json(200, {"ok": False, "msg": "Resident not found."})
+                img = data.get("image") or ""
+                prefix = "data:image/jpeg;base64,"
+                if not img.startswith(prefix):
+                    return self.send_json(200, {"ok": False, "msg": "Please choose a photo."})
+                raw = base64.b64decode(img[len(prefix):])
+                if len(raw) > 500_000:
+                    return self.send_json(200, {"ok": False, "msg": "That photo is too large."})
+                os.makedirs(PHOTOS, exist_ok=True)
+                with open(os.path.join(PHOTOS, r["resident_id"] + ".jpg"), "wb") as f:
+                    f.write(raw)
+                print(f"  PHOTO saved: {r['resident_id']}")
+                return self.send_json(200, {"ok": True, "user": public(r)})
 
             if path == "/api/profile":
                 r = find(rows, data.get("id"))

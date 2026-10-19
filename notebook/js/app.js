@@ -38,7 +38,7 @@
     const setText = (el, t) => { if (el) el.textContent = t; };
 
     setText($("gb-carpool-name"), "You (" + first + ")");
-    setText($("gb-carpool-avatar"), GB.initials(user.name || "R"));
+    GB.paintAvatar($("gb-carpool-avatar"), user);
     setText($("gb-carpool-precinct"), user.precinct || "");
     setText($("gb-carpool-kids"), "Driver");
     if (people) people.innerHTML = "";
